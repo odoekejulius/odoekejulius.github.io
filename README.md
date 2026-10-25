@@ -20,6 +20,12 @@ The site uses relative asset paths and works both at a repository URL such as `h
 
 GitHub Pages only serves static files, so it cannot process server-side contact forms. The contact links open the visitor’s email app or WhatsApp directly; no message is sent through this website.
 
+## Update the site
+
+There is no private admin dashboard on GitHub Pages: it cannot run PHP, a database, or a secure server-side login. To edit the published content, open `index.html` in the GitHub repository, select the pencil icon, make the changes, and commit them. GitHub Pages will publish the update after its deployment finishes.
+
+The layout and appearance are in `assets/css/style.css`; navigation, project filtering, and animations are in `assets/js/main.js`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
+
 ## Project structure
 
 ```text
