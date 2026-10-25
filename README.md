@@ -26,6 +26,17 @@ There is no private admin dashboard on GitHub Pages: it cannot run PHP, a databa
 
 The layout and appearance are in `assets/css/style.css`; navigation, project filtering, and animations are in `assets/js/main.js`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
 
+## CV and public documents
+
+The CV is previewed in the page from `assets/documents/julius-odoeke-cv.pdf`. To add another public PDF:
+
+1. Upload it to `assets/documents/`.
+2. Add a document card in the `#documents` section of `index.html`, linking to a unique preview anchor.
+3. Add a matching viewer with an `<iframe>` whose `src` points to the PDF, plus a direct-link fallback for browsers that do not display embedded PDFs.
+4. Test the preview and fallback link locally, then commit and let GitHub Pages deploy the change.
+
+GitHub Pages serves these files publicly. Hiding the PDF viewer toolbar does **not** prevent a visitor from opening, saving, or copying the file. Review any personal or contact information in a document before publishing it.
+
 ## Project structure
 
 ```text
@@ -36,9 +47,16 @@ The layout and appearance are in `assets/css/style.css`; navigation, project fil
     ├── favicon.svg
     ├── css/
     │   └── style.css
+    ├── documents/
+    │   └── julius-odoeke-cv.pdf
     ├── images/
     │   ├── julius-odoeke.jpeg
-    │   └── renacido-pharmacy-project.jpeg
+    │   └── renacido/
+    │       ├── renacido-admin-dashboard.png
+    │       ├── renacido-admin-sign-in.png
+    │       ├── renacido-customer-sign-in.png
+    │       ├── renacido-storefront-footer.png
+    │       └── renacido-storefront-home.png
     └── js/
         └── main.js
 ```
