@@ -36,6 +36,27 @@
   window.addEventListener("scroll", updateScrollState, { passive: true });
   window.addEventListener("resize", updateScrollState);
 
+  document.querySelectorAll("[data-office-preview]").forEach((preview) => {
+    preview.addEventListener("toggle", () => {
+      if (!preview.open) return;
+      const fileLink = preview.parentElement.querySelector(".project-file-link");
+      const frame = preview.querySelector("[data-office-frame]");
+      if (!fileLink || !frame || frame.src) return;
+
+      const fileUrl = new URL(fileLink.href, document.baseURI).href;
+      const status = preview.querySelector("[data-office-status]");
+      if (window.location.protocol !== "https:" || new URL(fileUrl).protocol !== "https:") {
+        frame.hidden = true;
+        if (status) status.textContent = "Preview is available after this site and file are published over HTTPS. ";
+        return;
+      }
+
+      frame.hidden = false;
+      frame.src = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`;
+      if (status) status.textContent = "Preview provided by Microsoft Office for the web. ";
+    });
+  });
+
   const analyticsPreview = document.querySelector(".analytics-preview");
   if (analyticsPreview) {
     const fitAnalyticsPreview = () => {
@@ -45,6 +66,125 @@
 
     analyticsPreview.addEventListener("load", fitAnalyticsPreview);
     window.addEventListener("resize", fitAnalyticsPreview);
+  }
+
+  const pdfPreviews = document.querySelectorAll("[data-pdf-preview]");
+  if (pdfPreviews.length && (window.location.protocol === "http:" || window.location.protocol === "https:")) {
+    const libraryUrl = new URL("assets/js/vendor/pdf.min.mjs", document.baseURI).href;
+    const workerUrl = new URL("assets/js/vendor/pdf.worker.min.mjs", document.baseURI).href;
+    let pdfjsPromise;
+
+    const loadPdfjs = () => {
+      if (!pdfjsPromise) {
+        pdfjsPromise = import(libraryUrl).then((pdfjs) => {
+          pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
+          return pdfjs;
+        });
+      }
+      return pdfjsPromise;
+    };
+
+    const renderPdfPreview = async (preview) => {
+      const viewer = preview.closest(".document-viewer");
+      const width = Math.floor(preview.clientWidth);
+      if (!viewer || width < 20 || preview.dataset.state === "loading") return;
+      if (preview.dataset.state === "rendered" && Math.abs(width - Number(preview.dataset.renderedWidth)) < 80) return;
+
+      preview.dataset.state = "loading";
+      preview.setAttribute("aria-busy", "true");
+      try {
+        const pdfjs = await loadPdfjs();
+        const pdf = await pdfjs.getDocument(new URL(preview.dataset.pdfSource, document.baseURI).href).promise;
+        const pages = document.createElement("div");
+        pages.className = "pdf-preview-pages";
+        const outputScale = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+          const page = await pdf.getPage(pageNumber);
+          const baseViewport = page.getViewport({ scale: 1 });
+          const scale = (width / baseViewport.width) * outputScale;
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d", { alpha: false });
+          if (!context) throw new Error("Canvas rendering is unavailable in this browser.");
+
+          canvas.width = Math.ceil(viewport.width);
+          canvas.height = Math.ceil(viewport.height);
+          canvas.setAttribute("role", "img");
+          canvas.setAttribute("aria-label", `Page ${pageNumber} of ${pdf.numPages}`);
+          const pageContainer = document.createElement("div");
+          pageContainer.className = "pdf-preview-page";
+          pageContainer.append(canvas);
+          pages.append(pageContainer);
+          await page.render({ canvasContext: context, viewport }).promise;
+        }
+
+        const status = preview.querySelector(".pdf-preview-status");
+        status?.remove();
+        preview.replaceChildren(pages);
+        preview.dataset.state = "rendered";
+        preview.dataset.renderedWidth = String(width);
+        preview.setAttribute("aria-busy", "false");
+        viewer.classList.remove("pdfjs-error");
+        viewer.classList.add("pdfjs-ready");
+        viewer.querySelector(".pdf-native-frame")?.remove();
+        if (Math.abs(preview.clientWidth - width) >= 80) {
+          preview.dataset.state = "idle";
+          window.setTimeout(() => renderPdfPreview(preview), 0);
+        }
+      } catch (error) {
+        console.error(`Unable to render PDF preview: ${preview.dataset.pdfSource}`, error);
+        preview.dataset.state = "error";
+        preview.setAttribute("aria-busy", "false");
+        const status = preview.querySelector(".pdf-preview-status") ?? document.createElement("p");
+        status.className = "pdf-preview-status";
+        status.setAttribute("role", "status");
+        status.textContent = "The inline preview is unavailable. Use the PDF link below to open the original document.";
+        if (!status.parentElement) preview.prepend(status);
+        viewer.classList.add("pdfjs-error");
+      }
+    };
+
+    pdfPreviews.forEach((preview) => {
+      let isVisible = false;
+      let started = false;
+      let resizeTimeout;
+      const startRendering = () => {
+        isVisible = true;
+        if (started) return;
+        started = true;
+        renderPdfPreview(preview);
+      };
+      const scheduleRender = () => {
+        if (!isVisible) return;
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(() => renderPdfPreview(preview), 150);
+      };
+
+      if ("ResizeObserver" in window) {
+        const resizeObserver = new ResizeObserver(scheduleRender);
+        resizeObserver.observe(preview);
+      }
+      window.addEventListener("resize", scheduleRender, { passive: true });
+
+      const certificateLibrary = preview.closest(".certificate-library");
+      if (certificateLibrary) {
+        certificateLibrary.addEventListener("toggle", () => {
+          if (certificateLibrary.open) startRendering();
+        });
+        if (certificateLibrary.open) startRendering();
+      } else {
+        const checkVisibility = () => {
+          const bounds = preview.getBoundingClientRect();
+          if (bounds.top < window.innerHeight + 300 && bounds.bottom > -300) {
+            startRendering();
+            window.removeEventListener("scroll", checkVisibility);
+          }
+        };
+        window.addEventListener("scroll", checkVisibility, { passive: true });
+        checkVisibility();
+      }
+    });
   }
 
   const certificateLibrary = document.querySelector(".certificate-library");

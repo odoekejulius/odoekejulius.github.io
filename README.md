@@ -1,10 +1,14 @@
 # Julius Odo-Eke — Portfolio
 
-A responsive, static portfolio site built with HTML, CSS, and vanilla JavaScript. It has no PHP, database, build step, custom domain, API keys, or third-party runtime dependencies.
+A responsive, static portfolio site built with HTML, CSS, and vanilla JavaScript. It has no PHP, database, build step, custom domain, or API keys. The PDF renderer is hosted locally with the site, so previews do not depend on a third-party runtime service.
 
 ## Run locally
 
-Open `index.html` directly in a browser. No local server or build step is required.
+Open `index.html` directly in a browser to view the site. The canvas-based PDF previews require HTTP or HTTPS; use XAMPP or another local web server to test them. Direct-file mode retains the browser's native PDF viewer and original-PDF links as fallbacks.
+
+## Multiple visitors and scrolling
+
+The site is static and stateless: visitors, tabs, and browsers do not share page state or interfere with one another. GitHub Pages serves the same read-only files to multiple visitors at once; concurrency and availability are handled by the hosting provider. A copy opened from `file://` or `localhost` is only reachable on that device unless a web server is deliberately configured for network access. In-page scrolling is smooth, while the operating system's reduced-motion preference is respected.
 
 ## Publish with GitHub Pages
 
@@ -30,13 +34,19 @@ GitHub Pages only serves static files, so it cannot process server-side contact 
 
 There is no private admin dashboard on GitHub Pages: it cannot run PHP, a database, or a secure server-side login. To edit the published content, open `index.html` in the GitHub repository, select the pencil icon, make the changes, and commit them. GitHub Pages will publish the update after its deployment finishes.
 
-The layout and appearance are in `assets/css/style.css`; navigation and animations are in `assets/js/main.js`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
+The layout and appearance are in `assets/css/style.css`; navigation, animations, and PDF rendering are in `assets/js/main.js`. The self-hosted Mozilla PDF.js 4.10.38 renderer and its Apache 2.0 license are in `assets/js/vendor/`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
 
 ## CV and public documents
 
-The CV and Google Data Analytics certificate PDFs and the Web Development and NYSC certificate scans are grouped under `assets/documents/`. The CV preview is always shown in the `#documents` section; the three certificates are grouped in a collapsible library that closes again after it scrolls out of view. On phones, PDF embeds are replaced with links that open the PDF directly in the browser's built-in viewer; certificate images open at full size when tapped.
+The CV and Google Data Analytics certificate PDFs and the Web Development and NYSC certificate scans are grouped under `assets/documents/`. The `#documents` section renders PDF pages in responsive canvases on desktop and mobile; original PDF links and native browser viewers remain available as fallbacks. The three certificates are grouped in a collapsible library that closes again after it scrolls out of view. Certificate images open at full size when tapped.
 
 GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** prevent a visitor from opening, saving, or copying a public file. Review personal information before publishing documents. Private documents or guaranteed download protection require access-controlled server-side hosting; static GitHub Pages cannot provide that.
+
+## Add images and other file types
+
+This site has no visitor upload form. To publish a file, add it to the site yourself and link to it from `index.html`. Standard browser image formats such as JPG/JPEG, PNG, GIF, WebP, and SVG can be shown with an `<img>` element; PDFs use the site's responsive PDF preview. Word (`.doc`/`.docx`), Excel (`.xls`/`.xlsx`), and PowerPoint (`.ppt`/`.pptx`) files can be offered with a Microsoft Office for the web preview and a direct file link. The preview is loaded only after a visitor opens it and requires the file to be publicly available over HTTPS. Microsoft handles that preview, so it may be unavailable in some browsers or networks; keep the direct link as a fallback. CSV and other browser-readable text files can be linked directly. Other formats can still be published as downloadable files, but an in-browser preview depends on the visitor's browser or a compatible viewer.
+
+The World Cup project lists its report, workbook, and all six CSV files in the expandable **Project files and data** section. To add another Office file, copy one of its entries in `index.html`, update the filename, title, file link, and iframe title, and keep the `data-office-preview` and `data-office-frame` attributes. The site script builds the Microsoft preview URL from the associated file link. Add a PowerPoint file the same way when one is available. Remember that every deployed asset is public and may be copied by visitors.
 
 ## Add portfolio work
 
@@ -49,6 +59,9 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
 ```text
 .
 ├── index.html
+├── terms.html
+├── robots.txt
+├── sitemap.xml
 ├── README.md
 └── assets/
     ├── favicon.svg
@@ -81,5 +94,9 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
     │       ├── renacido-storefront-footer.png
     │       └── renacido-storefront-home.png
     └── js/
-        └── main.js
+        ├── main.js
+        └── vendor/
+            ├── LICENSE.pdfjs
+            ├── pdf.min.mjs
+            └── pdf.worker.min.mjs
 ```
