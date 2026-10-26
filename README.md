@@ -63,6 +63,8 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
 ├── robots.txt
 ├── sitemap.xml
 ├── README.md
+├── 404.html
+├── .nojekyll
 └── assets/
     ├── favicon.svg
     ├── css/
@@ -87,6 +89,7 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
     │       └── tableau-data.xlsx
     ├── images/
     │   ├── julius-odoeke.jpeg
+    │   ├── og-cover.png
     │   └── renacido/
     │       ├── renacido-admin-dashboard.png
     │       ├── renacido-admin-sign-in.png
@@ -100,3 +103,7 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
             ├── pdf.min.mjs
             └── pdf.worker.min.mjs
 ```
+
+## Version 11 changes
+
+Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The CSS and JS version numbers are now the same on every page (`style.css?v=11`, `main.js?v=12`); bump them together on both pages whenever either file changes.

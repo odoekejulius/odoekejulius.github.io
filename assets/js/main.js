@@ -220,7 +220,10 @@
         if (entry.isIntersecting) {
           libraryWasVisible = true;
         } else if (libraryWasVisible && certificateLibrary.open) {
+          const wasAbove = entry.boundingClientRect.bottom < 0;
+          const heightBefore = certificateLibrary.offsetHeight;
           certificateLibrary.open = false;
+          if (wasAbove) window.scrollBy({ top: certificateLibrary.offsetHeight - heightBefore, behavior: "instant" });
           libraryWasVisible = false;
         }
       });
@@ -275,5 +278,58 @@
     revealItems.forEach((item) => observer.observe(item));
   } else {
     revealItems.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  // Count-up numbers
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const counters = document.querySelectorAll("[data-count]");
+  const runCounter = (el) => {
+    const target = Number(el.dataset.count);
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - start) / 1400);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString("en-US");
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const counterObserver = new IntersectionObserver((entries, o) => entries.forEach((e) => {
+      if (e.isIntersecting) { runCounter(e.target); o.unobserve(e.target); }
+    }), { threshold: 0.6 });
+    counters.forEach((el) => counterObserver.observe(el));
+  }
+
+  // Pointer spotlight on cards (mouse and trackpad only)
+  if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".project-card, .skill-card, .education-card, .mini-project, .stat").forEach((card) => {
+      card.classList.add("has-spot");
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        card.style.setProperty("--my", `${e.clientY - r.top}px`);
+      }, { passive: true });
+    });
+  }
+
+  // Contact form: composes an email in the visitor's mail app (no server needed)
+  const form = document.querySelector("#contact-form");
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const status = form.querySelector(".form-status");
+      const fields = ["name", "email", "message"].map((n) => form.elements[n]);
+      let valid = true;
+      fields.forEach((f) => {
+        const ok = f.value.trim() && f.checkValidity();
+        f.setAttribute("aria-invalid", String(!ok));
+        if (!ok) valid = false;
+      });
+      if (!valid) { status.textContent = "Please complete your name, a valid email, and a message."; return; }
+      const [name, email, message] = fields.map((f) => f.value.trim());
+      const body = `${message}\n\n— ${name} (${email})`;
+      window.location.href = `mailto:odoekejulius@gmail.com?subject=${encodeURIComponent("Message from " + name)}&body=${encodeURIComponent(body)}`;
+      status.textContent = "Your email app should open with the message ready to send.";
+    });
   }
 })();
