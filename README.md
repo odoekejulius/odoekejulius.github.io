@@ -28,7 +28,9 @@ After publishing, verify the site in [Google Search Console](https://search.goog
 
 ## Contact behavior
 
-GitHub Pages only serves static files, so it cannot process server-side contact forms. The contact links open the visitor’s email app or WhatsApp directly; no message is sent through this website.
+GitHub Pages only serves static files, so it cannot process server-side contact forms. The contact links open the visitor’s email app or WhatsApp directly; the contact form validates the message and opens a prefilled email in the visitor’s mail app. The site does not send or store contact messages. Connecting a hosted form provider such as Formspree or Web3Forms requires a public form endpoint and sends visitor-submitted details to that provider.
+
+The freelance timeline starts in 2019 to match the CV. The two CV download links are intentional: one is in the introduction and one is in the contact section.
 
 ## Update the site
 
@@ -104,6 +106,6 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
             └── pdf.worker.min.mjs
 ```
 
-## Version 11 changes
+## Recent design updates
 
-Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The CSS and JS version numbers are now the same on every page (`style.css?v=11`, `main.js?v=12`); bump them together on both pages whenever either file changes.
+Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The CSS and JS cache versions are `14` on both `index.html` and `terms.html`; bump them together on both pages whenever either file changes. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
