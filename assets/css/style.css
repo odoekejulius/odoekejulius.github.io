@@ -152,7 +152,7 @@ button { font: inherit; }
 .menu-toggle { display: none; }
 
 /* Hero */
-.hero { position: relative; min-height: min(840px, calc(100svh - 76px)); padding-top: clamp(80px, 9vw, 125px); padding-bottom: 100px; overflow: hidden; }
+.hero { position: relative; min-height: min(840px, calc(100svh - 76px)); padding-top: clamp(80px, 9vw, 125px); padding-bottom: clamp(72px, 8vw, 100px); overflow: hidden; }
 .hero::before {
   position: absolute; top: 8%; right: -18rem; width: 42rem; aspect-ratio: 1;
   border: 1px solid rgba(var(--rgb-ice), .055); border-radius: 50%;
@@ -212,9 +212,6 @@ button { font: inherit; }
 .portrait-meta > span:first-child { display: inline-flex; align-items: center; gap: 8px; }
 .portrait-meta > span:last-child { color: var(--subtle); font-size: .64rem; }
 .availability-dot { width: 6px; height: 6px; background: var(--ice-muted); box-shadow: 0 0 10px rgba(var(--rgb-accent), .45); }
-.hero-bottom { position: absolute; right: 0; bottom: 26px; left: 0; display: flex; justify-content: space-between; color: var(--subtle); font-family: var(--mono); font-size: .6rem; letter-spacing: .045em; text-transform: uppercase; }
-.hero-bottom a { color: var(--muted); }
-.hero-bottom a span { padding-left: 7px; color: var(--accent); }
 
 /* Shared section headings */
 .section-heading h2, .contact-copy h2 { max-width: 590px; font-size: clamp(2.65rem, 4.9vw, 4.25rem); font-weight: 500; line-height: 1.1; }
@@ -438,7 +435,10 @@ button { font: inherit; }
 .footer-wrap { position: relative; }
 .footer-main { display: grid; grid-template-columns: minmax(0, 1fr) 170px 170px; gap: 60px; padding-block: 54px 46px; }
 .footer-brand { max-width: 300px; }
-.footer-brand p { max-width: 260px; margin: 15px 0 0; color: var(--muted); font-size: .76rem; line-height: 1.75; }
+.footer-freelance { display: inline-flex; align-items: center; gap: 11px; margin-top: 20px; padding: 9px 14px 9px 9px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.footer-freelance-mark { display: grid; width: 36px; height: 36px; flex: 0 0 auto; place-items: center; border: 1px solid rgba(var(--rgb-accent), .22); border-radius: 9px; background: linear-gradient(145deg, rgba(var(--rgb-accent), .16), rgba(var(--rgb-mint), .09)); color: var(--accent-bright); }
+.footer-freelance-mark svg { width: 21px; height: 21px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5; }
+.footer-freelance-word { color: var(--text); font-size: .8rem; font-weight: 650; letter-spacing: .04em; }
 .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; }
 .footer-label { margin-bottom: 5px; color: var(--subtle); font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
 .footer-column a { color: var(--neutral-muted); font-size: .72rem; transition: color .2s ease; }
@@ -501,8 +501,6 @@ button { font: inherit; }
   .hero-lede { max-width: 530px; font-size: .92rem; }
   .hero-art { width: min(82%, 350px); }
   .hero-note { margin-top: 34px; }
-  .hero-bottom { bottom: 24px; font-size: .54rem; }
-  .hero-bottom > span { max-width: 48%; }
   .about-grid { grid-template-columns: 1fr; gap: 27px; }
   .section-top { display: flex; }
   .section-intro { margin: 0 auto; }
@@ -590,7 +588,7 @@ h1, h2 { text-wrap: balance; }
 /* Readability: raise the smallest text and left-align long reading blocks */
 .tag-list span, .skill-card .tag-list span { font-size: .7rem; }
 .project-meta, .eyebrow, .hero-note, .documents-label, .footer-label, .card-kicker, .skill-number, .timeline-item time, .cert-year, .viewer-heading > span:last-child, .certificate-library-count { font-size: .72rem; }
-.fact span, .portrait-meta, .portrait-meta > span:last-child, .timeline-place, .document-details small, .certificate-library-copy small, .cert-list small, .viewer-fallback, .document-privacy, .project-files-note, .analytics-scope > span:last-child, .hero-bottom { font-size: .74rem; }
+.fact span, .portrait-meta, .portrait-meta > span:last-child, .timeline-place, .document-details small, .certificate-library-copy small, .cert-list small, .viewer-fallback, .document-privacy, .project-files-note, .analytics-scope > span:last-child { font-size: .74rem; }
 .skill-card p, .education-card > p:last-child, .project-content p, .timeline-item > p:last-child { font-size: .85rem; }
 .about-copy > p, .timeline-item, .timeline-item > p:last-child, .education-card > p:last-child { text-align: left; text-wrap: pretty; }
 .timeline-top { align-items: flex-start; }
