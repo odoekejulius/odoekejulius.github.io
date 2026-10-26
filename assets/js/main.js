@@ -59,13 +59,43 @@
 
   const analyticsPreview = document.querySelector(".analytics-preview");
   if (analyticsPreview) {
+    let fitObserver;
+    let fitTimeout;
+    const syncPreviewTheme = () => {
+      const target = analyticsPreview.contentDocument?.documentElement;
+      if (!target) return;
+      const theme = document.documentElement.getAttribute("data-theme");
+      if (theme) target.setAttribute("data-theme", theme);
+      else target.removeAttribute("data-theme");
+      scheduleAnalyticsFit();
+    };
+
     const fitAnalyticsPreview = () => {
-      const contentHeight = analyticsPreview.contentDocument?.documentElement.scrollHeight;
+      const content = analyticsPreview.contentDocument?.body;
+      if (!content) return;
+      const contentHeight = content.scrollHeight;
       if (contentHeight) analyticsPreview.style.height = `${contentHeight}px`;
     };
 
-    analyticsPreview.addEventListener("load", fitAnalyticsPreview);
-    window.addEventListener("resize", fitAnalyticsPreview);
+    const scheduleAnalyticsFit = () => {
+      window.clearTimeout(fitTimeout);
+      fitTimeout = window.setTimeout(() => window.requestAnimationFrame(fitAnalyticsPreview), 100);
+    };
+
+    window.addEventListener("resize", scheduleAnalyticsFit, { passive: true });
+    analyticsPreview.addEventListener("load", () => {
+      syncPreviewTheme();
+      window.requestAnimationFrame(() => window.requestAnimationFrame(fitAnalyticsPreview));
+      const frameWindow = analyticsPreview.contentWindow;
+      const frameBody = analyticsPreview.contentDocument?.body;
+      if (fitObserver) fitObserver.disconnect();
+      if (frameWindow && frameBody && "ResizeObserver" in frameWindow) {
+        fitObserver = new frameWindow.ResizeObserver(scheduleAnalyticsFit);
+        fitObserver.observe(frameBody);
+      }
+      frameWindow?.addEventListener("resize", scheduleAnalyticsFit, { passive: true });
+    });
+    window.syncPreviewTheme = syncPreviewTheme;
   }
 
   const pdfPreviews = document.querySelectorAll("[data-pdf-preview]");
@@ -357,6 +387,31 @@
       const body = `${message}\n\n— ${name} (${email})`;
       window.location.href = `mailto:odoekejulius@gmail.com?subject=${encodeURIComponent("Message from " + name)}&body=${encodeURIComponent(body)}`;
       status.textContent = "Your email app should open with the message ready to send.";
+    });
+  }
+
+  const themeToggle = document.querySelector(".theme-toggle");
+  if (themeToggle) {
+    const root = document.documentElement;
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const syncTheme = () => {
+      const isLight = root.getAttribute("data-theme") === "light";
+      themeToggle.setAttribute("aria-pressed", String(isLight));
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+      if (themeMeta) themeMeta.content = getComputedStyle(root).getPropertyValue("--bg").trim();
+      window.syncPreviewTheme?.();
+    };
+
+    syncTheme();
+    themeToggle.addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("theme", next);
+      } catch (error) {
+        console.warn("Unable to save the selected color theme.", error);
+      }
+      syncTheme();
     });
   }
 })();
