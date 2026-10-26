@@ -36,6 +36,17 @@
   window.addEventListener("scroll", updateScrollState, { passive: true });
   window.addEventListener("resize", updateScrollState);
 
+  const analyticsPreview = document.querySelector(".analytics-preview");
+  if (analyticsPreview) {
+    const fitAnalyticsPreview = () => {
+      const contentHeight = analyticsPreview.contentDocument?.documentElement.scrollHeight;
+      if (contentHeight) analyticsPreview.style.height = `${contentHeight}px`;
+    };
+
+    analyticsPreview.addEventListener("load", fitAnalyticsPreview);
+    window.addEventListener("resize", fitAnalyticsPreview);
+  }
+
   const sectionLinks = navigation?.querySelectorAll('a[href^="#"]') ?? [];
   if ("IntersectionObserver" in window && sectionLinks.length) {
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -54,9 +65,7 @@
     document.querySelectorAll("main section[id]").forEach((section) => sectionObserver.observe(section));
   }
 
-  const filterButtons = document.querySelectorAll(".filter-button");
   const projects = document.querySelectorAll(".project-card");
-  const emptyState = document.querySelector(".empty-filter");
 
   projects.forEach((project, index) => {
     project.style.setProperty("--reveal-delay", `${index * 90}ms`);
@@ -64,27 +73,6 @@
 
   document.querySelectorAll(".skill-card").forEach((card, index) => {
     card.style.setProperty("--reveal-delay", `${index * 90}ms`);
-  });
-
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const filter = button.dataset.filter;
-      let visibleCount = 0;
-
-      filterButtons.forEach((item) => {
-        const active = item === button;
-        item.classList.toggle("is-active", active);
-        item.setAttribute("aria-pressed", String(active));
-      });
-
-      projects.forEach((project) => {
-        const visible = filter === "all" || project.dataset.category === filter;
-        project.hidden = !visible;
-        if (visible) visibleCount += 1;
-      });
-
-      if (emptyState) emptyState.hidden = visibleCount > 0;
-    });
   });
 
   const year = document.querySelector("#year");

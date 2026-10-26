@@ -1,0 +1,49 @@
+team,group,confederation,host_nation,world_cup_debut,eliminated_round,still_active,matches_played,wins,draws,losses,goals_for,goals_against,clean_sheets,goal_diff,points
+Mexico,A,CONCACAF,True,False,Round of 16,False,5,4,0,1,10,3,4,7,12
+South Korea,A,AFC,False,False,Group Stage,False,3,1,0,2,2,3,0,-1,3
+Czechia,A,UEFA,False,False,Group Stage,False,3,0,1,2,2,6,0,-4,1
+South Africa,A,CAF,False,False,Round of 32,False,4,1,1,2,2,4,1,-2,4
+Canada,B,CONCACAF,True,False,Round of 16,False,5,2,1,2,9,6,2,3,7
+Switzerland,B,UEFA,False,False,,True,4,3,1,0,9,3,1,6,10
+Bosnia and Herzegovina,B,UEFA,False,False,Round of 32,False,4,1,1,2,5,8,0,-3,4
+Qatar,B,AFC,False,False,Group Stage,False,3,0,1,2,2,10,0,-8,1
+Brazil,C,CONMEBOL,False,False,Round of 16,False,5,3,1,1,10,4,2,6,10
+Morocco,C,CAF,False,False,,True,5,4,1,0,10,4,2,6,13
+Haiti,C,CONCACAF,False,False,Group Stage,False,3,0,0,3,2,8,0,-6,0
+Scotland,C,UEFA,False,False,Group Stage,False,3,1,0,2,1,4,1,-3,3
+United States,D,CONCACAF,True,False,,True,4,3,0,1,10,4,2,6,9
+Australia,D,AFC,False,False,Round of 32,False,4,1,1,2,3,3,2,0,4
+Turkiye,D,UEFA,False,False,Group Stage,False,3,1,0,2,3,5,0,-2,3
+Paraguay,D,CONMEBOL,False,False,Round of 16,False,5,2,1,2,3,6,2,-3,7
+Germany,E,UEFA,False,False,Round of 32,False,4,2,0,2,11,5,0,6,6
+Ivory Coast,E,CAF,False,False,Round of 32,False,4,2,0,2,5,4,2,1,6
+Ecuador,E,CONMEBOL,False,False,Round of 32,False,4,1,1,2,2,4,1,-2,4
+Curacao,E,CONCACAF,False,True,Group Stage,False,3,0,1,2,1,9,1,-8,1
+Sweden,F,UEFA,False,False,Round of 32,False,4,1,1,2,7,10,0,-3,4
+Netherlands,F,UEFA,False,False,Round of 32,False,4,2,1,1,11,5,0,6,7
+Japan,F,AFC,False,False,Round of 32,False,4,1,2,1,8,5,1,3,5
+Tunisia,F,CAF,False,False,Group Stage,False,3,0,0,3,2,12,0,-10,0
+Belgium,G,UEFA,False,False,,True,4,2,2,0,9,4,1,5,8
+Egypt,G,CAF,False,False,,True,4,2,2,0,6,4,0,2,8
+Iran,G,AFC,False,False,Group Stage,False,3,0,3,0,3,3,1,0,3
+New Zealand,G,OFC,False,False,Group Stage,False,3,0,1,2,4,10,0,-6,1
+Spain,H,UEFA,False,False,,True,4,3,1,0,8,0,4,8,10
+Cape Verde,H,CAF,False,True,Round of 32,False,4,0,3,1,4,5,2,-1,3
+Saudi Arabia,H,AFC,False,False,Group Stage,False,3,0,2,1,1,5,1,-4,2
+Uruguay,H,CONMEBOL,False,False,Group Stage,False,3,0,2,1,3,4,0,-1,2
+France,I,UEFA,False,False,,True,5,5,0,0,14,2,3,12,15
+Norway,I,UEFA,False,False,,True,5,4,0,1,12,9,0,3,12
+Senegal,I,CAF,False,False,Round of 32,False,4,1,0,3,10,9,1,1,3
+Iraq,I,AFC,False,False,Group Stage,False,3,0,0,3,1,12,0,-11,0
+Argentina,J,CONMEBOL,False,False,,True,4,4,0,0,11,3,2,8,12
+Austria,J,UEFA,False,False,Round of 32,False,4,1,1,2,6,9,0,-3,4
+Jordan,J,AFC,False,True,Group Stage,False,3,0,0,3,3,8,0,-5,0
+Algeria,J,CAF,False,False,Round of 32,False,4,1,1,2,5,9,0,-4,4
+Portugal,K,UEFA,False,False,,True,4,2,2,0,8,2,2,6,8
+Colombia,K,CONMEBOL,False,False,,True,4,3,1,0,5,1,3,4,10
+DR Congo,K,CAF,False,False,Round of 32,False,4,1,1,2,5,5,0,0,4
+Uzbekistan,K,AFC,False,True,Group Stage,False,3,0,0,3,2,11,0,-9,0
+England,L,UEFA,False,False,,True,5,4,1,0,11,5,2,6,13
+Ghana,L,CAF,False,False,Round of 32,False,4,1,1,2,2,3,2,-1,4
+Panama,L,CONCACAF,False,False,Group Stage,False,3,0,0,3,0,4,0,-4,0
+Croatia,L,UEFA,False,False,Round of 32,False,4,2,0,2,6,7,1,-1,6

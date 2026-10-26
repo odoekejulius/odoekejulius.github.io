@@ -1,0 +1,185 @@
+match_id,date,stage,stage_order,group,is_knockout,team,opponent,goals_for,goals_against,decided_by_penalties,winner,notes,result,goal_diff,points,clean_sheet,confederation,host_nation,world_cup_debut
+1,2026-06-11,Group Stage,0,A,False,Mexico,South Africa,2,0,False,Mexico,Tournament opening match at Estadio Azteca,Win,2,3,True,CONCACAF,True,False
+1,2026-06-11,Group Stage,0,A,False,South Africa,Mexico,0,2,False,Mexico,Tournament opening match at Estadio Azteca,Loss,-2,0,False,CAF,False,False
+2,2026-06-11,Group Stage,0,A,False,Czechia,South Korea,1,2,False,South Korea,,Loss,-1,0,False,UEFA,False,False
+2,2026-06-11,Group Stage,0,A,False,South Korea,Czechia,2,1,False,South Korea,,Win,1,3,False,AFC,False,False
+3,2026-06-12,Group Stage,0,B,False,Bosnia and Herzegovina,Canada,1,1,False,Draw,,Draw,0,1,False,UEFA,False,False
+3,2026-06-12,Group Stage,0,B,False,Canada,Bosnia and Herzegovina,1,1,False,Draw,,Draw,0,1,False,CONCACAF,True,False
+4,2026-06-12,Group Stage,0,D,False,Paraguay,United States,1,4,False,United States,,Loss,-3,0,False,CONMEBOL,False,False
+4,2026-06-12,Group Stage,0,D,False,United States,Paraguay,4,1,False,United States,,Win,3,3,False,CONCACAF,True,False
+5,2026-06-13,Group Stage,0,B,False,Qatar,Switzerland,1,1,False,Draw,,Draw,0,1,False,AFC,False,False
+5,2026-06-13,Group Stage,0,B,False,Switzerland,Qatar,1,1,False,Draw,,Draw,0,1,False,UEFA,False,False
+6,2026-06-13,Group Stage,0,C,False,Brazil,Morocco,1,1,False,Draw,,Draw,0,1,False,CONMEBOL,False,False
+6,2026-06-13,Group Stage,0,C,False,Morocco,Brazil,1,1,False,Draw,,Draw,0,1,False,CAF,False,False
+7,2026-06-13,Group Stage,0,C,False,Haiti,Scotland,0,1,False,Scotland,,Loss,-1,0,False,CONCACAF,False,False
+7,2026-06-13,Group Stage,0,C,False,Scotland,Haiti,1,0,False,Scotland,,Win,1,3,True,UEFA,False,False
+8,2026-06-13,Group Stage,0,D,False,Australia,Turkiye,2,0,False,Australia,,Win,2,3,True,AFC,False,False
+8,2026-06-13,Group Stage,0,D,False,Turkiye,Australia,0,2,False,Australia,,Loss,-2,0,False,UEFA,False,False
+9,2026-06-14,Group Stage,0,E,False,Curacao,Germany,1,7,False,Germany,,Loss,-6,0,False,CONCACAF,False,True
+9,2026-06-14,Group Stage,0,E,False,Germany,Curacao,7,1,False,Germany,,Win,6,3,False,UEFA,False,False
+10,2026-06-14,Group Stage,0,E,False,Ecuador,Ivory Coast,0,1,False,Ivory Coast,,Loss,-1,0,False,CONMEBOL,False,False
+10,2026-06-14,Group Stage,0,E,False,Ivory Coast,Ecuador,1,0,False,Ivory Coast,,Win,1,3,True,CAF,False,False
+11,2026-06-14,Group Stage,0,F,False,Japan,Netherlands,2,2,False,Draw,,Draw,0,1,False,AFC,False,False
+11,2026-06-14,Group Stage,0,F,False,Netherlands,Japan,2,2,False,Draw,,Draw,0,1,False,UEFA,False,False
+12,2026-06-14,Group Stage,0,F,False,Sweden,Tunisia,5,1,False,Sweden,,Win,4,3,False,UEFA,False,False
+12,2026-06-14,Group Stage,0,F,False,Tunisia,Sweden,1,5,False,Sweden,,Loss,-4,0,False,CAF,False,False
+13,2026-06-15,Group Stage,0,G,False,Belgium,Egypt,1,1,False,Draw,,Draw,0,1,False,UEFA,False,False
+13,2026-06-15,Group Stage,0,G,False,Egypt,Belgium,1,1,False,Draw,,Draw,0,1,False,CAF,False,False
+14,2026-06-15,Group Stage,0,G,False,Iran,New Zealand,2,2,False,Draw,,Draw,0,1,False,AFC,False,False
+14,2026-06-15,Group Stage,0,G,False,New Zealand,Iran,2,2,False,Draw,,Draw,0,1,False,OFC,False,False
+15,2026-06-15,Group Stage,0,H,False,Cape Verde,Spain,0,0,False,Draw,,Draw,0,1,True,CAF,False,True
+15,2026-06-15,Group Stage,0,H,False,Spain,Cape Verde,0,0,False,Draw,,Draw,0,1,True,UEFA,False,False
+16,2026-06-15,Group Stage,0,H,False,Saudi Arabia,Uruguay,1,1,False,Draw,,Draw,0,1,False,AFC,False,False
+16,2026-06-15,Group Stage,0,H,False,Uruguay,Saudi Arabia,1,1,False,Draw,,Draw,0,1,False,CONMEBOL,False,False
+17,2026-06-16,Group Stage,0,I,False,France,Senegal,3,1,False,France,,Win,2,3,False,UEFA,False,False
+17,2026-06-16,Group Stage,0,I,False,Senegal,France,1,3,False,France,,Loss,-2,0,False,CAF,False,False
+18,2026-06-16,Group Stage,0,I,False,Iraq,Norway,1,4,False,Norway,,Loss,-3,0,False,AFC,False,False
+18,2026-06-16,Group Stage,0,I,False,Norway,Iraq,4,1,False,Norway,,Win,3,3,False,UEFA,False,False
+19,2026-06-16,Group Stage,0,J,False,Algeria,Argentina,0,3,False,Argentina,,Loss,-3,0,False,CAF,False,False
+19,2026-06-16,Group Stage,0,J,False,Argentina,Algeria,3,0,False,Argentina,,Win,3,3,True,CONMEBOL,False,False
+20,2026-06-16,Group Stage,0,J,False,Austria,Jordan,3,1,False,Austria,,Win,2,3,False,UEFA,False,False
+20,2026-06-16,Group Stage,0,J,False,Jordan,Austria,1,3,False,Austria,,Loss,-2,0,False,AFC,False,True
+21,2026-06-17,Group Stage,0,K,False,DR Congo,Portugal,1,1,False,Draw,,Draw,0,1,False,CAF,False,False
+21,2026-06-17,Group Stage,0,K,False,Portugal,DR Congo,1,1,False,Draw,,Draw,0,1,False,UEFA,False,False
+22,2026-06-17,Group Stage,0,K,False,Colombia,Uzbekistan,3,1,False,Colombia,,Win,2,3,False,CONMEBOL,False,False
+22,2026-06-17,Group Stage,0,K,False,Uzbekistan,Colombia,1,3,False,Colombia,,Loss,-2,0,False,AFC,False,True
+23,2026-06-17,Group Stage,0,L,False,Croatia,England,2,4,False,England,,Loss,-2,0,False,UEFA,False,False
+23,2026-06-17,Group Stage,0,L,False,England,Croatia,4,2,False,England,,Win,2,3,False,UEFA,False,False
+24,2026-06-17,Group Stage,0,L,False,Ghana,Panama,1,0,False,Ghana,,Win,1,3,True,CAF,False,False
+24,2026-06-17,Group Stage,0,L,False,Panama,Ghana,0,1,False,Ghana,,Loss,-1,0,False,CONCACAF,False,False
+25,2026-06-18,Group Stage,0,A,False,Czechia,South Africa,1,1,False,Draw,,Draw,0,1,False,UEFA,False,False
+25,2026-06-18,Group Stage,0,A,False,South Africa,Czechia,1,1,False,Draw,,Draw,0,1,False,CAF,False,False
+26,2026-06-18,Group Stage,0,A,False,Mexico,South Korea,1,0,False,Mexico,,Win,1,3,True,CONCACAF,True,False
+26,2026-06-18,Group Stage,0,A,False,South Korea,Mexico,0,1,False,Mexico,,Loss,-1,0,False,AFC,False,False
+27,2026-06-18,Group Stage,0,B,False,Bosnia and Herzegovina,Switzerland,1,4,False,Switzerland,,Loss,-3,0,False,UEFA,False,False
+27,2026-06-18,Group Stage,0,B,False,Switzerland,Bosnia and Herzegovina,4,1,False,Switzerland,,Win,3,3,False,UEFA,False,False
+28,2026-06-18,Group Stage,0,B,False,Canada,Qatar,6,0,False,Canada,,Win,6,3,True,CONCACAF,True,False
+28,2026-06-18,Group Stage,0,B,False,Qatar,Canada,0,6,False,Canada,,Loss,-6,0,False,AFC,False,False
+29,2026-06-19,Group Stage,0,C,False,Morocco,Scotland,1,0,False,Morocco,,Win,1,3,True,CAF,False,False
+29,2026-06-19,Group Stage,0,C,False,Scotland,Morocco,0,1,False,Morocco,,Loss,-1,0,False,UEFA,False,False
+30,2026-06-19,Group Stage,0,C,False,Brazil,Haiti,3,0,False,Brazil,,Win,3,3,True,CONMEBOL,False,False
+30,2026-06-19,Group Stage,0,C,False,Haiti,Brazil,0,3,False,Brazil,,Loss,-3,0,False,CONCACAF,False,False
+31,2026-06-19,Group Stage,0,D,False,Australia,United States,0,2,False,United States,,Loss,-2,0,False,AFC,False,False
+31,2026-06-19,Group Stage,0,D,False,United States,Australia,2,0,False,United States,,Win,2,3,True,CONCACAF,True,False
+32,2026-06-19,Group Stage,0,D,False,Paraguay,Turkiye,1,0,False,Paraguay,,Win,1,3,True,CONMEBOL,False,False
+32,2026-06-19,Group Stage,0,D,False,Turkiye,Paraguay,0,1,False,Paraguay,,Loss,-1,0,False,UEFA,False,False
+33,2026-06-20,Group Stage,0,E,False,Germany,Ivory Coast,2,1,False,Germany,,Win,1,3,False,UEFA,False,False
+33,2026-06-20,Group Stage,0,E,False,Ivory Coast,Germany,1,2,False,Germany,,Loss,-1,0,False,CAF,False,False
+34,2026-06-20,Group Stage,0,E,False,Curacao,Ecuador,0,0,False,Draw,,Draw,0,1,True,CONCACAF,False,True
+34,2026-06-20,Group Stage,0,E,False,Ecuador,Curacao,0,0,False,Draw,,Draw,0,1,True,CONMEBOL,False,False
+35,2026-06-20,Group Stage,0,F,False,Netherlands,Sweden,5,1,False,Netherlands,,Win,4,3,False,UEFA,False,False
+35,2026-06-20,Group Stage,0,F,False,Sweden,Netherlands,1,5,False,Netherlands,,Loss,-4,0,False,UEFA,False,False
+36,2026-06-20,Group Stage,0,F,False,Japan,Tunisia,4,0,False,Japan,,Win,4,3,True,AFC,False,False
+36,2026-06-20,Group Stage,0,F,False,Tunisia,Japan,0,4,False,Japan,,Loss,-4,0,False,CAF,False,False
+37,2026-06-21,Group Stage,0,G,False,Belgium,Iran,0,0,False,Draw,,Draw,0,1,True,UEFA,False,False
+37,2026-06-21,Group Stage,0,G,False,Iran,Belgium,0,0,False,Draw,,Draw,0,1,True,AFC,False,False
+38,2026-06-21,Group Stage,0,G,False,Egypt,New Zealand,3,1,False,Egypt,,Win,2,3,False,CAF,False,False
+38,2026-06-21,Group Stage,0,G,False,New Zealand,Egypt,1,3,False,Egypt,,Loss,-2,0,False,OFC,False,False
+39,2026-06-21,Group Stage,0,H,False,Saudi Arabia,Spain,0,4,False,Spain,,Loss,-4,0,False,AFC,False,False
+39,2026-06-21,Group Stage,0,H,False,Spain,Saudi Arabia,4,0,False,Spain,,Win,4,3,True,UEFA,False,False
+40,2026-06-21,Group Stage,0,H,False,Cape Verde,Uruguay,2,2,False,Draw,,Draw,0,1,False,CAF,False,True
+40,2026-06-21,Group Stage,0,H,False,Uruguay,Cape Verde,2,2,False,Draw,,Draw,0,1,False,CONMEBOL,False,False
+41,2026-06-22,Group Stage,0,I,False,France,Iraq,3,0,False,France,,Win,3,3,True,UEFA,False,False
+41,2026-06-22,Group Stage,0,I,False,Iraq,France,0,3,False,France,,Loss,-3,0,False,AFC,False,False
+42,2026-06-22,Group Stage,0,I,False,Norway,Senegal,3,2,False,Norway,,Win,1,3,False,UEFA,False,False
+42,2026-06-22,Group Stage,0,I,False,Senegal,Norway,2,3,False,Norway,,Loss,-1,0,False,CAF,False,False
+43,2026-06-22,Group Stage,0,J,False,Argentina,Austria,2,0,False,Argentina,Messi broke World Cup all-time goalscoring record in this match,Win,2,3,True,CONMEBOL,False,False
+43,2026-06-22,Group Stage,0,J,False,Austria,Argentina,0,2,False,Argentina,Messi broke World Cup all-time goalscoring record in this match,Loss,-2,0,False,UEFA,False,False
+44,2026-06-22,Group Stage,0,J,False,Algeria,Jordan,2,1,False,Algeria,,Win,1,3,False,CAF,False,False
+44,2026-06-22,Group Stage,0,J,False,Jordan,Algeria,1,2,False,Algeria,,Loss,-1,0,False,AFC,False,True
+45,2026-06-23,Group Stage,0,K,False,Portugal,Uzbekistan,5,0,False,Portugal,,Win,5,3,True,UEFA,False,False
+45,2026-06-23,Group Stage,0,K,False,Uzbekistan,Portugal,0,5,False,Portugal,,Loss,-5,0,False,AFC,False,True
+46,2026-06-23,Group Stage,0,K,False,Colombia,DR Congo,1,0,False,Colombia,,Win,1,3,True,CONMEBOL,False,False
+46,2026-06-23,Group Stage,0,K,False,DR Congo,Colombia,0,1,False,Colombia,,Loss,-1,0,False,CAF,False,False
+47,2026-06-23,Group Stage,0,L,False,England,Ghana,0,0,False,Draw,,Draw,0,1,True,UEFA,False,False
+47,2026-06-23,Group Stage,0,L,False,Ghana,England,0,0,False,Draw,,Draw,0,1,True,CAF,False,False
+48,2026-06-23,Group Stage,0,L,False,Croatia,Panama,1,0,False,Croatia,,Win,1,3,True,UEFA,False,False
+48,2026-06-23,Group Stage,0,L,False,Panama,Croatia,0,1,False,Croatia,,Loss,-1,0,False,CONCACAF,False,False
+49,2026-06-24,Group Stage,0,A,False,Czechia,Mexico,0,3,False,Mexico,,Loss,-3,0,False,UEFA,False,False
+49,2026-06-24,Group Stage,0,A,False,Mexico,Czechia,3,0,False,Mexico,,Win,3,3,True,CONCACAF,True,False
+50,2026-06-24,Group Stage,0,A,False,South Africa,South Korea,1,0,False,South Africa,,Win,1,3,True,CAF,False,False
+50,2026-06-24,Group Stage,0,A,False,South Korea,South Africa,0,1,False,South Africa,,Loss,-1,0,False,AFC,False,False
+51,2026-06-24,Group Stage,0,B,False,Canada,Switzerland,1,2,False,Switzerland,,Loss,-1,0,False,CONCACAF,True,False
+51,2026-06-24,Group Stage,0,B,False,Switzerland,Canada,2,1,False,Switzerland,,Win,1,3,False,UEFA,False,False
+52,2026-06-24,Group Stage,0,B,False,Bosnia and Herzegovina,Qatar,3,1,False,Bosnia and Herzegovina,,Win,2,3,False,UEFA,False,False
+52,2026-06-24,Group Stage,0,B,False,Qatar,Bosnia and Herzegovina,1,3,False,Bosnia and Herzegovina,,Loss,-2,0,False,AFC,False,False
+53,2026-06-24,Group Stage,0,C,False,Brazil,Scotland,3,0,False,Brazil,,Win,3,3,True,CONMEBOL,False,False
+53,2026-06-24,Group Stage,0,C,False,Scotland,Brazil,0,3,False,Brazil,,Loss,-3,0,False,UEFA,False,False
+54,2026-06-24,Group Stage,0,C,False,Haiti,Morocco,2,4,False,Morocco,,Loss,-2,0,False,CONCACAF,False,False
+54,2026-06-24,Group Stage,0,C,False,Morocco,Haiti,4,2,False,Morocco,,Win,2,3,False,CAF,False,False
+55,2026-06-25,Group Stage,0,D,False,Turkiye,United States,3,2,False,Turkiye,,Win,1,3,False,UEFA,False,False
+55,2026-06-25,Group Stage,0,D,False,United States,Turkiye,2,3,False,Turkiye,,Loss,-1,0,False,CONCACAF,True,False
+56,2026-06-25,Group Stage,0,D,False,Australia,Paraguay,0,0,False,Draw,,Draw,0,1,True,AFC,False,False
+56,2026-06-25,Group Stage,0,D,False,Paraguay,Australia,0,0,False,Draw,,Draw,0,1,True,CONMEBOL,False,False
+57,2026-06-25,Group Stage,0,E,False,Ecuador,Germany,2,1,False,Ecuador,,Win,1,3,False,CONMEBOL,False,False
+57,2026-06-25,Group Stage,0,E,False,Germany,Ecuador,1,2,False,Ecuador,,Loss,-1,0,False,UEFA,False,False
+58,2026-06-25,Group Stage,0,E,False,Curacao,Ivory Coast,0,2,False,Ivory Coast,,Loss,-2,0,False,CONCACAF,False,True
+58,2026-06-25,Group Stage,0,E,False,Ivory Coast,Curacao,2,0,False,Ivory Coast,,Win,2,3,True,CAF,False,False
+59,2026-06-25,Group Stage,0,F,False,Japan,Sweden,1,1,False,Draw,,Draw,0,1,False,AFC,False,False
+59,2026-06-25,Group Stage,0,F,False,Sweden,Japan,1,1,False,Draw,,Draw,0,1,False,UEFA,False,False
+60,2026-06-25,Group Stage,0,F,False,Netherlands,Tunisia,3,1,False,Netherlands,,Win,2,3,False,UEFA,False,False
+60,2026-06-25,Group Stage,0,F,False,Tunisia,Netherlands,1,3,False,Netherlands,,Loss,-2,0,False,CAF,False,False
+61,2026-06-26,Group Stage,0,G,False,Egypt,Iran,1,1,False,Draw,,Draw,0,1,False,CAF,False,False
+61,2026-06-26,Group Stage,0,G,False,Iran,Egypt,1,1,False,Draw,,Draw,0,1,False,AFC,False,False
+62,2026-06-26,Group Stage,0,G,False,Belgium,New Zealand,5,1,False,Belgium,,Win,4,3,False,UEFA,False,False
+62,2026-06-26,Group Stage,0,G,False,New Zealand,Belgium,1,5,False,Belgium,,Loss,-4,0,False,OFC,False,False
+63,2026-06-26,Group Stage,0,H,False,Cape Verde,Saudi Arabia,0,0,False,Draw,,Draw,0,1,True,CAF,False,True
+63,2026-06-26,Group Stage,0,H,False,Saudi Arabia,Cape Verde,0,0,False,Draw,,Draw,0,1,True,AFC,False,False
+64,2026-06-26,Group Stage,0,H,False,Spain,Uruguay,1,0,False,Spain,,Win,1,3,True,UEFA,False,False
+64,2026-06-26,Group Stage,0,H,False,Uruguay,Spain,0,1,False,Spain,,Loss,-1,0,False,CONMEBOL,False,False
+65,2026-06-26,Group Stage,0,I,False,France,Norway,4,1,False,France,,Win,3,3,False,UEFA,False,False
+65,2026-06-26,Group Stage,0,I,False,Norway,France,1,4,False,France,,Loss,-3,0,False,UEFA,False,False
+66,2026-06-26,Group Stage,0,I,False,Iraq,Senegal,0,5,False,Senegal,,Loss,-5,0,False,AFC,False,False
+66,2026-06-26,Group Stage,0,I,False,Senegal,Iraq,5,0,False,Senegal,,Win,5,3,True,CAF,False,False
+67,2026-06-27,Group Stage,0,J,False,Algeria,Austria,3,3,False,Draw,,Draw,0,1,False,CAF,False,False
+67,2026-06-27,Group Stage,0,J,False,Austria,Algeria,3,3,False,Draw,,Draw,0,1,False,UEFA,False,False
+68,2026-06-27,Group Stage,0,J,False,Argentina,Jordan,3,1,False,Argentina,,Win,2,3,False,CONMEBOL,False,False
+68,2026-06-27,Group Stage,0,J,False,Jordan,Argentina,1,3,False,Argentina,,Loss,-2,0,False,AFC,False,True
+69,2026-06-27,Group Stage,0,K,False,Colombia,Portugal,0,0,False,Draw,,Draw,0,1,True,CONMEBOL,False,False
+69,2026-06-27,Group Stage,0,K,False,Portugal,Colombia,0,0,False,Draw,,Draw,0,1,True,UEFA,False,False
+70,2026-06-27,Group Stage,0,K,False,DR Congo,Uzbekistan,3,1,False,DR Congo,,Win,2,3,False,CAF,False,False
+70,2026-06-27,Group Stage,0,K,False,Uzbekistan,DR Congo,1,3,False,DR Congo,,Loss,-2,0,False,AFC,False,True
+71,2026-06-27,Group Stage,0,L,False,Croatia,Ghana,2,1,False,Croatia,,Win,1,3,False,UEFA,False,False
+71,2026-06-27,Group Stage,0,L,False,Ghana,Croatia,1,2,False,Croatia,,Loss,-1,0,False,CAF,False,False
+72,2026-06-27,Group Stage,0,L,False,England,Panama,2,0,False,England,,Win,2,3,True,UEFA,False,False
+72,2026-06-27,Group Stage,0,L,False,Panama,England,0,2,False,England,,Loss,-2,0,False,CONCACAF,False,False
+73,2026-06-28,Round of 32,1,Knockout,True,Canada,South Africa,1,0,False,Canada,,Win,1,3,True,CONCACAF,True,False
+73,2026-06-28,Round of 32,1,Knockout,True,South Africa,Canada,0,1,False,Canada,,Loss,-1,0,False,CAF,False,False
+74,2026-06-29,Round of 32,1,Knockout,True,Brazil,Japan,2,1,False,Brazil,,Win,1,3,False,CONMEBOL,False,False
+74,2026-06-29,Round of 32,1,Knockout,True,Japan,Brazil,1,2,False,Brazil,,Loss,-1,0,False,AFC,False,False
+75,2026-06-29,Round of 32,1,Knockout,True,Germany,Paraguay,1,1,True,Paraguay,Paraguay won 4-3 on penalties,Loss,0,0,False,UEFA,False,False
+75,2026-06-29,Round of 32,1,Knockout,True,Paraguay,Germany,1,1,True,Paraguay,Paraguay won 4-3 on penalties,Win,0,3,False,CONMEBOL,False,False
+76,2026-06-29,Round of 32,1,Knockout,True,Morocco,Netherlands,1,1,True,Morocco,Morocco won 3-2 on penalties,Win,0,3,False,CAF,False,False
+76,2026-06-29,Round of 32,1,Knockout,True,Netherlands,Morocco,1,1,True,Morocco,Morocco won 3-2 on penalties,Loss,0,0,False,UEFA,False,False
+77,2026-06-30,Round of 32,1,Knockout,True,Ivory Coast,Norway,1,2,False,Norway,,Loss,-1,0,False,CAF,False,False
+77,2026-06-30,Round of 32,1,Knockout,True,Norway,Ivory Coast,2,1,False,Norway,,Win,1,3,False,UEFA,False,False
+78,2026-06-30,Round of 32,1,Knockout,True,France,Sweden,3,0,False,France,,Win,3,3,True,UEFA,False,False
+78,2026-06-30,Round of 32,1,Knockout,True,Sweden,France,0,3,False,France,,Loss,-3,0,False,UEFA,False,False
+79,2026-06-30,Round of 32,1,Knockout,True,Ecuador,Mexico,0,2,False,Mexico,,Loss,-2,0,False,CONMEBOL,False,False
+79,2026-06-30,Round of 32,1,Knockout,True,Mexico,Ecuador,2,0,False,Mexico,,Win,2,3,True,CONCACAF,True,False
+80,2026-07-01,Round of 32,1,Knockout,True,DR Congo,England,1,2,False,England,,Loss,-1,0,False,CAF,False,False
+80,2026-07-01,Round of 32,1,Knockout,True,England,DR Congo,2,1,False,England,,Win,1,3,False,UEFA,False,False
+81,2026-07-01,Round of 32,1,Knockout,True,Belgium,Senegal,3,2,False,Belgium,,Win,1,3,False,UEFA,False,False
+81,2026-07-01,Round of 32,1,Knockout,True,Senegal,Belgium,2,3,False,Belgium,,Loss,-1,0,False,CAF,False,False
+82,2026-07-01,Round of 32,1,Knockout,True,Bosnia and Herzegovina,United States,0,2,False,United States,,Loss,-2,0,False,UEFA,False,False
+82,2026-07-01,Round of 32,1,Knockout,True,United States,Bosnia and Herzegovina,2,0,False,United States,,Win,2,3,True,CONCACAF,True,False
+83,2026-07-02,Round of 32,1,Knockout,True,Austria,Spain,0,3,False,Spain,,Loss,-3,0,False,UEFA,False,False
+83,2026-07-02,Round of 32,1,Knockout,True,Spain,Austria,3,0,False,Spain,,Win,3,3,True,UEFA,False,False
+84,2026-07-02,Round of 32,1,Knockout,True,Croatia,Portugal,1,2,False,Portugal,,Loss,-1,0,False,UEFA,False,False
+84,2026-07-02,Round of 32,1,Knockout,True,Portugal,Croatia,2,1,False,Portugal,,Win,1,3,False,UEFA,False,False
+85,2026-07-02,Round of 32,1,Knockout,True,Algeria,Switzerland,0,2,False,Switzerland,,Loss,-2,0,False,CAF,False,False
+85,2026-07-02,Round of 32,1,Knockout,True,Switzerland,Algeria,2,0,False,Switzerland,,Win,2,3,True,UEFA,False,False
+86,2026-07-03,Round of 32,1,Knockout,True,Australia,Egypt,1,1,True,Egypt,Egypt won 4-2 on penalties,Loss,0,0,False,AFC,False,False
+86,2026-07-03,Round of 32,1,Knockout,True,Egypt,Australia,1,1,True,Egypt,Egypt won 4-2 on penalties,Win,0,3,False,CAF,False,False
+87,2026-07-03,Round of 32,1,Knockout,True,Argentina,Cape Verde,3,2,False,Argentina,,Win,1,3,False,CONMEBOL,False,False
+87,2026-07-03,Round of 32,1,Knockout,True,Cape Verde,Argentina,2,3,False,Argentina,,Loss,-1,0,False,CAF,False,True
+88,2026-07-03,Round of 32,1,Knockout,True,Colombia,Ghana,1,0,False,Colombia,,Win,1,3,True,CONMEBOL,False,False
+88,2026-07-03,Round of 32,1,Knockout,True,Ghana,Colombia,0,1,False,Colombia,,Loss,-1,0,False,CAF,False,False
+89,2026-07-04,Round of 16,2,Knockout,True,Canada,Morocco,0,3,False,Morocco,Morocco eliminates co-host Canada,Loss,-3,0,False,CONCACAF,True,False
+89,2026-07-04,Round of 16,2,Knockout,True,Morocco,Canada,3,0,False,Morocco,Morocco eliminates co-host Canada,Win,3,3,True,CAF,False,False
+90,2026-07-04,Round of 16,2,Knockout,True,France,Paraguay,1,0,False,France,,Win,1,3,True,UEFA,False,False
+90,2026-07-04,Round of 16,2,Knockout,True,Paraguay,France,0,1,False,France,,Loss,-1,0,False,CONMEBOL,False,False
+91,2026-07-05,Round of 16,2,Knockout,True,Brazil,Norway,1,2,False,Norway,,Loss,-1,0,False,CONMEBOL,False,False
+91,2026-07-05,Round of 16,2,Knockout,True,Norway,Brazil,2,1,False,Norway,,Win,1,3,False,UEFA,False,False
+92,2026-07-05,Round of 16,2,Knockout,True,England,Mexico,3,2,False,England,,Win,1,3,False,UEFA,False,False
+92,2026-07-05,Round of 16,2,Knockout,True,Mexico,England,2,3,False,England,,Loss,-1,0,False,CONCACAF,True,False

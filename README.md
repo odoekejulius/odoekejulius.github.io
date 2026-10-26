@@ -24,18 +24,19 @@ GitHub Pages only serves static files, so it cannot process server-side contact 
 
 There is no private admin dashboard on GitHub Pages: it cannot run PHP, a database, or a secure server-side login. To edit the published content, open `index.html` in the GitHub repository, select the pencil icon, make the changes, and commit them. GitHub Pages will publish the update after its deployment finishes.
 
-The layout and appearance are in `assets/css/style.css`; navigation, project filtering, and animations are in `assets/js/main.js`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
+The layout and appearance are in `assets/css/style.css`; navigation and animations are in `assets/js/main.js`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
 
 ## CV and public documents
 
-The CV is previewed in the page from `assets/documents/julius-odoeke-cv.pdf`. To add another public PDF:
+The CV is previewed inline from `assets/documents/julius-odoeke-cv.pdf`. The Google Data Analytics, Web Development, and NYSC certificates are listed in the site, but their scanned files are not currently in the project. Add each certificate PDF or image under `assets/documents/`, then replace its pending entry in the `#documents` section with a preview card and viewer.
 
-1. Upload it to `assets/documents/`.
-2. Add a document card in the `#documents` section of `index.html`, linking to a unique preview anchor.
-3. Add a matching viewer with an `<iframe>` whose `src` points to the PDF, plus a direct-link fallback for browsers that do not display embedded PDFs.
-4. Test the preview and fallback link locally, then commit and let GitHub Pages deploy the change.
+GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** prevent a visitor from opening, saving, or copying a public file. Review personal information before publishing documents. Private documents or guaranteed download protection require access-controlled server-side hosting; static GitHub Pages cannot provide that.
 
-GitHub Pages serves these files publicly. Hiding the PDF viewer toolbar does **not** prevent a visitor from opening, saving, or copying the file. Review any personal or contact information in a document before publishing it.
+## Add portfolio work
+
+Website projects and data analytics projects are separate sections in `index.html` so each collection can grow independently. Add a website card inside `#website-projects`. Add analytics write-ups and dashboard previews inside `#analytics-projects`; put supporting static previews in `assets/data-analytics/`. Keep preview pages self-contained and test them at phone and desktop sizes before publishing. Do not link raw files as download buttons if the intent is to invite visitors to preview the work; public files can still be retrieved from their URLs.
+
+The World Cup project dashboard is a self-contained interactive preview at `assets/data-analytics/world-cup-2026/dashboard-preview.html`; its project notes are at `assets/data-analytics/world-cup-2026/analysis-report-preview.html`. The source files remain grouped under the same folder.
 
 ## Project structure
 
@@ -49,6 +50,19 @@ GitHub Pages serves these files publicly. Hiding the PDF viewer toolbar does **n
     │   └── style.css
     ├── documents/
     │   └── julius-odoeke-cv.pdf
+    ├── data-analytics/
+    │   └── world-cup-2026/
+    │       ├── dashboard-preview.html
+    │       ├── analysis-report-preview.html
+    │       ├── confederation_summary.csv
+    │       ├── data_cleaning_log.csv
+    │       ├── dim_team_summary.csv
+    │       ├── fact_team_match.csv
+    │       ├── group_standings.csv
+    │       ├── matches_clean.csv
+    │       ├── analysis-report.docx
+    │       ├── dashboard-source.jsx
+    │       └── tableau-data.xlsx
     ├── images/
     │   ├── julius-odoeke.jpeg
     │   └── renacido/
