@@ -16,6 +16,12 @@ Open `index.html` directly in a browser. No local server or build step is requir
 
 The site uses relative asset paths and works both at a repository URL such as `https://username.github.io/repository/` and at a user or organization URL. A custom domain and `CNAME` file are optional and are not needed.
 
+## Search engine indexing
+
+The portfolio's canonical URL, sitemap, robots file, social preview metadata, and structured person profile are configured for `https://odoekejulius.github.io/`. If the published site moves to another domain, update these absolute URLs in `index.html`, `robots.txt`, and `sitemap.xml`.
+
+After publishing, verify the site in [Google Search Console](https://search.google.com/search-console/) and submit `https://odoekejulius.github.io/sitemap.xml`. You can also add the site to [Bing Webmaster Tools](https://www.bing.com/webmasters/) and submit the same sitemap. Search engines decide when to crawl, index, and rank a site; these steps make it discoverable but cannot guarantee a result for every search or an immediate ranking.
+
 ## Contact behavior
 
 GitHub Pages only serves static files, so it cannot process server-side contact forms. The contact links open the visitor’s email app or WhatsApp directly; no message is sent through this website.
@@ -28,7 +34,7 @@ The layout and appearance are in `assets/css/style.css`; navigation and animatio
 
 ## CV and public documents
 
-The CV is previewed inline from `assets/documents/julius-odoeke-cv.pdf`. The Google Data Analytics, Web Development, and NYSC certificates are listed in the site, but their scanned files are not currently in the project. Add each certificate PDF or image under `assets/documents/`, then replace its pending entry in the `#documents` section with a preview card and viewer.
+The CV and Google Data Analytics certificate PDFs and the Web Development and NYSC certificate scans are grouped under `assets/documents/`. The `#documents` section links to an inline preview for each item. On phones, PDF embeds are replaced with links that open the PDF directly in the browser's built-in viewer; certificate images open at full size when tapped.
 
 GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** prevent a visitor from opening, saving, or copying a public file. Review personal information before publishing documents. Private documents or guaranteed download protection require access-controlled server-side hosting; static GitHub Pages cannot provide that.
 
@@ -49,7 +55,10 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
     ├── css/
     │   └── style.css
     ├── documents/
-    │   └── julius-odoeke-cv.pdf
+    │   ├── google-data-analytics-professional-certificate.pdf
+    │   ├── julius-odoeke-cv.pdf
+    │   ├── nysc-certificate-of-national-service.jpg
+    │   └── web-development-certificate.jpg
     ├── data-analytics/
     │   └── world-cup-2026/
     │       ├── dashboard-preview.html
