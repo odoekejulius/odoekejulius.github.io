@@ -159,13 +159,14 @@
         }
       } catch (error) {
         console.error(`Unable to render PDF preview: ${preview.dataset.pdfSource}`, error);
-        preview.dataset.state = "error";
         preview.setAttribute("aria-busy", "false");
-        const status = preview.querySelector(".pdf-preview-status") ?? document.createElement("p");
-        status.className = "pdf-preview-status";
-        status.setAttribute("role", "status");
-        status.textContent = "The quick preview could not load. You can still read the PDF in the viewer below or open the original file.";
-        preview.replaceChildren(status);
+        const fallbackFrame = viewer.querySelector(".pdf-native-frame");
+        if (fallbackFrame) {
+          preview.replaceChildren(fallbackFrame);
+          preview.dataset.state = "fallback";
+        } else {
+          preview.dataset.state = preview.querySelector("canvas") ? "rendered" : "error";
+        }
         viewer.classList.add("pdfjs-error");
         viewer.classList.remove("pdfjs-ready");
       }
