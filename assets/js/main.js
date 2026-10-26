@@ -84,17 +84,41 @@
       return pdfjsPromise;
     };
 
+    const withTimeout = (promise, description, onTimeout) => new Promise((resolve, reject) => {
+      const timeout = window.setTimeout(() => {
+        try {
+          onTimeout?.();
+        } catch (error) {
+          reject(error);
+          return;
+        }
+        reject(new Error(`${description} timed out.`));
+      }, 15000);
+
+      Promise.resolve(promise).then(
+        (value) => {
+          window.clearTimeout(timeout);
+          resolve(value);
+        },
+        (error) => {
+          window.clearTimeout(timeout);
+          reject(error);
+        }
+      );
+    });
+
     const renderPdfPreview = async (preview) => {
       const viewer = preview.closest(".document-viewer");
       const width = Math.floor(preview.clientWidth);
-      if (!viewer || width < 20 || preview.dataset.state === "loading") return;
+      if (!viewer || width < 20 || preview.dataset.state === "loading" || preview.dataset.state === "error") return;
       if (preview.dataset.state === "rendered" && Math.abs(width - Number(preview.dataset.renderedWidth)) < 80) return;
 
       preview.dataset.state = "loading";
       preview.setAttribute("aria-busy", "true");
       try {
-        const pdfjs = await loadPdfjs();
-        const pdf = await pdfjs.getDocument(new URL(preview.dataset.pdfSource, document.baseURI).href).promise;
+        const pdfjs = await withTimeout(loadPdfjs(), "PDF preview library loading");
+        const loadingTask = pdfjs.getDocument(new URL(preview.dataset.pdfSource, document.baseURI).href);
+        const pdf = await withTimeout(loadingTask.promise, "PDF document loading", () => loadingTask.destroy());
         const pages = document.createElement("div");
         pages.className = "pdf-preview-pages";
         const outputScale = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
@@ -116,7 +140,8 @@
           pageContainer.className = "pdf-preview-page";
           pageContainer.append(canvas);
           pages.append(pageContainer);
-          await page.render({ canvasContext: context, viewport }).promise;
+          const renderTask = page.render({ canvasContext: context, viewport });
+          await withTimeout(renderTask.promise, `PDF page ${pageNumber} rendering`, () => renderTask.cancel());
         }
 
         const status = preview.querySelector(".pdf-preview-status");
@@ -139,9 +164,10 @@
         const status = preview.querySelector(".pdf-preview-status") ?? document.createElement("p");
         status.className = "pdf-preview-status";
         status.setAttribute("role", "status");
-        status.textContent = "The inline preview is unavailable. Use the PDF link below to open the original document.";
-        if (!status.parentElement) preview.prepend(status);
+        status.textContent = "The quick preview could not load. You can still read the PDF in the viewer below or open the original file.";
+        preview.replaceChildren(status);
         viewer.classList.add("pdfjs-error");
+        viewer.classList.remove("pdfjs-ready");
       }
     };
 
@@ -273,7 +299,7 @@
           currentObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0 });
 
     revealItems.forEach((item) => observer.observe(item));
   } else {
