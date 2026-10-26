@@ -372,21 +372,74 @@
   // Contact form: composes an email in the visitor's mail app (no server needed)
   const form = document.querySelector("#contact-form");
   if (form) {
+    const nameField = form.elements.name;
+    const emailField = form.elements.email;
+    const topicField = form.elements.topic;
+    const messageField = form.elements.message;
+    const messageCount = form.querySelector("#message-count");
+    const status = form.querySelector(".form-status");
+    const fieldErrors = new Map([
+      [nameField, form.querySelector("#name-error")],
+      [emailField, form.querySelector("#email-error")],
+      [messageField, form.querySelector("#message-error")],
+    ]);
+
+    const getFieldError = (field) => {
+      const value = field.value.trim();
+      if (!value) return "This field is required.";
+      if (field.validity.typeMismatch) return "Enter a valid email address.";
+      if (field.minLength > 0 && value.length < field.minLength) return `Please enter at least ${field.minLength} characters.`;
+      if (field.maxLength > 0 && field.value.length > field.maxLength) return `Please keep this to ${field.maxLength} characters or fewer.`;
+      return "";
+    };
+
+    const updateMessageCount = () => {
+      messageCount.textContent = `${messageField.value.length.toLocaleString("en-US")} / 4,000`;
+    };
+
+    updateMessageCount();
+    const updateField = (field) => {
+      const error = getFieldError(field);
+      const errorElement = fieldErrors.get(field);
+      const invalid = field.dataset.touched === "true" && Boolean(error);
+      field.setAttribute("aria-invalid", String(invalid));
+      if (errorElement) errorElement.textContent = invalid ? error : "";
+      return !error;
+    };
+
+    [nameField, emailField, messageField].forEach((field) => {
+      field.addEventListener("input", () => {
+        if (field.dataset.touched === "true") updateField(field);
+        if (field === messageField) updateMessageCount();
+      });
+      field.addEventListener("blur", () => {
+        field.dataset.touched = "true";
+        updateField(field);
+      });
+    });
+
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const status = form.querySelector(".form-status");
-      const fields = ["name", "email", "message"].map((n) => form.elements[n]);
-      let valid = true;
-      fields.forEach((f) => {
-        const ok = f.value.trim() && f.checkValidity();
-        f.setAttribute("aria-invalid", String(!ok));
-        if (!ok) valid = false;
+      const fields = [nameField, emailField, messageField];
+      const invalidFields = fields.filter((field) => {
+        field.dataset.touched = "true";
+        return !updateField(field);
       });
-      if (!valid) { status.textContent = "Please complete your name, a valid email, and a message."; return; }
-      const [name, email, message] = fields.map((f) => f.value.trim());
-      const body = `${message}\n\n— ${name} (${email})`;
-      window.location.href = `mailto:odoekejulius@gmail.com?subject=${encodeURIComponent("Message from " + name)}&body=${encodeURIComponent(body)}`;
-      status.textContent = "Your email app should open with the message ready to send.";
+      if (invalidFields.length) {
+        status.textContent = "A few details need your attention. Please check the highlighted fields.";
+        invalidFields[0].focus();
+        return;
+      }
+
+      const name = nameField.value.trim();
+      const email = emailField.value.trim();
+      const topic = topicField.value;
+      const message = messageField.value.trim();
+      const subject = `${topic} enquiry — ${name}`;
+      const body = `Hello Julius,\n\n${message}\n\n---\nName: ${name}\nEmail: ${email}\nTopic: ${topic}`;
+      const mailto = `mailto:odoekejulius@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.textContent = "Your email app should open with your message ready. If it doesn’t, email Julius directly at odoekejulius@gmail.com.";
+      window.location.assign(mailto);
     });
   }
 

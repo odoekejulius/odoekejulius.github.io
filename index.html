@@ -49,7 +49,7 @@
     }
   </script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=22">
+  <link rel="stylesheet" href="assets/css/style.css?v=24">
   <script>
     (() => {
       const root = document.documentElement;
@@ -66,7 +66,7 @@
       }
     })();
   </script>
-  <script src="assets/js/main.js?v=22" defer></script>
+  <script src="assets/js/main.js?v=24" defer></script>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -524,14 +524,57 @@
           <span class="email-note">odoekejulius@gmail.com</span>
         </div>
       </div>
-      <div class="container"><form class="contact-form reveal" id="contact-form" novalidate>
-        <p class="form-title">Prefer to write it here? This opens your email app with the message ready to send.</p>
-        <label>Your name<input name="name" type="text" autocomplete="name" required></label>
-        <label>Your email<input name="email" type="email" autocomplete="email" required></label>
-        <label class="form-wide">Message<textarea name="message" rows="5" required></textarea></label>
-        <button class="button button-primary" type="submit">Compose email <span aria-hidden="true">↗</span></button>
-        <p class="form-status" role="status" aria-live="polite"></p>
-      </form></div>
+      <div class="container">
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <div class="composer-heading">
+            <div class="composer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M21 3 10.8 13.2M21 3l-6.5 18-3.7-7.8L3 9.5 21 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="composer-title">
+              <p class="composer-kicker">A note to Julius</p>
+              <h3>Start a conversation</h3>
+              <p>Share a little about what you have in mind. I’ll be glad to hear from you.</p>
+            </div>
+            <span class="composer-badge"><i aria-hidden="true"></i> Opens your email app</span>
+          </div>
+          <div class="composer-fields">
+            <label>
+              <span>Your name</span>
+              <input name="name" type="text" autocomplete="name" placeholder="e.g. Alex Johnson" minlength="2" maxlength="100" required aria-describedby="name-error">
+              <small class="field-error" id="name-error"></small>
+            </label>
+            <label>
+              <span>Email address</span>
+              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required aria-describedby="email-error">
+              <small class="field-error" id="email-error"></small>
+            </label>
+            <label class="form-wide">
+              <span>What would you like to discuss?</span>
+              <select name="topic" required>
+                <option value="Website development">Website development</option>
+                <option value="Data analysis">Data analysis</option>
+                <option value="ICT training">ICT training</option>
+                <option value="Job opportunity">Job opportunity</option>
+                <option value="Something else">Something else</option>
+              </select>
+            </label>
+            <label class="form-wide">
+              <span>Your message</span>
+              <textarea name="message" rows="6" minlength="20" maxlength="4000" placeholder="A few details about your project, question, or opportunity..." required aria-describedby="message-hint message-count message-error"></textarea>
+              <span class="message-meta">
+                <small id="message-hint">Please include at least 20 characters.</small>
+                <small id="message-count" aria-live="polite">0 / 4,000</small>
+              </span>
+              <small class="field-error" id="message-error"></small>
+            </label>
+          </div>
+          <div class="composer-submit">
+            <button class="button button-primary" type="submit">Prepare email <span aria-hidden="true">↗</span></button>
+            <p class="composer-privacy">Your message stays in your email app until you choose to send it.</p>
+          </div>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </section>
 
   </main>
