@@ -38,7 +38,7 @@ The layout and appearance are in `assets/css/style.css`; navigation, animations,
 
 ## CV and public documents
 
-The CV and Google Data Analytics certificate PDFs and the Web Development and NYSC certificate scans are grouped under `assets/documents/`. The `#documents` section renders PDF pages in responsive canvases on desktop and mobile; original PDF links and native browser viewers remain available as fallbacks. The three certificates are grouped in a collapsible library that closes again after it scrolls out of view. Certificate images open at full size when tapped.
+The CV and Google Data Analytics certificate PDFs and the Web Development and NYSC certificate scans are grouped under `assets/documents/`. The `#documents` section renders PDF pages in responsive canvases on desktop and mobile; the CV preview has its own scroll area so visitors can read all pages without scrolling the whole site. Original PDF links and native browser viewers remain available as fallbacks. The three certificates are grouped in a collapsible library that closes again after it scrolls out of view. Certificate images open at full size when tapped.
 
 GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** prevent a visitor from opening, saving, or copying a public file. Review personal information before publishing documents. Private documents or guaranteed download protection require access-controlled server-side hosting; static GitHub Pages cannot provide that.
 
