@@ -366,7 +366,7 @@ button { font: inherit; }
 .viewer-heading b { padding-inline: 3px; color: var(--accent); font-weight: 400; }
 .viewer-status { width: 6px; height: 6px; border-radius: 50%; background: var(--status-muted); box-shadow: 0 0 10px rgba(var(--rgb-accent), .48); }
 .pdf-canvas-preview { width: 100%; min-height: 72px; padding: 12px; background: var(--viewer-bg); }
-.cv-pdf-preview { height: min(72vh, 760px); min-height: 320px; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-gutter: stable; }
+.cv-pdf-preview { height: min(72vh, 760px); min-height: 320px; overflow: auto; -webkit-overflow-scrolling: touch; scrollbar-gutter: stable; }
 .cv-pdf-preview:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .pdf-preview-status { margin: 0; color: var(--muted); font-size: .72rem; }
 .pdf-preview-pages { display: grid; gap: 12px; }
