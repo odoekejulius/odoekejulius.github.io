@@ -4,6 +4,7 @@ backend:
   name: github
   repo: odoekejulius/odoekejulius.github.io
   branch: main
+  auth_methods: [token]
 
 media_folder: /assets/uploads
 public_folder: /assets/uploads
