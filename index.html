@@ -49,7 +49,7 @@
     }
   </script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=27">
+  <link rel="stylesheet" href="assets/css/style.css?v=28">
   <script>
     (() => {
       const root = document.documentElement;
@@ -66,7 +66,7 @@
       }
     })();
   </script>
-  <script src="assets/js/main.js?v=27" defer></script>
+  <script src="assets/js/main.js?v=28" defer></script>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -85,6 +85,7 @@
         <a href="#about">About</a>
         <a href="#website-projects">Websites</a>
         <a href="#analytics-projects">Analytics</a>
+        <a href="#media" data-cms-media-link hidden>Videos</a>
         <a href="#experience">Experience</a>
         <a href="#documents">Documents</a>
         <a href="#skills">Skills</a>
@@ -197,6 +198,7 @@
               <a class="text-link" href="https://renacidopharmacy.com" target="_blank" rel="noopener noreferrer">Visit live website <span aria-hidden="true">↗</span></a>
             </div>
           </article>
+          <div class="cms-project-grid project-grid" data-cms-projects="web"></div>
           <div class="in-progress">
             <article class="mini-project reveal"><span class="status-pill">In development</span><h3>C.Zara Enterprise</h3><p>An online store for a natural foods business in Abuja, with an admin area so the owners can manage their own products, orders and customers.</p></article>
             <article class="mini-project reveal"><span class="status-pill">In development</span><h3>Nethub</h3><p>A bill-payment platform for airtime, data, electricity, TV subscriptions and other everyday payments.</p></article>
@@ -290,6 +292,20 @@
             </div>
           </div>
         </article>
+        <div class="cms-project-grid project-grid" data-cms-projects="analytics"></div>
+      </div>
+    </section>
+
+    <section class="section media-section" id="media" data-cms-media-section hidden>
+      <div class="container">
+        <div class="section-top">
+          <div class="section-heading">
+            <p class="eyebrow">03 / Videos &amp; media</p>
+            <h2>Work in <span class="text-gradient">motion.</span></h2>
+          </div>
+          <p class="section-intro">Videos, walkthroughs and demonstrations.</p>
+        </div>
+        <div class="project-grid cms-media-grid" data-cms-media></div>
       </div>
     </section>
 
@@ -457,6 +473,13 @@
             </details>
           </div>
         </div>
+        <div class="cms-document-section" data-cms-documents hidden>
+          <div class="section-heading">
+            <p class="eyebrow">More to explore</p>
+            <h2>Additional <span class="text-gradient">documents.</span></h2>
+          </div>
+          <div class="project-grid cms-document-grid" data-cms-document-cards></div>
+        </div>
       </div>
     </section>
 
@@ -586,6 +609,7 @@
           <a href="#about">About</a>
           <a href="#website-projects">Website projects</a>
           <a href="#analytics-projects">Data analytics</a>
+          <a href="#media" data-cms-media-link hidden>Videos &amp; media</a>
           <a href="#experience">Experience</a>
           <a href="#process">How I work</a>
           <a href="#documents">Documents</a>

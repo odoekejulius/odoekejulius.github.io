@@ -288,6 +288,268 @@
     }
   }
 
+  const cmsCollections = [
+    { path: "content/website-projects.json", selector: '[data-cms-projects="web"]', type: "project", category: "Web development" },
+    { path: "content/analytics-projects.json", selector: '[data-cms-projects="analytics"]', type: "project", category: "Data analytics" },
+    { path: "content/media.json", selector: "[data-cms-media]", type: "media" },
+    { path: "content/documents.json", selector: "[data-cms-document-cards]", type: "document" }
+  ];
+
+  const safePublicUrl = (value) => {
+    if (typeof value !== "string" || !value.trim()) return "";
+    try {
+      const url = new URL(value.trim(), document.baseURI);
+      return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
+    } catch {
+      return "";
+    }
+  };
+
+  const textItems = (value) => Array.isArray(value)
+    ? value.filter((item) => typeof item === "string" && item.trim()).map((item) => item.trim())
+    : [];
+
+  const createProjectImage = (source, alt) => {
+    const imageUrl = safePublicUrl(source);
+    if (!imageUrl) return null;
+    const link = document.createElement("a");
+    link.className = "project-image";
+    link.href = imageUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    const image = document.createElement("img");
+    image.src = imageUrl;
+    image.alt = alt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    link.append(image);
+    const indicator = document.createElement("span");
+    indicator.className = "image-link";
+    indicator.setAttribute("aria-hidden", "true");
+    indicator.textContent = "↗";
+    link.append(indicator);
+    return link;
+  };
+
+  const addTextList = (parent, values, className) => {
+    const items = textItems(values);
+    if (!items.length) return;
+    const list = document.createElement("ul");
+    list.className = className;
+    items.forEach((value) => {
+      const item = document.createElement("li");
+      item.textContent = value;
+      list.append(item);
+    });
+    parent.append(list);
+  };
+
+  const addProjectLink = (parent, label, value) => {
+    const href = safePublicUrl(value);
+    if (!href) return;
+    const link = document.createElement("a");
+    link.className = "text-link";
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.append(document.createTextNode(label));
+    const indicator = document.createElement("span");
+    indicator.setAttribute("aria-hidden", "true");
+    indicator.textContent = " ↗";
+    link.append(indicator);
+    parent.append(link);
+  };
+
+  const createProjectCard = (entry, category) => {
+    const card = document.createElement("article");
+    card.className = "project-card cms-project-card";
+    const title = typeof entry.title === "string" && entry.title.trim() ? entry.title.trim() : "Untitled project";
+    const image = createProjectImage(entry.image, typeof entry.image_alt === "string" ? entry.image_alt : `Screenshot for ${title}`);
+    if (image) card.append(image);
+
+    const content = document.createElement("div");
+    content.className = "project-content";
+    const meta = document.createElement("div");
+    meta.className = "project-meta";
+    const categoryLabel = document.createElement("span");
+    categoryLabel.textContent = category;
+    const yearLabel = document.createElement("span");
+    yearLabel.textContent = typeof entry.year === "string" ? entry.year : "";
+    meta.append(categoryLabel, yearLabel);
+    content.append(meta);
+
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    content.append(heading);
+    if (typeof entry.description === "string" && entry.description.trim()) {
+      const description = document.createElement("p");
+      description.className = "cms-writeup";
+      description.textContent = entry.description.trim();
+      content.append(description);
+    }
+
+    addTextList(content, entry.highlights, "highlights");
+    const tags = textItems(entry.tags);
+    if (tags.length) {
+      const tagList = document.createElement("div");
+      tagList.className = "tag-list";
+      tags.forEach((tag) => {
+        const label = document.createElement("span");
+        label.textContent = tag;
+        tagList.append(label);
+      });
+      content.append(tagList);
+    }
+
+    if (Array.isArray(entry.screenshots)) {
+      const screenshots = entry.screenshots.filter((item) => item && typeof item === "object");
+      if (screenshots.length) {
+        const gallery = document.createElement("div");
+        gallery.className = "project-gallery";
+        gallery.setAttribute("aria-label", `${title} screenshots`);
+        screenshots.forEach((screenshot) => {
+          const screenshotLink = createProjectImage(screenshot.image, screenshot.caption || `Screenshot for ${title}`);
+          if (!screenshotLink) return;
+          screenshotLink.className = "";
+          const imageElement = screenshotLink.querySelector("img");
+          if (imageElement) imageElement.alt = screenshot.caption || `Screenshot for ${title}`;
+          screenshotLink.querySelector(".image-link")?.remove();
+          const caption = document.createElement("span");
+          caption.textContent = typeof screenshot.caption === "string" ? screenshot.caption : "";
+          screenshotLink.append(caption);
+          gallery.append(screenshotLink);
+        });
+        if (gallery.childElementCount) content.append(gallery);
+      }
+    }
+
+    addProjectLink(content, "View project", entry.live_url);
+    card.append(content);
+    return card;
+  };
+
+  const getYouTubeId = (value) => {
+    const href = safePublicUrl(value);
+    if (!href) return "";
+    try {
+      const url = new URL(href);
+      const host = url.hostname.replace(/^www\./, "");
+      let videoId = "";
+      if (host === "youtu.be") videoId = url.pathname.slice(1).split("/")[0];
+      else if (host === "youtube.com" || host === "m.youtube.com") {
+        if (url.pathname === "/watch") videoId = url.searchParams.get("v") || "";
+        else videoId = url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)/)?.[1] || "";
+      }
+      return /^[\w-]{11}$/.test(videoId) ? videoId : "";
+    } catch {
+      return "";
+    }
+  };
+
+  const createMediaCard = (entry) => {
+    const card = document.createElement("article");
+    card.className = "project-card cms-media-card";
+    const title = typeof entry.title === "string" && entry.title.trim() ? entry.title.trim() : "Video";
+    const videoId = getYouTubeId(entry.youtube_url);
+    const videoFile = safePublicUrl(entry.video_file);
+    const coverImage = safePublicUrl(entry.cover_image);
+    const media = document.createElement("div");
+    media.className = "cms-media-player";
+
+    if (videoId) {
+      const frame = document.createElement("iframe");
+      frame.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
+      frame.title = title;
+      frame.loading = "lazy";
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      frame.allowFullscreen = true;
+      media.append(frame);
+    } else if (videoFile) {
+      const video = document.createElement("video");
+      video.controls = true;
+      video.preload = "metadata";
+      video.playsInline = true;
+      if (coverImage) video.poster = coverImage;
+      const source = document.createElement("source");
+      source.src = videoFile;
+      source.type = /\.webm(?:$|[?#])/i.test(videoFile) ? "video/webm" : /\.ogg(?:$|[?#])/i.test(videoFile) ? "video/ogg" : "video/mp4";
+      video.append(source);
+      media.append(video);
+    }
+
+    if (media.childElementCount) card.append(media);
+    const content = document.createElement("div");
+    content.className = "project-content";
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    content.append(heading);
+    if (typeof entry.description === "string" && entry.description.trim()) {
+      const description = document.createElement("p");
+      description.className = "cms-writeup";
+      description.textContent = entry.description.trim();
+      content.append(description);
+    }
+    if (!videoId && videoFile) addProjectLink(content, "Open video", videoFile);
+    card.append(content);
+    return card;
+  };
+
+  const createDocumentCard = (entry) => {
+    const card = document.createElement("article");
+    card.className = "project-card cms-document-card";
+    const title = typeof entry.title === "string" && entry.title.trim() ? entry.title.trim() : "Document";
+    const coverImage = createProjectImage(entry.cover_image, `Cover image for ${title}`);
+    if (coverImage) card.append(coverImage);
+    const content = document.createElement("div");
+    content.className = "project-content";
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    content.append(heading);
+    if (typeof entry.description === "string" && entry.description.trim()) {
+      const description = document.createElement("p");
+      description.className = "cms-writeup";
+      description.textContent = entry.description.trim();
+      content.append(description);
+    }
+    addProjectLink(content, "Open document", entry.document_file);
+    card.append(content);
+    return card;
+  };
+
+  const loadCmsCollection = async ({ path, selector, type, category }) => {
+    const target = document.querySelector(selector);
+    if (!target) return;
+    try {
+      const response = await fetch(path, { cache: "no-cache" });
+      if (!response.ok) throw new Error(`Request failed with status ${response.status}.`);
+      const entries = await response.json();
+      if (!Array.isArray(entries)) throw new Error("The collection must contain a JSON array.");
+      entries.forEach((entry) => {
+        if (!entry || typeof entry !== "object" || Array.isArray(entry)) return;
+        const card = type === "project"
+          ? createProjectCard(entry, category)
+          : type === "media"
+            ? createMediaCard(entry)
+            : createDocumentCard(entry);
+        target.append(card);
+      });
+      if (type === "media" && target.childElementCount) {
+        document.querySelector("[data-cms-media-section]")?.removeAttribute("hidden");
+        document.querySelectorAll("[data-cms-media-link]").forEach((link) => link.removeAttribute("hidden"));
+      }
+      if (type === "document" && target.childElementCount) {
+        target.closest("[data-cms-documents]")?.removeAttribute("hidden");
+      }
+    } catch (error) {
+      console.error(`Unable to load portfolio content from ${path}.`, error);
+    }
+  };
+
+  if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+    cmsCollections.forEach(loadCmsCollection);
+  }
+
   const sectionLinks = navigation?.querySelectorAll('a[href^="#"]') ?? [];
   if ("IntersectionObserver" in window && sectionLinks.length) {
     const sectionObserver = new IntersectionObserver((entries) => {

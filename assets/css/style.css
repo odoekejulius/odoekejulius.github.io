@@ -235,6 +235,9 @@ button { font: inherit; }
 .work-section { background: linear-gradient(180deg, rgba(var(--rgb-white), .012), rgba(var(--rgb-muted-blue), .025) 48%, rgba(var(--rgb-white), .012)); }
 .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .website-project-grid { grid-template-columns: minmax(0, 1fr); max-width: 900px; margin-inline: auto; }
+.cms-project-grid { max-width: 1000px; margin: 18px auto 0; }
+.website-project-grid .cms-project-grid { grid-template-columns: minmax(0, 1fr); max-width: none; }
+.cms-writeup { white-space: pre-line; }
 .project-card {
   overflow: hidden; border: 1px solid rgba(var(--rgb-border), .105); border-radius: 16px;
   background: linear-gradient(145deg, rgba(var(--rgb-white), .075), rgba(var(--rgb-white), .025));
@@ -262,6 +265,11 @@ button { font: inherit; }
 .project-gallery a::after { position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(var(--rgb-dark-ink), .82)); content: ""; pointer-events: none; }
 .project-gallery a > span { position: absolute; z-index: 1; right: 6px; bottom: 6px; left: 6px; color: white; font-size: .55rem; line-height: 1.3; }
 .analytics-section { border-block: 1px solid rgba(var(--rgb-border), .07); background: linear-gradient(130deg, rgba(var(--rgb-white), .018), rgba(var(--rgb-steel), .045), rgba(var(--rgb-white), .012)); }
+.media-section { border-bottom: 1px solid rgba(var(--rgb-border), .07); background: linear-gradient(130deg, rgba(var(--rgb-white), .018), rgba(var(--rgb-steel), .045), rgba(var(--rgb-white), .012)); }
+.cms-media-player { overflow: hidden; aspect-ratio: 16 / 9; background: var(--viewer-bg); }
+.cms-media-player iframe, .cms-media-player video { display: block; width: 100%; height: 100%; border: 0; object-fit: contain; }
+.cms-document-section { display: grid; gap: 20px; margin-top: 24px; }
+.cms-document-grid { width: 100%; }
 .analytics-project-card { max-width: 1000px; margin-inline: auto; }
 .analytics-project-heading { display: grid; grid-template-columns: minmax(0, 1fr) 150px; align-items: center; gap: 24px; padding: clamp(20px, 4vw, 34px); }
 .analytics-project-heading h3 { margin: 14px 0 9px; font-family: var(--serif); font-size: clamp(1.6rem, 3.1vw, 2.1rem); font-weight: 600; line-height: 1.2; }

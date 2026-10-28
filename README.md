@@ -32,11 +32,15 @@ GitHub Pages only serves static files, so it cannot process server-side contact 
 
 The freelance timeline starts in 2019 to match the CV. The two CV download links are intentional: one is in the introduction and one is in the contact section.
 
-## Update the site
+## Manage portfolio content
 
-There is no private admin dashboard on GitHub Pages: it cannot run PHP, a database, or a secure server-side login. To edit the published content, open `index.html` in the GitHub repository, select the pencil icon, make the changes, and commit them. GitHub Pages will publish the update after its deployment finishes.
+The site includes a GitHub-backed Sveltia CMS dashboard at `https://odoekejulius.github.io/admin/`. It does not need a PHP server, database, or secret stored in the website. Sign in with a GitHub fine-grained personal access token that has access only to the `odoekejulius/odoekejulius.github.io` repository and **Contents: Read and write** permission. Sveltia CMS provides a token sign-in link on its login screen. The token stays in the browser's local storage; never paste it into a website file or commit it. Sign out on shared devices.
 
-The layout and appearance are in `assets/css/style.css`; navigation, animations, and PDF rendering are in `assets/js/main.js`. The self-hosted Mozilla PDF.js 4.10.38 renderer and its Apache 2.0 license are in `assets/js/vendor/`. To replace an image, upload the new file under `assets/images/` and update its relative path in `index.html`.
+Use the dashboard to add website projects, data analytics projects, YouTube videos (or small uploaded videos), and additional documents. Write the description, add screenshots or files, and save. The CMS commits the entry and uploaded media to this repository; GitHub Pages publishes the update after its deployment finishes. These collections appear in the matching portfolio sections. The pre-existing featured projects, CV, and certificates remain in their current sections.
+
+All uploaded files and documents are public and can be copied by visitors. Avoid uploading private information. Keep video uploads small; use a YouTube link for larger videos because GitHub repositories are not video hosting. CMS uploads are stored under `assets/uploads/`, and content records are in `content/`. New changes are committed directly to the `main` branch and go live after deployment.
+
+The layout and appearance are in `assets/css/style.css`; navigation, animations, content rendering, and PDF rendering are in `assets/js/main.js`. The self-hosted Mozilla PDF.js 4.10.38 renderer and its Apache 2.0 license are in `assets/js/vendor/`.
 
 ## CV and public documents
 
@@ -46,15 +50,13 @@ GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** p
 
 ## Add images and other file types
 
-This site has no visitor upload form. To publish a file, add it to the site yourself and link to it from `index.html`. Standard browser image formats such as JPG/JPEG, PNG, GIF, WebP, and SVG can be shown with an `<img>` element; PDFs use the site's responsive PDF preview. Word (`.doc`/`.docx`), Excel (`.xls`/`.xlsx`), and PowerPoint (`.ppt`/`.pptx`) files can be offered with a Microsoft Office for the web preview and a direct file link. The preview is loaded only after a visitor opens it and requires the file to be publicly available over HTTPS. Microsoft handles that preview, so it may be unavailable in some browsers or networks; keep the direct link as a fallback. CSV and other browser-readable text files can be linked directly. Other formats can still be published as downloadable files, but an in-browser preview depends on the visitor's browser or a compatible viewer.
+Portfolio media is uploaded through the admin dashboard and stored in `assets/uploads/`. The CMS can add screenshots to project cards, YouTube links or small video files to the Videos & Media section, and downloadable documents with descriptions. Visitors can open or copy every published file. For large videos, embed YouTube rather than uploading the video to the GitHub repository. The built-in CV and certificate previews are unchanged.
 
 The World Cup project lists its report, workbook, and all six CSV files in the expandable **Project files and data** section. To add another Office file, copy one of its entries in `index.html`, update the filename, title, file link, and iframe title, and keep the `data-office-preview` and `data-office-frame` attributes. The site script builds the Microsoft preview URL from the associated file link. Add a PowerPoint file the same way when one is available. Remember that every deployed asset is public and may be copied by visitors.
 
 ## Add portfolio work
 
-Website projects and data analytics projects are separate sections in `index.html` so each collection can grow independently. Add a website card inside `#website-projects`. Add analytics write-ups and dashboard previews inside `#analytics-projects`; put supporting static previews in `assets/data-analytics/`. Keep preview pages self-contained and test them at phone and desktop sizes before publishing. Do not link raw files as download buttons if the intent is to invite visitors to preview the work; public files can still be retrieved from their URLs.
-
-The World Cup project dashboard is a self-contained interactive preview at `assets/data-analytics/world-cup-2026/dashboard-preview.html`; its project notes are at `assets/data-analytics/world-cup-2026/analysis-report-preview.html`. The source files remain grouped under the same folder.
+Add new website and analytics entries from the admin dashboard instead of editing the page markup. The existing World Cup project dashboard is a self-contained interactive preview at `assets/data-analytics/world-cup-2026/dashboard-preview.html`; its project notes are at `assets/data-analytics/world-cup-2026/analysis-report-preview.html`. Its source files remain grouped under the same folder.
 
 ## Project structure
 
@@ -67,6 +69,14 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
 ├── README.md
 ├── 404.html
 ├── .nojekyll
+├── admin/
+│   ├── index.html
+│   └── config.yml
+├── content/
+│   ├── website-projects.json
+│   ├── analytics-projects.json
+│   ├── media.json
+│   └── documents.json
 └── assets/
     ├── favicon.svg
     ├── css/
@@ -98,6 +108,7 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
     │       ├── renacido-customer-sign-in.png
     │       ├── renacido-storefront-footer.png
     │       └── renacido-storefront-home.png
+    ├── uploads/              # Media uploaded through the CMS
     └── js/
         ├── main.js
         └── vendor/
@@ -108,4 +119,4 @@ The World Cup project dashboard is a self-contained interactive preview at `asse
 
 ## Recent design updates
 
-Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and an embedded analytics dashboard that resizes to fit its content and follows the selected theme. The CSS and JS cache versions are `27` on `index.html` and `terms.html`; `404.html` uses CSS version `27`. Bump these cache versions when their referenced files change. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
+Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and an embedded analytics dashboard that resizes to fit its content and follows the selected theme. The CSS and JS cache versions are `28` on `index.html` and `terms.html`; `404.html` uses CSS version `28`. Bump these cache versions when their referenced files change. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.

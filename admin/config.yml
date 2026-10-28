@@ -1,0 +1,90 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: odoekejulius/odoekejulius.github.io
+  branch: main
+
+media_folder: /assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: website_projects
+    label: Website projects
+    label_singular: Website project
+    file: /content/website-projects.json
+    identifier_field: title
+    description: New projects appear in the Website projects section. Uploaded media is public.
+    fields:
+      - { label: Project title, name: title, widget: string }
+      - { label: Year, name: year, widget: string, required: false }
+      - { label: Short write-up, name: description, widget: text }
+      - { label: Main screenshot, name: image, widget: image, required: false }
+      - { label: Screenshot description (alt text), name: image_alt, widget: string, required: false }
+      - label: Additional screenshots
+        name: screenshots
+        widget: list
+        required: false
+        fields:
+          - { label: Screenshot, name: image, widget: image }
+          - { label: Caption, name: caption, widget: string }
+      - label: Highlights
+        name: highlights
+        widget: list
+        required: false
+        field: { label: Highlight, name: highlight, widget: string }
+      - label: Technologies
+        name: tags
+        widget: list
+        required: false
+        field: { label: Technology, name: tag, widget: string }
+      - { label: Live project URL, name: live_url, widget: string, required: false }
+
+  - name: analytics_projects
+    label: Data analytics projects
+    label_singular: Analytics project
+    file: /content/analytics-projects.json
+    identifier_field: title
+    description: New projects appear in the Data analytics section. Uploaded media is public.
+    fields:
+      - { label: Project title, name: title, widget: string }
+      - { label: Year, name: year, widget: string, required: false }
+      - { label: Short write-up, name: description, widget: text }
+      - { label: Main screenshot, name: image, widget: image, required: false }
+      - { label: Screenshot description (alt text), name: image_alt, widget: string, required: false }
+      - label: Highlights
+        name: highlights
+        widget: list
+        required: false
+        field: { label: Highlight, name: highlight, widget: string }
+      - label: Tools and methods
+        name: tags
+        widget: list
+        required: false
+        field: { label: Tool or method, name: tag, widget: string }
+      - { label: Project or dashboard URL, name: live_url, widget: string, required: false }
+
+  - name: media
+    label: Videos and media
+    label_singular: Video or media item
+    file: /content/media.json
+    identifier_field: title
+    description: Add a YouTube link or upload a small video. All published media is public.
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: YouTube URL, name: youtube_url, widget: string, required: false }
+      - { label: "Video file (MP4, WebM or Ogg; small files only)", name: video_file, widget: file, accept: "video/mp4,video/webm,video/ogg", required: false }
+      - { label: Cover image, name: cover_image, widget: image, required: false }
+
+  - name: documents
+    label: Additional documents
+    label_singular: Document
+    file: /content/documents.json
+    identifier_field: title
+    description: Uploaded documents are publicly accessible. Do not upload private or sensitive files.
+    fields:
+      - { label: Document title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Document file, name: document_file, widget: file }
+      - { label: Cover image, name: cover_image, widget: image, required: false }
