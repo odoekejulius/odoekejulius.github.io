@@ -10,6 +10,16 @@ media_folder: /assets/uploads
 public_folder: /assets/uploads
 
 collections:
+  - name: site_settings
+    label: Site settings
+    files:
+      - name: profile
+        label: Profile
+        file: /content/site-settings.json
+        fields:
+          - { label: Author portrait, name: portrait_image, widget: image }
+          - { label: Portrait description (alt text), name: portrait_alt, widget: string }
+
   - name: website_projects
     label: Website projects
     label_singular: Website project

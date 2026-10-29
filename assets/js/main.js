@@ -295,6 +295,34 @@
     { path: "content/documents.json", selector: "[data-cms-document-cards]", type: "document" }
   ];
 
+  const loadSiteSettings = async () => {
+    const portrait = document.querySelector(".portrait-frame img");
+    if (!portrait) return;
+    try {
+      const response = await fetch("content/site-settings.json", { cache: "no-cache" });
+      if (!response.ok) throw new Error(`Request failed with status ${response.status}.`);
+      const settings = await response.json();
+      if (!settings || typeof settings !== "object" || Array.isArray(settings)) {
+        throw new Error("Site settings must contain a JSON object.");
+      }
+      const imageUrl = safePublicUrl(settings.portrait_image);
+      if (imageUrl) portrait.src = imageUrl;
+      if (typeof settings.portrait_alt === "string" && settings.portrait_alt.trim()) {
+        portrait.alt = settings.portrait_alt.trim();
+      }
+      if (imageUrl) {
+        const personSchema = document.querySelector('script[type="application/ld+json"]');
+        if (personSchema) {
+          const schema = JSON.parse(personSchema.textContent);
+          schema.image = imageUrl;
+          personSchema.textContent = JSON.stringify(schema);
+        }
+      }
+    } catch (error) {
+      console.error("Unable to load site settings from content/site-settings.json.", error);
+    }
+  };
+
   const safePublicUrl = (value) => {
     if (typeof value !== "string" || !value.trim()) return "";
     try {
@@ -547,6 +575,7 @@
   };
 
   if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+    loadSiteSettings();
     cmsCollections.forEach(loadCmsCollection);
   }
 
