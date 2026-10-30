@@ -25,7 +25,7 @@ collections:
     label_singular: Website project
     file: /content/website-projects.json
     identifier_field: title
-    description: New projects appear in the Website projects section. Uploaded media is public.
+    description: New projects appear in the Website projects section. Only the first three show initially; visitors can expand the list. Uploaded media is public.
     fields:
       - { label: Project title, name: title, widget: string }
       - { label: Year, name: year, widget: string, required: false }
@@ -49,14 +49,14 @@ collections:
         widget: list
         required: false
         field: { label: Technology, name: tag, widget: string }
-      - { label: Live project URL, name: live_url, widget: string, required: false }
+      - { label: Project URL or downloadable file URL, name: live_url, widget: string, required: false }
 
   - name: analytics_projects
     label: Data analytics projects
     label_singular: Analytics project
     file: /content/analytics-projects.json
     identifier_field: title
-    description: New projects appear in the Data analytics section. Uploaded media is public.
+    description: New projects appear in the Data analytics section. Only the first three show initially; visitors can expand the list. Every upload is public—never upload identity, employment, student, client, or other private records. A ZIP is not converted into a dashboard automatically.
     fields:
       - { label: Project title, name: title, widget: string }
       - { label: Year, name: year, widget: string, required: false }
@@ -73,6 +73,8 @@ collections:
         widget: list
         required: false
         field: { label: Tool or method, name: tag, widget: string }
+      - { label: Analysis ZIP source (public file), name: project_archive, widget: file, accept: ".zip,application/zip,application/x-zip-compressed", required: false }
+      - { label: Interactive HTML preview path or URL, name: project_preview_url, widget: string, required: false, hint: "Optional. Link a separately prepared interactive HTML project preview. Uploading a ZIP alone cannot create a dashboard." }
       - { label: Project or dashboard URL, name: live_url, widget: string, required: false }
 
   - name: media

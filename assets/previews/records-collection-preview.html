@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Personal records — Redacted collection overview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c111a;
+      --panel: rgb(var(--ch-fill) / .055);
+      --line: rgb(var(--ch-ink) / .12);
+      --text: #f3f5fb;
+      --muted: #a3aec2;
+      --soft: #76839b;
+      --accent: #b4c2ff;
+      --mint: #9edccc;
+      --ch-fill: 255 255 255;
+      --ch-ink: 214 224 255;
+      --ch-accent: 180 194 255;
+      --ch-glow: 123 145 213;
+      --ch-deep: 5 9 16;
+      --bar-a: #8fa7ed;
+      --bar-b: #a1dacf;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: clamp(18px, 4vw, 42px);
+      color: var(--text);
+      background: radial-gradient(ellipse at 86% 0%, rgb(var(--ch-glow) / .14), transparent 32rem), var(--bg);
+    }
+    main { width: min(940px, 100%); margin: auto; }
+    .topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; color: var(--soft); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+    .privacy-mark { color: var(--mint); }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    h1 { max-width: 720px; margin: 19px 0 10px; font-size: clamp(2rem, 5.5vw, 3.6rem); line-height: 1.07; letter-spacing: -.04em; }
+    h1 span { color: var(--accent); }
+    .intro { max-width: 690px; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.75; }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 23px; }
+    .metric, .panel { border: 1px solid var(--line); background: linear-gradient(145deg, rgb(var(--ch-fill) / .065), rgb(var(--ch-fill) / .025)); box-shadow: inset 0 1px 0 rgb(var(--ch-fill) / .045); }
+    .metric { padding: 14px; border-radius: 12px; }
+    .metric strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 400; letter-spacing: -.04em; }
+    .metric span { color: var(--soft); font-size: .63rem; }
+    .panel { margin-top: 12px; padding: 19px; border-radius: 14px; }
+    .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
+    h2 { margin: 0; font-size: 1.22rem; }
+    .panel-heading p { margin: 5px 0 0; color: var(--soft); font-size: .65rem; line-height: 1.5; }
+    .chart { display: grid; gap: 13px; }
+    .bar-row { display: grid; grid-template-columns: 104px minmax(40px, 1fr) 32px; align-items: center; gap: 10px; color: var(--muted); font-size: .68rem; }
+    .bar-track { height: 8px; overflow: hidden; border-radius: 99px; background: rgb(var(--ch-fill) / .07); }
+    .bar-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--bar-a), var(--bar-b)); }
+    .bar-value { color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; margin: 20px 0 12px; }
+    button { padding: 8px 11px; border: 1px solid var(--line); border-radius: 99px; background: rgb(var(--ch-fill) / .035); color: var(--muted); font: inherit; font-size: .65rem; cursor: pointer; }
+    button[aria-pressed="true"] { border-color: rgb(var(--ch-accent) / .45); background: rgb(var(--ch-accent) / .1); color: var(--text); }
+    button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .category { padding: 14px; border: 1px solid rgb(var(--ch-ink) / .09); border-radius: 10px; background: rgb(var(--ch-deep) / .24); }
+    .category[hidden] { display: none; }
+    .category span { color: var(--accent); font: .59rem/1.5 Consolas, monospace; letter-spacing: .07em; text-transform: uppercase; }
+    .category h3 { margin: 7px 0 5px; font-size: .82rem; font-weight: 600; }
+    .category p, .note { margin: 0; color: var(--muted); font-size: .69rem; line-height: 1.7; }
+    .privacy-note { margin-top: 13px; padding: 14px 16px; border: 1px solid rgb(var(--ch-accent) / .2); border-radius: 11px; background: rgb(var(--ch-accent) / .05); color: var(--muted); font-size: .69rem; line-height: 1.7; }
+    .privacy-note strong { color: var(--text); }
+    .note { margin: 13px 2px 0; color: var(--soft); font-size: .63rem; }
+    @media (max-width: 620px) {
+      body { padding: 18px 14px; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .category-grid { grid-template-columns: 1fr; }
+      .panel { padding: 15px; }
+      .bar-row { grid-template-columns: 88px minmax(30px, 1fr) 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f6fb; --text: #0f172a; --muted: #475569; --soft: #5b6579; --accent: #3949b8; --mint: #0b7d5c;
+      --ch-fill: 15 23 52; --ch-ink: 30 41 90; --ch-accent: 57 73 184; --ch-glow: 120 140 230; --ch-deep: 30 41 90;
+      --bar-a: #4a5bd0; --bar-b: #2b9e7c;
+    }
+    :root[data-theme="light"] .metric, :root[data-theme="light"] .panel { background: rgb(255 255 255 / .82); box-shadow: 0 8px 24px rgb(30 41 90 / .07); }
+    :root[data-theme="light"] .category { background: rgb(var(--ch-fill) / .04); }
+    :root[data-theme="light"] button { background: rgb(255 255 255 / .78); }
+  </style>
+  <script>
+    try {
+      if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (error) {
+      console.warn("Unable to restore the saved color theme.", error);
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <div class="topline"><span>Records collection · Redacted overview</span><span class="privacy-mark">Personal source files excluded</span></div>
+    <h1>A clearer view of a <span>personal records collection.</span></h1>
+    <p class="intro">This portfolio preview summarizes the archive by file format and broad category. It is an inventory overview, not an analysis of the private documents. No original documents, photos, names, signatures, or form details are included.</p>
+
+    <div class="metric-grid" aria-label="Redacted archive inventory">
+      <div class="metric"><strong>25</strong><span>files in the source archive</span></div>
+      <div class="metric"><strong>8</strong><span>PDF documents</span></div>
+      <div class="metric"><strong>16</strong><span>image files</span></div>
+      <div class="metric"><strong>1</strong><span>Word document</span></div>
+    </div>
+
+    <section class="panel" aria-labelledby="formats-heading">
+      <div class="panel-heading">
+        <div>
+          <h2 id="formats-heading">Inventory by file format</h2>
+          <p>Counts only; no file names or document contents are shown.</p>
+        </div>
+      </div>
+      <div class="chart" role="img" aria-label="Eight PDF files, sixteen image files, and one Word document">
+        <div class="bar-row"><span>PDF</span><div class="bar-track"><div class="bar-fill" style="width:32%"></div></div><span class="bar-value">8</span></div>
+        <div class="bar-row"><span>Images</span><div class="bar-track"><div class="bar-fill" style="width:64%"></div></div><span class="bar-value">16</span></div>
+        <div class="bar-row"><span>Word</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div><span class="bar-value">1</span></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="categories-heading">
+      <div class="panel-heading">
+        <div>
+          <h2 id="categories-heading">Broad collection categories</h2>
+          <p>Choose a category to focus the redacted inventory.</p>
+        </div>
+      </div>
+      <div class="filters" role="group" aria-label="Filter record categories">
+        <button type="button" data-filter="all" aria-pressed="true">All categories</button>
+        <button type="button" data-filter="career" aria-pressed="false">Career</button>
+        <button type="button" data-filter="education" aria-pressed="false">Education</button>
+        <button type="button" data-filter="administration" aria-pressed="false">Administration</button>
+        <button type="button" data-filter="images" aria-pressed="false">Images &amp; scans</button>
+      </div>
+      <div class="category-grid" aria-live="polite">
+        <article class="category" data-category="career">
+          <span>Career</span>
+          <h3>Employment profiles and résumé material</h3>
+          <p>Career-related documents are represented as a category only. Employers, personal details, and document text are omitted.</p>
+        </article>
+        <article class="category" data-category="education">
+          <span>Education</span>
+          <h3>School and university credentials</h3>
+          <p>Education records are grouped at a high level; certificate images and identifying details are not reproduced.</p>
+        </article>
+        <article class="category" data-category="administration">
+          <span>Administration</span>
+          <h3>Supporting forms and agreements</h3>
+          <p>Administrative paperwork is not displayed. Form fields, signatures, account details, and other personal data stay private.</p>
+        </article>
+        <article class="category" data-category="images">
+          <span>Images &amp; scans</span>
+          <h3>Personal image files</h3>
+          <p>Image files are counted in the inventory only. None are loaded, linked, or shown in this public preview.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="privacy-note"><strong>Privacy boundary:</strong> the original archive remains outside the public website. This page contains no links to the source files and intentionally excludes document scans, names, faces, signatures, addresses, and form contents.</div>
+    <p class="note">This page presents only an aggregate inventory and broad categories derived from the archive listing. It does not claim to evaluate the contents or outcomes of the records.</p>
+  </main>
+  <script>
+    const filterButtons = document.querySelectorAll("[data-filter]");
+    const categories = document.querySelectorAll("[data-category]");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        categories.forEach((category) => {
+          category.hidden = filter !== "all" && category.dataset.category !== filter;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

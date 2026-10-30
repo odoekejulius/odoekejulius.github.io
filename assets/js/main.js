@@ -451,7 +451,23 @@
       }
     }
 
-    addProjectLink(content, "View project", entry.live_url);
+    const previewUrl = safePublicUrl(entry.project_preview_url);
+    if (previewUrl) {
+      const preview = document.createElement("details");
+      preview.className = "cms-project-preview";
+      const summary = document.createElement("summary");
+      summary.textContent = "Explore interactive project";
+      const frame = document.createElement("iframe");
+      frame.src = previewUrl;
+      frame.title = `${title} interactive project preview`;
+      frame.loading = "lazy";
+      frame.referrerPolicy = "no-referrer";
+      preview.append(summary, frame);
+      content.append(preview);
+    }
+
+    const projectUrl = safePublicUrl(entry.live_url);
+    if (projectUrl && !/\.zip(?:$|[?#])/i.test(projectUrl)) addProjectLink(content, "View project", projectUrl);
     card.append(content);
     return card;
   };
@@ -562,6 +578,28 @@
             : createDocumentCard(entry);
         target.append(card);
       });
+      const cards = Array.from(target.children);
+      const visibleLimit = 3;
+      cards.forEach((card, index) => {
+        card.hidden = index >= visibleLimit;
+      });
+      if (cards.length > visibleLimit) {
+        const itemLabel = type === "media" ? "media items" : type === "document" ? "documents" : "projects";
+        const toggle = document.createElement("button");
+        toggle.className = "collection-toggle";
+        toggle.type = "button";
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = `Show all ${cards.length} ${itemLabel}`;
+        toggle.addEventListener("click", () => {
+          const expanded = toggle.getAttribute("aria-expanded") !== "true";
+          toggle.setAttribute("aria-expanded", String(expanded));
+          cards.forEach((card, index) => {
+            card.hidden = !expanded && index >= visibleLimit;
+          });
+          toggle.textContent = expanded ? "Show fewer" : `Show all ${cards.length} ${itemLabel}`;
+        });
+        target.after(toggle);
+      }
       if (type === "media" && target.childElementCount) {
         document.querySelector("[data-cms-media-section]")?.removeAttribute("hidden");
         document.querySelectorAll("[data-cms-media-link]").forEach((link) => link.removeAttribute("hidden"));

@@ -33,8 +33,6 @@
     }
     main { width: min(1050px, 100%); margin: auto; }
     .topline { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--soft); font-size: .69rem; letter-spacing: .1em; text-transform: uppercase; }
-    .live-mark { display: inline-flex; align-items: center; gap: 8px; color: var(--mint); }
-    .live-mark::before { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 12px currentColor; content: ""; }
     h1 { max-width: 720px; margin: 18px 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 5.5vw, 3.7rem); font-weight: 400; line-height: 1.07; letter-spacing: -.04em; }
     h1 span { color: var(--accent); }
     .intro { max-width: 680px; margin: 0; color: var(--muted); font-size: .91rem; line-height: 1.75; }
@@ -94,7 +92,7 @@
 </head>
 <body>
   <main>
-    <div class="topline"><span>Data project · Interactive preview</span><span class="live-mark">Tableau-ready analysis</span></div>
+    <div class="topline"><span>Data project · Interactive preview</span></div>
     <h1>FIFA World Cup 2026 <span>performance, explored.</span></h1>
     <p class="intro">A portfolio snapshot of the match and team analysis: clean the source tables, verify tournament status against results, then explore team standings and confederation-level scoring.</p>
     <div class="snapshot"><span>Data through July 5, 2026</span><span>Group stage → Round of 16</span><span>Prepared by Julius Odo-Eke</span></div>
@@ -137,7 +135,7 @@
       <div class="report-grid">
         <div class="finding"><span>01 / VALIDATION</span><p>The supplied report records no duplicate rows or orphaned team names, and notes that score/winner combinations were internally consistent.</p></div>
         <div class="finding"><span>02 / CORRECTIONS</span><p>Three team elimination labels were corrected by cross-checking the match log: Mexico, South Africa, and the United States.</p></div>
-        <div class="finding"><span>03 / DATA MODEL</span><p>Match-level and team-level data were shaped into a Tableau-ready model for comparing form, goals, standings, and confederations.</p></div>
+        <div class="finding"><span>03 / DATA MODEL</span><p>Match-level and team-level data were shaped into a reusable model for comparing form, goals, standings, and confederations.</p></div>
       </div>
       <p class="footnote">Coverage is intentionally partial: the report describes 92 of 104 planned tournament matches, ending mid-Round-of-16. Figures here describe that dated project snapshot, not final tournament results.</p>
     </section>
