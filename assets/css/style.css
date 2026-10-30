@@ -267,6 +267,9 @@ button { font: inherit; }
 .cms-project-preview { margin-top: 16px; border-top: 1px solid var(--line); }
 .cms-project-preview > summary { padding: 12px 0; color: var(--accent); font-size: .72rem; font-weight: 600; cursor: pointer; }
 .cms-project-preview iframe { display: block; width: 100%; height: min(72vh, 760px); min-height: 360px; border: 1px solid var(--line); border-radius: 10px; background: var(--preview-bg); }
+.cms-package-status { margin: 0 0 12px; color: var(--muted); font-size: .72rem; line-height: 1.6; }
+.cms-package-report { margin-top: 12px; border-top: 1px solid var(--line); }
+.cms-package-report > summary { padding: 12px 0; color: var(--accent); font-size: .72rem; font-weight: 600; cursor: pointer; }
 .dropout-project-card { margin-top: 22px; }
 .tag-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 17px; }
 .tag-list span { padding: 3px 9px; border: 1px solid rgba(var(--rgb-border), .11); border-radius: 999px; background: rgba(var(--rgb-white), .035); color: var(--muted-strong); font-family: var(--mono); font-size: .57rem; line-height: 1.7; }

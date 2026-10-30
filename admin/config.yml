@@ -56,25 +56,20 @@ collections:
     label_singular: Analytics project
     file: /content/analytics-projects.json
     identifier_field: title
-    description: New projects appear in the Data analytics section. Only the first three show initially; visitors can expand the list. Uploaded files are public—never upload identity, employment, student, client, or other private records.
+    description: New projects appear in the Data analytics section. Only the first three show initially; visitors can expand the list. Upload only a ZIP containing a finished, self-contained index.html dashboard and optional report.html. The ZIP is public—never include student-level, identity, employment, client, or other private data.
     fields:
       - { label: Project title, name: title, widget: string }
       - { label: Year, name: year, widget: string, required: false }
-      - { label: Short write-up, name: description, widget: text }
-      - { label: Main screenshot, name: image, widget: image, required: false }
-      - { label: Screenshot description (alt text), name: image_alt, widget: string, required: false }
-      - label: Highlights
-        name: highlights
-        widget: list
-        required: false
-        field: { label: Highlight, name: highlight, widget: string }
-      - label: Tools and methods
-        name: tags
-        widget: list
-        required: false
-        field: { label: Tool or method, name: tag, widget: string }
-      - { label: Interactive project preview (self-contained HTML), name: project_preview_url, widget: file, accept: ".html,text/html", required: false, hint: "Upload a prepared, self-contained HTML dashboard. The project card embeds it in an expandable preview. Do not upload student-level or otherwise private data." }
-      - { label: Project or dashboard URL, name: live_url, widget: string, required: false }
+      - label: Finished dashboard package (ZIP)
+        name: project_package_url
+        widget: file
+        accept: ".zip,application/zip"
+        required: true
+        media_libraries:
+          default:
+            config:
+              max_file_size: 5242880
+        hint: "ZIP must contain only a self-contained index.html and optional self-contained report.html at its root. The archive is publicly accessible. Do not include spreadsheets, CSVs, source data, personal records, or other files."
 
   - name: media
     label: Videos and media

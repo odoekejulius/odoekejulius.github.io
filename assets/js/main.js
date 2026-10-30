@@ -392,6 +392,105 @@
     parent.append(link);
   };
 
+  const addAnalyticsPackagePreview = (parent, packageUrl, title) => {
+    const url = safePublicUrl(packageUrl);
+    if (!url) return;
+
+    const preview = document.createElement("details");
+    preview.className = "cms-project-preview";
+    const summary = document.createElement("summary");
+    summary.textContent = "Explore this analysis";
+    const status = document.createElement("p");
+    status.className = "cms-package-status";
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    status.textContent = "Open to view the interactive dashboard.";
+    const dashboard = document.createElement("iframe");
+    dashboard.title = `${title} interactive dashboard`;
+    dashboard.loading = "lazy";
+    dashboard.sandbox = "allow-scripts";
+    dashboard.referrerPolicy = "no-referrer";
+    preview.append(summary, status, dashboard);
+
+    let loading = false;
+    preview.addEventListener("toggle", async () => {
+      if (!preview.open || loading || dashboard.srcdoc) return;
+      loading = true;
+      status.textContent = "Loading project preview…";
+      try {
+        if (!window.JSZip) throw new Error("The project ZIP reader did not load.");
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`The project package could not be loaded (HTTP ${response.status}).`);
+        const archiveBlob = await response.blob();
+        const maxArchiveSize = 5 * 1024 * 1024;
+        if (archiveBlob.size > maxArchiveSize) throw new Error("Project packages must be smaller than 5 MB.");
+
+        const archive = await window.JSZip.loadAsync(archiveBlob);
+        const files = [];
+        archive.forEach((path, file) => {
+          if (!file.dir) files.push({ path, file });
+        });
+        const allowedPaths = new Set(["index.html", "report.html"]);
+        if (!files.some(({ path }) => path === "index.html")
+          || files.some(({ path }) => !allowedPaths.has(path))
+          || files.length > 2) {
+          throw new Error("This package must contain only index.html and optional report.html at its root.");
+        }
+
+        const pageMarkup = new Map();
+        for (const { path, file } of files) {
+          const uncompressedSize = file._data?.uncompressedSize;
+          if (!Number.isSafeInteger(uncompressedSize) || uncompressedSize > 2 * 1024 * 1024) {
+            throw new Error(`${path} is too large to preview.`);
+          }
+          const markup = await file.async("string");
+          const parsed = new DOMParser().parseFromString(markup, "text/html");
+          if (!/<html(?:\s|>)/i.test(markup)) {
+            throw new Error(`${path} must be a complete HTML document.`);
+          }
+          const externalResources = parsed.querySelector(
+            "base, script[src], link[href], img[src], iframe[src], audio[src], video[src], source[src]"
+          );
+          const styles = [
+            ...Array.from(parsed.querySelectorAll("style"), (element) => element.textContent || ""),
+            ...Array.from(parsed.querySelectorAll("[style]"), (element) => element.getAttribute("style") || "")
+          ].join("\n");
+          if (externalResources || /@import\b|url\(\s*(['"]?)(?!(?:data:|#))/i.test(styles)) {
+            throw new Error(`${path} must be self-contained and cannot load external or separate files.`);
+          }
+          pageMarkup.set(path, markup);
+        }
+
+        dashboard.srcdoc = pageMarkup.get("index.html");
+        status.textContent = "";
+        status.hidden = true;
+
+        const reportMarkup = pageMarkup.get("report.html");
+        if (reportMarkup) {
+          const reportDetails = document.createElement("details");
+          reportDetails.className = "cms-package-report";
+          const reportSummary = document.createElement("summary");
+          reportSummary.textContent = "Read the analysis report";
+          const reportFrame = document.createElement("iframe");
+          reportFrame.title = `${title} analysis report`;
+          reportFrame.loading = "lazy";
+          reportFrame.sandbox = "allow-scripts";
+          reportFrame.referrerPolicy = "no-referrer";
+          reportFrame.srcdoc = reportMarkup;
+          reportDetails.append(reportSummary, reportFrame);
+          preview.append(reportDetails);
+        }
+      } catch (error) {
+        console.error(`Unable to preview analytics package for "${title}".`, error);
+        status.textContent = error instanceof Error ? error.message : "The project package could not be previewed.";
+      } finally {
+        loading = false;
+      }
+    });
+
+    parent.append(preview);
+  };
+
   const createProjectCard = (entry, category) => {
     const card = document.createElement("article");
     card.className = "project-card cms-project-card";
@@ -455,19 +554,23 @@
       }
     }
 
-    const previewUrl = safePublicUrl(entry.project_preview_url);
-    if (previewUrl) {
-      const preview = document.createElement("details");
-      preview.className = "cms-project-preview";
-      const summary = document.createElement("summary");
-      summary.textContent = "Explore interactive project";
-      const frame = document.createElement("iframe");
-      frame.src = previewUrl;
-      frame.title = `${title} interactive project preview`;
-      frame.loading = "lazy";
-      frame.referrerPolicy = "no-referrer";
-      preview.append(summary, frame);
-      content.append(preview);
+    if (category === "Data analytics") {
+      addAnalyticsPackagePreview(content, entry.project_package_url, title);
+    } else {
+      const previewUrl = safePublicUrl(entry.project_preview_url);
+      if (previewUrl) {
+        const preview = document.createElement("details");
+        preview.className = "cms-project-preview";
+        const summary = document.createElement("summary");
+        summary.textContent = "Explore interactive project";
+        const frame = document.createElement("iframe");
+        frame.src = previewUrl;
+        frame.title = `${title} interactive project preview`;
+        frame.loading = "lazy";
+        frame.referrerPolicy = "no-referrer";
+        preview.append(summary, frame);
+        content.append(preview);
+      }
     }
 
     const projectUrl = safePublicUrl(entry.live_url);
