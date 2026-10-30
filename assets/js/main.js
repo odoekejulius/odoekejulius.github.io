@@ -404,17 +404,17 @@
     status.className = "cms-package-status";
     status.setAttribute("role", "status");
     status.setAttribute("aria-live", "polite");
-    status.textContent = "Open to view the interactive dashboard.";
-    const dashboard = document.createElement("iframe");
-    dashboard.title = `${title} interactive dashboard`;
-    dashboard.loading = "lazy";
-    dashboard.sandbox = "allow-scripts";
-    dashboard.referrerPolicy = "no-referrer";
-    preview.append(summary, status, dashboard);
+    status.textContent = "Open to explore the project files.";
+    const fileList = document.createElement("div");
+    fileList.className = "cms-package-file-list";
+    const filePreview = document.createElement("div");
+    filePreview.className = "cms-package-file-preview";
+    preview.append(summary, status, fileList, filePreview);
 
     let loading = false;
+    let activeObjectUrl = "";
     preview.addEventListener("toggle", async () => {
-      if (!preview.open || loading || dashboard.srcdoc) return;
+      if (!preview.open || loading || fileList.childElementCount) return;
       loading = true;
       status.textContent = "Loading project preview…";
       try {
@@ -422,64 +422,95 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error(`The project package could not be loaded (HTTP ${response.status}).`);
         const archiveBlob = await response.blob();
-        const maxArchiveSize = 5 * 1024 * 1024;
-        if (archiveBlob.size > maxArchiveSize) throw new Error("Project packages must be smaller than 5 MB.");
+        const maxArchiveSize = 15 * 1024 * 1024;
+        if (archiveBlob.size > maxArchiveSize) throw new Error("Project packages must be smaller than 15 MB.");
 
         const archive = await window.JSZip.loadAsync(archiveBlob);
         const files = [];
         archive.forEach((path, file) => {
-          if (!file.dir) files.push({ path, file });
+          const baseName = path.split("/").pop();
+          if (!file.dir && !path.startsWith("__MACOSX/") && baseName !== ".DS_Store" && !baseName.startsWith("._")) {
+            files.push({ path, file });
+          }
         });
-        const allowedPaths = new Set(["index.html", "report.html"]);
-        if (!files.some(({ path }) => path === "index.html")
-          || files.some(({ path }) => !allowedPaths.has(path))
-          || files.length > 2) {
-          throw new Error("This package must contain only index.html and optional report.html at its root.");
-        }
-
-        const pageMarkup = new Map();
-        for (const { path, file } of files) {
-          const uncompressedSize = file._data?.uncompressedSize;
-          if (!Number.isSafeInteger(uncompressedSize) || uncompressedSize > 2 * 1024 * 1024) {
-            throw new Error(`${path} is too large to preview.`);
+        const supportedExtensions = new Set([
+          "csv", "docx", "html", "ipynb", "js", "jsx", "json", "md", "pdf", "pptx",
+          "py", "r", "sql", "txt", "ts", "tsx", "xlsx", "xlsm", "png", "jpg", "jpeg", "webp"
+        ]);
+        if (!files.length || files.length > 50) throw new Error("A project package must contain between 1 and 50 files.");
+        let totalUncompressedSize = 0;
+        files.forEach(({ path, file }) => {
+          const size = file._data?.uncompressedSize;
+          if (!Number.isSafeInteger(size) || size > 10 * 1024 * 1024) {
+            throw new Error(`${path} is too large to preview (10 MB per file maximum).`);
           }
-          const markup = await file.async("string");
-          const parsed = new DOMParser().parseFromString(markup, "text/html");
-          if (!/<html(?:\s|>)/i.test(markup)) {
-            throw new Error(`${path} must be a complete HTML document.`);
-          }
-          const externalResources = parsed.querySelector(
-            "base, script[src], link[href], img[src], iframe[src], audio[src], video[src], source[src]"
-          );
-          const styles = [
-            ...Array.from(parsed.querySelectorAll("style"), (element) => element.textContent || ""),
-            ...Array.from(parsed.querySelectorAll("[style]"), (element) => element.getAttribute("style") || "")
-          ].join("\n");
-          if (externalResources || /@import\b|url\(\s*(['"]?)(?!(?:data:|#))/i.test(styles)) {
-            throw new Error(`${path} must be self-contained and cannot load external or separate files.`);
-          }
-          pageMarkup.set(path, markup);
-        }
+          totalUncompressedSize += size;
+          const extension = path.split(".").pop().toLowerCase();
+          if (!supportedExtensions.has(extension)) throw new Error(`${path} has an unsupported file type.`);
+          if (path.split("/").some((part) => part === "..")) throw new Error("The package contains an invalid file path.");
+        });
+        if (totalUncompressedSize > 40 * 1024 * 1024) throw new Error("The uncompressed project package is too large to preview.");
 
-        dashboard.srcdoc = pageMarkup.get("index.html");
-        status.textContent = "";
-        status.hidden = true;
-
-        const reportMarkup = pageMarkup.get("report.html");
-        if (reportMarkup) {
-          const reportDetails = document.createElement("details");
-          reportDetails.className = "cms-package-report";
-          const reportSummary = document.createElement("summary");
-          reportSummary.textContent = "Read the analysis report";
-          const reportFrame = document.createElement("iframe");
-          reportFrame.title = `${title} analysis report`;
-          reportFrame.loading = "lazy";
-          reportFrame.sandbox = "allow-scripts";
-          reportFrame.referrerPolicy = "no-referrer";
-          reportFrame.srcdoc = reportMarkup;
-          reportDetails.append(reportSummary, reportFrame);
-          preview.append(reportDetails);
-        }
+        const renderButton = (fileInfo) => {
+          const button = document.createElement("button");
+          button.className = "cms-package-file";
+          button.type = "button";
+          button.dataset.packagePath = fileInfo.path;
+          button.textContent = `${fileInfo.path} · ${formatFileSize(fileInfo.file._data.uncompressedSize)}`;
+          button.addEventListener("click", async () => {
+            filePreview.replaceChildren();
+            fileList.querySelectorAll("button").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+            status.hidden = false;
+            status.textContent = `Opening ${fileInfo.path}…`;
+            try {
+              if (activeObjectUrl) URL.revokeObjectURL(activeObjectUrl);
+              activeObjectUrl = "";
+              const extension = fileInfo.path.split(".").pop().toLowerCase();
+              if (extension === "html") {
+                filePreview.append(await createHtmlPackagePreview(fileInfo, title));
+              } else if (extension === "csv") {
+                filePreview.append(await createCsvPackagePreview(fileInfo));
+              } else if (extension === "xlsx" || extension === "xlsm") {
+                filePreview.append(await createWorkbookPackagePreview(fileInfo));
+              } else if (extension === "pdf") {
+                const blob = await fileInfo.file.async("blob");
+                activeObjectUrl = URL.createObjectURL(blob);
+                const frame = document.createElement("iframe");
+                frame.className = "cms-package-document";
+                frame.title = `${title} — ${fileInfo.path}`;
+                frame.src = activeObjectUrl;
+                filePreview.append(frame);
+              } else if (["png", "jpg", "jpeg", "webp"].includes(extension)) {
+                const blob = await fileInfo.file.async("blob");
+                activeObjectUrl = URL.createObjectURL(blob);
+                const image = document.createElement("img");
+                image.className = "cms-package-image";
+                image.src = activeObjectUrl;
+                image.alt = fileInfo.path;
+                filePreview.append(image);
+              } else if (extension === "docx") {
+                filePreview.append(await createDocxPackagePreview(fileInfo));
+              } else if (extension === "pptx") {
+                filePreview.append(await createPptxPackagePreview(fileInfo));
+              } else {
+                filePreview.append(await createTextPackagePreview(fileInfo));
+              }
+              status.hidden = true;
+              status.textContent = "";
+            } catch (error) {
+              console.error(`Unable to preview ${fileInfo.path} in analytics package "${title}".`, error);
+              status.textContent = error instanceof Error ? error.message : `Unable to preview ${fileInfo.path}.`;
+            }
+          });
+          fileList.append(button);
+        };
+        files.sort((left, right) => left.path.localeCompare(right.path));
+        files.forEach(renderButton);
+        status.textContent = "Choose a project file to preview it here.";
+        const preferred = files.find(({ path }) => path.split("/").pop().toLowerCase() === "index.html")
+          || files.find(({ path }) => ["csv", "xlsx", "xlsm", "pdf", "docx", "pptx"].includes(path.split(".").pop().toLowerCase()))
+          || files[0];
+        fileList.querySelector(`[data-package-path="${CSS.escape(preferred.path)}"]`)?.click();
       } catch (error) {
         console.error(`Unable to preview analytics package for "${title}".`, error);
         status.textContent = error instanceof Error ? error.message : "The project package could not be previewed.";
@@ -489,6 +520,262 @@
     });
 
     parent.append(preview);
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const createDataTable = (headers, rows, label) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "cms-package-table-wrap";
+    const table = document.createElement("table");
+    table.className = "cms-package-table";
+    table.setAttribute("aria-label", label);
+    if (headers.length) {
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      headers.forEach((value) => {
+        const cell = document.createElement("th");
+        cell.scope = "col";
+        cell.textContent = value;
+        headerRow.append(cell);
+      });
+      thead.append(headerRow);
+      table.append(thead);
+    }
+    const tbody = document.createElement("tbody");
+    rows.forEach((row) => {
+      const tr = document.createElement("tr");
+      headers.forEach((_, index) => {
+        const cell = document.createElement("td");
+        cell.textContent = row[index] ?? "";
+        tr.append(cell);
+      });
+      tbody.append(tr);
+    });
+    table.append(tbody);
+    wrapper.append(table);
+    return wrapper;
+  };
+
+  const parseCsvRows = (text) => {
+    const rows = [];
+    let row = [];
+    let cell = "";
+    let quoted = false;
+    for (let index = 0; index < text.length; index += 1) {
+      const character = text[index];
+      if (character === '"') {
+        if (quoted && text[index + 1] === '"') {
+          cell += '"';
+          index += 1;
+        } else {
+          quoted = !quoted;
+        }
+      } else if (character === "," && !quoted) {
+        row.push(cell);
+        cell = "";
+      } else if ((character === "\n" || character === "\r") && !quoted) {
+        if (character === "\r" && text[index + 1] === "\n") index += 1;
+        row.push(cell);
+        if (row.some((value) => value !== "")) rows.push(row);
+        row = [];
+        cell = "";
+      } else {
+        cell += character;
+      }
+    }
+    if (cell || row.length) {
+      row.push(cell);
+      if (row.some((value) => value !== "")) rows.push(row);
+    }
+    return rows;
+  };
+
+  const createCsvPackagePreview = async ({ path, file }) => {
+    if (file._data.uncompressedSize > 5 * 1024 * 1024) throw new Error("CSV previews are limited to 5 MB.");
+    const rows = parseCsvRows(await file.async("string"));
+    if (!rows.length) throw new Error("This CSV file has no rows to preview.");
+    const headers = rows[0].slice(0, 30);
+    const wrapper = document.createElement("div");
+    wrapper.append(createDataTable(headers, rows.slice(1, 201).map((row) => row.slice(0, 30)), path));
+    if (rows.length > 201) {
+      const note = document.createElement("p");
+      note.className = "cms-package-note";
+      note.textContent = `Showing the first 200 of ${rows.length - 1} data rows.`;
+      wrapper.append(note);
+    }
+    return wrapper;
+  };
+
+  const createTextPackagePreview = async ({ path, file }) => {
+    if (file._data.uncompressedSize > 1024 * 1024) throw new Error("Text/code previews are limited to 1 MB.");
+    const pre = document.createElement("pre");
+    pre.className = "cms-package-code";
+    pre.textContent = await file.async("string");
+    return pre;
+  };
+
+  const createHtmlPackagePreview = async ({ path, file }, title) => {
+    if (file._data.uncompressedSize > 2 * 1024 * 1024) throw new Error(`${path} is too large to preview (2 MB maximum).`);
+    const markup = await file.async("string");
+    const parsed = new DOMParser().parseFromString(markup, "text/html");
+    if (!/<html(?:\s|>)/i.test(markup)) throw new Error(`${path} must be a complete HTML document.`);
+    const externalResources = parsed.querySelector(
+      'base, script[src], link[href], img[src], iframe[src], audio[src], video[src], source[src], form, object, embed, meta[http-equiv="refresh" i]'
+    );
+    const unsafeResources = Array.from(parsed.querySelectorAll("*")).some((element) =>
+      Array.from(element.attributes).some(({ name, value }) => (
+        ["src", "href", "data", "action", "formaction", "poster", "srcset", "xlink:href"].includes(name.toLowerCase())
+        && value.trim()
+        && !value.trim().startsWith("#")
+        && !/^data:/i.test(value.trim())
+      ))
+    );
+    const styles = [
+      ...Array.from(parsed.querySelectorAll("style"), (element) => element.textContent || ""),
+      ...Array.from(parsed.querySelectorAll("[style]"), (element) => element.getAttribute("style") || "")
+    ].join("\n");
+    if (externalResources || unsafeResources || /@import\b|url\(\s*(['"]?)(?!(?:data:|#))/i.test(styles)) {
+      throw new Error(`${path} must be self-contained and cannot load external or separate files.`);
+    }
+    const policy = document.createElement("meta");
+    policy.httpEquiv = "Content-Security-Policy";
+    policy.content = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' data:; img-src data:; font-src data:; connect-src 'none'; media-src data:; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'";
+    parsed.head.prepend(policy);
+    const frame = document.createElement("iframe");
+    frame.className = "cms-package-html";
+    frame.title = `${title} — ${path}`;
+    frame.loading = "lazy";
+    frame.sandbox = "allow-scripts";
+    frame.referrerPolicy = "no-referrer";
+    frame.srcdoc = `<!doctype html>${parsed.documentElement.outerHTML}`;
+    return frame;
+  };
+
+  const createWorkbookPackagePreview = async ({ path, file }) => {
+    if (!window.JSZip) throw new Error("The project ZIP reader did not load.");
+    const workbook = await window.JSZip.loadAsync(await file.async("uint8array"));
+    const workbookFile = workbook.file("xl/workbook.xml");
+    const relationsFile = workbook.file("xl/_rels/workbook.xml.rels");
+    if (!workbookFile || !relationsFile) throw new Error(`${path} is not a supported Excel workbook.`);
+    const parseXml = async (archiveFile) => new DOMParser().parseFromString(await archiveFile.async("string"), "application/xml");
+    const workbookXml = await parseXml(workbookFile);
+    const relationsXml = await parseXml(relationsFile);
+    const elements = (xml, name) => Array.from(xml.getElementsByTagName("*")).filter((element) => element.localName === name);
+    const relationships = new Map(elements(relationsXml, "Relationship").map((item) => [item.getAttribute("Id"), item.getAttribute("Target")]));
+    const sheets = elements(workbookXml, "sheet").map((sheet) => ({
+      name: sheet.getAttribute("name"),
+      path: `xl/${(relationships.get(sheet.getAttribute("r:id")) || "").replace(/^\/?xl\//, "")}`
+    })).filter((sheet) => sheet.name && workbook.file(sheet.path));
+    if (!sheets.length) throw new Error(`${path} does not contain a readable worksheet.`);
+
+    let sharedStrings = [];
+    const sharedStringsFile = workbook.file("xl/sharedStrings.xml");
+    if (sharedStringsFile) {
+      const sharedXml = await parseXml(sharedStringsFile);
+      sharedStrings = elements(sharedXml, "si").map((item) => elements(item, "t").map((text) => text.textContent).join(""));
+    }
+    const container = document.createElement("div");
+    const select = document.createElement("select");
+    select.className = "cms-package-sheet-select";
+    select.setAttribute("aria-label", `Choose a worksheet in ${path}`);
+    sheets.forEach(({ name }, index) => {
+      const option = document.createElement("option");
+      option.value = String(index);
+      option.textContent = name;
+      select.append(option);
+    });
+    const sheetContent = document.createElement("div");
+    container.append(select, sheetContent);
+    const renderSheet = async (sheetIndex) => {
+      const xml = await parseXml(workbook.file(sheets[sheetIndex].path));
+      const xmlRows = elements(xml, "row").slice(0, 201);
+      const grid = [];
+      let maxColumn = 0;
+      xmlRows.forEach((rowElement, rowIndex) => {
+        const row = [];
+        elements(rowElement, "c").forEach((cell) => {
+          const reference = cell.getAttribute("r");
+          const letters = reference.match(/[A-Z]+/i)?.[0] || "A";
+          const column = Array.from(letters.toUpperCase()).reduce((value, char) => value * 26 + char.charCodeAt(0) - 64, 0) - 1;
+          if (column >= 30) return;
+          maxColumn = Math.max(maxColumn, column + 1);
+          const value = elements(cell, "v")[0]?.textContent || "";
+          const inlineText = elements(cell, "t").map((text) => text.textContent).join("");
+          const type = cell.getAttribute("t");
+          row[column] = type === "s" ? sharedStrings[Number(value)] || "" : type === "inlineStr" ? inlineText : value;
+        });
+        grid[rowIndex] = row;
+      });
+      const rows = grid.map((row) => Array.from({ length: maxColumn }, (_, index) => row[index] || ""));
+      const headers = rows.shift() || [];
+      sheetContent.replaceChildren(createDataTable(headers, rows, `${path} — ${sheets[sheetIndex].name}`));
+      if (xmlRows.length > 200) {
+        const note = document.createElement("p");
+        note.className = "cms-package-note";
+        note.textContent = "Showing the first 200 worksheet rows.";
+        sheetContent.append(note);
+      }
+    };
+    select.addEventListener("change", () => renderSheet(Number(select.value)));
+    await renderSheet(0);
+    return container;
+  };
+
+  const createDocxPackagePreview = async ({ path, file }) => {
+    if (!window.JSZip) throw new Error("The project ZIP reader did not load.");
+    const documentArchive = await window.JSZip.loadAsync(await file.async("uint8array"));
+    const documentXml = documentArchive.file("word/document.xml");
+    if (!documentXml) throw new Error(`${path} is not a supported Word document.`);
+    const xml = new DOMParser().parseFromString(await documentXml.async("string"), "application/xml");
+    const paragraphs = Array.from(xml.getElementsByTagName("*"))
+      .filter((element) => element.localName === "p")
+      .map((paragraph) => Array.from(paragraph.getElementsByTagName("*"))
+        .filter((element) => element.localName === "t")
+        .map((text) => text.textContent)
+        .join(""))
+      .filter(Boolean);
+    const article = document.createElement("article");
+    article.className = "cms-package-docx";
+    paragraphs.forEach((text) => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      article.append(paragraph);
+    });
+    if (!paragraphs.length) throw new Error(`${path} does not contain readable text.`);
+    return article;
+  };
+
+  const createPptxPackagePreview = async ({ path, file }) => {
+    if (!window.JSZip) throw new Error("The project ZIP reader did not load.");
+    const presentation = await window.JSZip.loadAsync(await file.async("uint8array"));
+    const slides = Object.keys(presentation.files)
+      .filter((name) => /^ppt\/slides\/slide\d+\.xml$/.test(name))
+      .sort((left, right) => Number(left.match(/\d+/)[0]) - Number(right.match(/\d+/)[0]));
+    if (!slides.length) throw new Error(`${path} does not contain readable slides.`);
+    const article = document.createElement("article");
+    article.className = "cms-package-docx";
+    for (const [index, slidePath] of slides.entries()) {
+      const slide = new DOMParser().parseFromString(await presentation.file(slidePath).async("string"), "application/xml");
+      const text = Array.from(slide.getElementsByTagName("*"))
+        .filter((element) => element.localName === "t")
+        .map((element) => element.textContent)
+        .join(" ");
+      if (!text.trim()) continue;
+      const section = document.createElement("section");
+      const heading = document.createElement("h4");
+      heading.textContent = `Slide ${index + 1}`;
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      section.append(heading, paragraph);
+      article.append(section);
+    }
+    if (!article.childElementCount) throw new Error(`${path} does not contain readable slide text.`);
+    return article;
   };
 
   const createProjectCard = (entry, category) => {

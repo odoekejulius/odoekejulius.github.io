@@ -56,11 +56,11 @@ collections:
     label_singular: Analytics project
     file: /content/analytics-projects.json
     identifier_field: title
-    description: New projects appear in the Data analytics section. Only the first three show initially; visitors can expand the list. Upload only a ZIP containing a finished, self-contained index.html dashboard and optional report.html. The ZIP is public—never include student-level, identity, employment, client, or other private data.
+    description: New projects appear in the Data analytics section. Upload a ZIP with public-safe analysis outputs; the site previews common data, report, image, and source files. The ZIP itself is public. Never upload student-level, identity, employment, client, or other private records.
     fields:
       - { label: Project title, name: title, widget: string }
       - { label: Year, name: year, widget: string, required: false }
-      - label: Finished dashboard package (ZIP)
+      - label: Analysis project files (ZIP)
         name: project_package_url
         widget: file
         accept: ".zip,application/zip"
@@ -68,8 +68,8 @@ collections:
         media_libraries:
           default:
             config:
-              max_file_size: 5242880
-        hint: "ZIP must contain only a self-contained index.html and optional self-contained report.html at its root. The archive is publicly accessible. Do not include spreadsheets, CSVs, source data, personal records, or other files."
+              max_file_size: 15728640
+        hint: "The public ZIP may contain HTML, CSV, Excel, PDF/Word/PowerPoint reports, images, and source-code files. The site previews files inside the collapsed project card. Upload only data and records that are safe for the public; never include private person-level, student, identity, employment, client, or confidential files."
 
   - name: media
     label: Videos and media
