@@ -1,0 +1,65 @@
+variable_x,variable_y,correlation
+Daily usage,Daily usage,1.0
+Daily usage,Weekend extra hours,-0.0096
+Daily usage,Sleep hours,-0.7159
+Daily usage,Sleep quality,-0.6813
+Daily usage,Stress,0.7545
+Daily usage,Mental health,-0.8499
+Daily usage,GPA,-0.7101
+Daily usage,Age,-0.0296
+Weekend extra hours,Daily usage,-0.0096
+Weekend extra hours,Weekend extra hours,1.0
+Weekend extra hours,Sleep hours,0.0167
+Weekend extra hours,Sleep quality,0.0121
+Weekend extra hours,Stress,0.0012
+Weekend extra hours,Mental health,0.004
+Weekend extra hours,GPA,0.0123
+Weekend extra hours,Age,0.0029
+Sleep hours,Daily usage,-0.7159
+Sleep hours,Weekend extra hours,0.0167
+Sleep hours,Sleep hours,1.0
+Sleep hours,Sleep quality,0.7477
+Sleep hours,Stress,-0.6617
+Sleep hours,Mental health,0.7742
+Sleep hours,GPA,0.5953
+Sleep hours,Age,0.0126
+Sleep quality,Daily usage,-0.6813
+Sleep quality,Weekend extra hours,0.0121
+Sleep quality,Sleep hours,0.7477
+Sleep quality,Sleep quality,1.0
+Sleep quality,Stress,-0.5765
+Sleep quality,Mental health,0.6624
+Sleep quality,GPA,0.5293
+Sleep quality,Age,0.0309
+Stress,Daily usage,0.7545
+Stress,Weekend extra hours,0.0012
+Stress,Sleep hours,-0.6617
+Stress,Sleep quality,-0.5765
+Stress,Stress,1.0
+Stress,Mental health,-0.7737
+Stress,GPA,-0.6509
+Stress,Age,-0.0207
+Mental health,Daily usage,-0.8499
+Mental health,Weekend extra hours,0.004
+Mental health,Sleep hours,0.7742
+Mental health,Sleep quality,0.6624
+Mental health,Stress,-0.7737
+Mental health,Mental health,1.0
+Mental health,GPA,0.6594
+Mental health,Age,0.0226
+GPA,Daily usage,-0.7101
+GPA,Weekend extra hours,0.0123
+GPA,Sleep hours,0.5953
+GPA,Sleep quality,0.5293
+GPA,Stress,-0.6509
+GPA,Mental health,0.6594
+GPA,GPA,1.0
+GPA,Age,0.0281
+Age,Daily usage,-0.0296
+Age,Weekend extra hours,0.0029
+Age,Sleep hours,0.0126
+Age,Sleep quality,0.0309
+Age,Stress,-0.0207
+Age,Mental health,0.0226
+Age,GPA,0.0281
+Age,Age,1.0

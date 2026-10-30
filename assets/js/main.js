@@ -57,10 +57,10 @@
     });
   });
 
-  const analyticsPreview = document.querySelector(".analytics-preview");
-  if (analyticsPreview) {
-    let fitObserver;
-    let fitTimeout;
+  const analyticsPreviews = document.querySelectorAll(".analytics-preview");
+  if (analyticsPreviews.length) {
+    const fitObservers = new Map();
+    const fitTimeouts = new Map();
     const syncPreviewTheme = () => {
       const theme = document.documentElement.getAttribute("data-theme");
       document.querySelectorAll("[data-sync-theme]").forEach((preview) => {
@@ -69,36 +69,43 @@
         if (theme) target.setAttribute("data-theme", theme);
         else target.removeAttribute("data-theme");
       });
-      scheduleAnalyticsFit();
+      analyticsPreviews.forEach(scheduleAnalyticsFit);
     };
 
-    const fitAnalyticsPreview = () => {
-      const content = analyticsPreview.contentDocument?.body;
+    const fitAnalyticsPreview = (preview) => {
+      const content = preview.contentDocument?.body;
       if (!content) return;
       const contentHeight = content.scrollHeight;
-      if (contentHeight) analyticsPreview.style.height = `${contentHeight}px`;
+      if (contentHeight) preview.style.height = `${contentHeight}px`;
     };
 
-    const scheduleAnalyticsFit = () => {
-      window.clearTimeout(fitTimeout);
-      fitTimeout = window.setTimeout(() => window.requestAnimationFrame(fitAnalyticsPreview), 100);
+    const scheduleAnalyticsFit = (preview) => {
+      window.clearTimeout(fitTimeouts.get(preview));
+      const timeout = window.setTimeout(() => {
+        fitTimeouts.delete(preview);
+        fitAnalyticsPreview(preview);
+      }, 100);
+      fitTimeouts.set(preview, timeout);
     };
 
-    window.addEventListener("resize", scheduleAnalyticsFit, { passive: true });
+    window.addEventListener("resize", () => analyticsPreviews.forEach(scheduleAnalyticsFit), { passive: true });
     document.querySelectorAll("[data-sync-theme]").forEach((preview) => {
       preview.addEventListener("load", syncPreviewTheme);
     });
-    analyticsPreview.addEventListener("load", () => {
-      syncPreviewTheme();
-      window.requestAnimationFrame(() => window.requestAnimationFrame(fitAnalyticsPreview));
-      const frameWindow = analyticsPreview.contentWindow;
-      const frameBody = analyticsPreview.contentDocument?.body;
-      if (fitObserver) fitObserver.disconnect();
-      if (frameWindow && frameBody && "ResizeObserver" in frameWindow) {
-        fitObserver = new frameWindow.ResizeObserver(scheduleAnalyticsFit);
-        fitObserver.observe(frameBody);
-      }
-      frameWindow?.addEventListener("resize", scheduleAnalyticsFit, { passive: true });
+    analyticsPreviews.forEach((preview) => {
+      preview.addEventListener("load", () => {
+        syncPreviewTheme();
+        window.requestAnimationFrame(() => window.requestAnimationFrame(() => fitAnalyticsPreview(preview)));
+        const frameWindow = preview.contentWindow;
+        const frameBody = preview.contentDocument?.body;
+        fitObservers.get(preview)?.disconnect();
+        if (frameWindow && frameBody && "ResizeObserver" in frameWindow) {
+          const observer = new frameWindow.ResizeObserver(() => scheduleAnalyticsFit(preview));
+          fitObservers.set(preview, observer);
+          observer.observe(frameBody);
+        }
+        frameWindow?.addEventListener("resize", () => scheduleAnalyticsFit(preview), { passive: true });
+      });
     });
     window.syncPreviewTheme = syncPreviewTheme;
   }
@@ -1085,75 +1092,80 @@
   // Contact form: composes an email in the visitor's mail app (no server needed)
   const form = document.querySelector("#contact-form");
   if (form) {
-    const nameField = form.elements.name;
-    const emailField = form.elements.email;
-    const topicField = form.elements.topic;
-    const messageField = form.elements.message;
+    const nameField = form.elements.namedItem("name");
+    const emailField = form.elements.namedItem("email");
+    const topicField = form.elements.namedItem("topic");
+    const messageField = form.elements.namedItem("message");
     const messageCount = form.querySelector("#message-count");
     const status = form.querySelector(".form-status");
-    const fieldErrors = new Map([
-      [nameField, form.querySelector("#name-error")],
-      [emailField, form.querySelector("#email-error")],
-      [messageField, form.querySelector("#message-error")],
-    ]);
 
-    const getFieldError = (field) => {
-      const value = field.value.trim();
-      if (!value) return "This field is required.";
-      if (field.validity.typeMismatch) return "Enter a valid email address.";
-      if (field.minLength > 0 && value.length < field.minLength) return `Please enter at least ${field.minLength} characters.`;
-      if (field.maxLength > 0 && field.value.length > field.maxLength) return `Please keep this to ${field.maxLength} characters or fewer.`;
-      return "";
-    };
+    if (nameField && emailField && messageField && messageCount && status) {
+      const fieldErrors = new Map([
+        [nameField, form.querySelector("#name-error")],
+        [emailField, form.querySelector("#email-error")],
+        [messageField, form.querySelector("#message-error")],
+      ]);
 
-    const updateMessageCount = () => {
-      messageCount.textContent = `${messageField.value.length.toLocaleString("en-US")} / 4,000`;
-    };
+      const getFieldError = (field) => {
+        const value = field.value.trim();
+        if (!value) return "This field is required.";
+        if (field.validity.typeMismatch) return "Enter a valid email address.";
+        if (field.minLength > 0 && value.length < field.minLength) return `Please enter at least ${field.minLength} characters.`;
+        if (field.maxLength > 0 && field.value.length > field.maxLength) return `Please keep this to ${field.maxLength} characters or fewer.`;
+        return "";
+      };
 
-    updateMessageCount();
-    const updateField = (field) => {
-      const error = getFieldError(field);
-      const errorElement = fieldErrors.get(field);
-      const invalid = field.dataset.touched === "true" && Boolean(error);
-      field.setAttribute("aria-invalid", String(invalid));
-      if (errorElement) errorElement.textContent = invalid ? error : "";
-      return !error;
-    };
+      const updateMessageCount = () => {
+        messageCount.textContent = `${messageField.value.length.toLocaleString("en-US")} / 4,000`;
+      };
 
-    [nameField, emailField, messageField].forEach((field) => {
-      field.addEventListener("input", () => {
-        if (field.dataset.touched === "true") updateField(field);
-        if (field === messageField) updateMessageCount();
+      updateMessageCount();
+      const updateField = (field) => {
+        const error = getFieldError(field);
+        const errorElement = fieldErrors.get(field);
+        const invalid = field.dataset.touched === "true" && Boolean(error);
+        field.setAttribute("aria-invalid", String(invalid));
+        if (errorElement) errorElement.textContent = invalid ? error : "";
+        return !error;
+      };
+
+      [nameField, emailField, messageField].forEach((field) => {
+        field.addEventListener("input", () => {
+          if (field.dataset.touched === "true") updateField(field);
+          if (field === messageField) updateMessageCount();
+        });
+        field.addEventListener("blur", () => {
+          field.dataset.touched = "true";
+          updateField(field);
+        });
       });
-      field.addEventListener("blur", () => {
-        field.dataset.touched = "true";
-        updateField(field);
-      });
-    });
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const fields = [nameField, emailField, messageField];
-      const invalidFields = fields.filter((field) => {
-        field.dataset.touched = "true";
-        return !updateField(field);
-      });
-      if (invalidFields.length) {
-        status.textContent = "A few details need your attention. Please check the highlighted fields.";
-        invalidFields[0].focus();
-        return;
-      }
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const fields = [nameField, emailField, messageField];
+        const invalidFields = fields.filter((field) => {
+          field.dataset.touched = "true";
+          return !updateField(field);
+        });
+        if (invalidFields.length) {
+          status.textContent = "A few details need your attention. Please check the highlighted fields.";
+          invalidFields[0].focus();
+          return;
+        }
 
-      const name = nameField.value.trim();
-      const email = emailField.value.trim();
-      const topic = topicField.value;
-      const message = messageField.value.trim();
-      const subject = `${topic} enquiry — ${name}`;
-      const body = `Hello Julius,\n\n${message}\n\n---\nName: ${name}\nEmail: ${email}\nTopic: ${topic}`;
-      const mailto = `mailto:odoekejulius@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      status.textContent = "Your email app should open with your message ready. If it doesn’t, email Julius directly at odoekejulius@gmail.com.";
-      window.location.assign(mailto);
-    });
+        const name = nameField.value.trim();
+        const email = emailField.value.trim();
+        const topic = topicField && typeof topicField.value === "string" ? topicField.value.trim() || "Something else" : "Something else";
+        const message = messageField.value.trim();
+        const subject = `${topic} enquiry — ${name}`;
+        const body = `Hello Julius,\n\n${message}\n\n---\nName: ${name}\nEmail: ${email}\nTopic: ${topic}`;
+        const mailto = `mailto:odoekejulius@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        status.textContent = "Your email app should open with your message ready. If it doesn’t, email Julius directly at odoekejulius@gmail.com.";
+        window.location.assign(mailto);
+      });
+    } else {
+      console.error("Contact form is missing required fields or status elements.");
+    }
   }
 
   const themeToggle = document.querySelector(".theme-toggle");

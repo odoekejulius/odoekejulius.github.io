@@ -67,7 +67,7 @@
     })();
   </script>
   <script src="assets/js/vendor/jszip.min.js" defer></script>
-  <script src="assets/js/main.js?v=32" defer></script>
+  <script src="assets/js/main.js?v=33" defer></script>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -130,7 +130,7 @@
         <div class="stat reveal"><strong><span data-count="6">6</span></strong><span>roles held since 2019</span></div>
         <div class="stat reveal"><strong><span data-count="3">3</span></strong><span>online platforms built from scratch</span></div>
         <div class="stat reveal"><strong><span data-count="1" data-count-source="website-projects">1</span></strong><span>website projects completed</span></div>
-        <div class="stat reveal"><strong><span data-count="2" data-count-source="analytics-projects">2</span></strong><span>data analysis projects completed</span></div>
+        <div class="stat reveal"><strong><span data-count="3" data-count-source="analytics-projects">3</span></strong><span>data analysis projects completed</span></div>
       </div>
     </section>
 
@@ -324,6 +324,57 @@
               <p><strong>Important caveat:</strong> the report says the unusually smooth patterns suggest a simulated dataset. Figures are illustrative, observational associations—not causal effects or validated institutional estimates.</p>
               <div class="analytics-project-links">
                 <a class="text-link" href="assets/data-analytics/student-dropout-risk/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="project-card analytics-project-card social-wellbeing-project-card reveal">
+          <div class="analytics-project-heading">
+            <div>
+              <div class="project-meta"><span>Data analytics</span><span>Student wellbeing</span></div>
+              <h3>Social media use and student wellbeing.</h3>
+              <p>An end-to-end analysis of 4,500 student records: data-quality checks, usage tiers, wellbeing and sleep associations, platform comparisons, and recommendations. The public preview presents aggregate results only.</p>
+              <div class="tag-list"><span>Data quality</span><span>Excel</span><span>Exploratory analysis</span><span>Wellbeing research</span></div>
+            </div>
+            <div class="analytics-scope"><span class="scope-number">4,500</span><span>records analysed</span></div>
+          </div>
+          <details class="analytics-explorer">
+            <summary>Explore the social media wellbeing analysis</summary>
+            <div class="analytics-preview-heading">
+              <span><i class="viewer-status" aria-hidden="true"></i>Interactive project preview</span>
+              <span>Compare reported outcomes across daily-use tiers</span>
+            </div>
+            <iframe
+              class="analytics-preview"
+              data-sync-theme
+              src="assets/data-analytics/social-media-wellbeing/dashboard-preview.html"
+              title="Interactive social media use and student wellbeing analysis dashboard"
+              loading="lazy">
+            </iframe>
+            <div class="analytics-project-footer">
+              <p><strong>Interpret with care:</strong> the report says the unusually smooth relationships are typical of simulated or heavily engineered data. These are observational associations, not causal or clinical findings, and should be validated on real survey data before informing policy.</p>
+              <details class="project-files">
+                <summary>Project files and aggregate data</summary>
+                <ul class="project-file-list">
+                  <li><div class="project-file-details"><strong>Project report notes</strong><small>HTML · reviewed aggregate findings</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read report</a></li>
+                  <li><div class="project-file-details"><strong>Usage-tier summary</strong><small>Aggregate CSV · grouped by broad daily-use bands</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/usage_tier_summary.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Usage associations</strong><small>Aggregate CSV · estimates and confidence intervals</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/usage_effects.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Platform comparison</strong><small>Aggregate CSV · platform summaries and adjusted estimates</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/platform_comparison.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>GPA model decomposition</strong><small>Aggregate CSV · usage, sleep, and stress models</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/gpa_decomposition.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Late-night adjusted estimates</strong><small>Aggregate CSV · outcomes adjusted for daily usage</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/late_night_adjusted.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Correlation summary</strong><small>Aggregate CSV · reported variable relationships</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/correlations.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Minor and adult slopes</strong><small>Aggregate CSV · comparison of reported associations</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/minor_vs_adult_slopes.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Model comparison</strong><small>Aggregate CSV · five-fold AUC</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/model_comparison.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>What-if estimates</strong><small>Aggregate CSV · illustrative usage-reduction scenarios</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/whatif_usage_reduction.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Data-quality log</strong><small>Aggregate CSV · checks, findings, and actions</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/data_quality_log.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Impact-label checks</strong><small>Aggregate CSV · label-predictability audit</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/impact_label_check.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>KPI summary</strong><small>Aggregate CSV · overall sample summaries</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/kpi_summary.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                </ul>
+                <p class="project-files-note">The public files contain aggregate findings only. The source archive and individual student records are not published.</p>
+              </details>
+              <div class="analytics-project-links">
+                <a class="text-link" href="assets/data-analytics/social-media-wellbeing/dashboard-preview.html" target="_blank" rel="noopener noreferrer">Open interactive dashboard <span aria-hidden="true">↗</span></a>
+                <a class="text-link" href="assets/data-analytics/social-media-wellbeing/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
               </div>
             </div>
           </details>

@@ -1,0 +1,5 @@
+predictors,tree_depth,accuracy
+Mental health index only,3,0.906
+Daily usage only,3,0.8909
+"Usage, weekend, sleep, sleep quality, mental health",4,0.9151
+Majority-class baseline (always Beneficial),0,0.818

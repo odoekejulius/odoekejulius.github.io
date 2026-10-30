@@ -56,7 +56,7 @@ The World Cup project lists its report, workbook, and all six CSV files in the e
 
 ## Add portfolio work
 
-Add new website and analytics entries from the admin dashboard instead of editing the page markup. Analytics ZIP packages can include reviewed aggregate CSV/Excel outputs, reports, visual assets, self-contained dashboards, and source code. Never publish personal or confidential records. The World Cup and Student Dropout Risk dashboards and project notes live under their respective folders in `assets/data-analytics/`. Their private source datasets stay outside the public web root.
+Add new website and analytics entries from the admin dashboard instead of editing the page markup. Analytics ZIP packages can include reviewed aggregate CSV/Excel outputs, reports, visual assets, self-contained dashboards, and source code. Never publish personal or confidential records. The World Cup, Student Dropout Risk, and Social Media Wellbeing dashboards and project notes live under their respective folders in `assets/data-analytics/`. The Social Media Wellbeing project publishes reviewed aggregate outputs only; its source archive contains student IDs and person-level wellbeing and academic data, which must stay outside the public web root.
 
 ## Project structure
 
@@ -86,7 +86,7 @@ Add new website and analytics entries from the admin dashboard instead of editin
     │   ├── nysc-certificate-of-national-service.jpg
     │   └── web-development-certificate.jpg
     ├── data-analytics/
-    │   └── world-cup-2026/
+    │   ├── world-cup-2026/
     │       ├── dashboard-preview.html
     │       ├── analysis-report-preview.html
     │       ├── confederation_summary.csv
@@ -98,6 +98,13 @@ Add new website and analytics entries from the admin dashboard instead of editin
     │       ├── analysis-report.docx
     │       ├── dashboard-source.jsx
     │       └── tableau-data.xlsx
+    │   ├── student-dropout-risk/
+    │       ├── dashboard-preview.html
+    │       └── analysis-report-preview.html
+    │   └── social-media-wellbeing/
+    │       ├── dashboard-preview.html
+    │       ├── analysis-report-preview.html
+    │       └── reviewed aggregate CSV outputs
     ├── images/
     │   ├── julius-odoeke.jpeg
     │   ├── og-cover.png

@@ -1,0 +1,4 @@
+outcome,late_night_coefficient_controlling_usage,ci_low,ci_high,p_value
+Mental health index (points),-0.4651,-0.885,-0.0452,0.0299
+Sleep duration (hours),-0.0862,-0.1386,-0.0339,0.0012
+GPA (points),-0.0164,-0.0337,0.0009,0.0628

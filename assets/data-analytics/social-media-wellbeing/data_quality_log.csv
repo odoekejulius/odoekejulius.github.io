@@ -1,0 +1,14 @@
+check_type,check,rows_affected,finding,action
+Completeness,Perceived_Stress_Score missing,46.0,"1.0% of rows; no association with level, impact or usage (looks random). Slope with complete cases -> median-imputed: 2.05 vs 2.03",Left blank; complete-case analysis; missing flag added
+Completeness,Academic_Performance_GPA missing,85.0,1.9% of rows; same pattern. Slope -0.107 complete-case vs -0.105 median-imputed,Left blank; complete-case analysis; missing flag added
+Uniqueness,Duplicate rows / Student_ID,0.0,None found,No action
+Consistency,"Academic_Level vs Age (High School 15-21, Undergrad 18-26, Postgrad 22-26)",0.0,Ages are consistent with levels; 21-year-old high-school students (30) is unusual but possible,Kept
+Logic,Sleep + daily usage + weekend extra > 24h,0.0,0 violations (max combined 17.4h usage on weekend days),No action
+Range,Daily usage capped at 14h,55.0,Ceiling effect: 55 students recorded exactly 14.0h,Kept; noted
+Range,GPA capped at 4.0,353.0,8.0% of non-missing GPAs sit at the 4.0 ceiling,Kept; noted
+Range,Stress = 0 / stress 35+,121.0,87 zeros and 34 scores of 35+ on the 0-40 scale - plausible extremes,Kept
+Range,Sleep 3h or less / 10h or more,18.0,Extremes present but plausible,Kept
+Sensitivity,Students under 18,1220.0,27.1% of the sample are minors (15-17),Kept; usage effects tested separately for minors (no difference); recommendations framed for minors
+Interpretation,Overall_Impact behaves like a derived summary label,,"Closely tracks usage and mental health: zero Negative below 8.7h of use, Neutral from 3.6h, and a tree on usage alone reaches 89.1% accuracy (majority baseline 81.8%). It overlaps heavily with the other outcomes, so it is not independent evidence","Treated as a composite outcome, not a separate finding"
+Interpretation,Relationships are unusually clean (usage explains 72% of mental-health variance),,"Typical of simulated data; platform, gender, device and comparison effects are ~0",Caveat in report; validate on real survey data
+Interpretation,Weekend_Extra_Hours has ~0 correlation with every outcome,,Either noise or not what it claims to be,Kept; not used as a driver

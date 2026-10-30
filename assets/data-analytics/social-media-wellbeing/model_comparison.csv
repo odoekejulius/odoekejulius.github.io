@@ -1,0 +1,4 @@
+model,auc_5fold
+Daily usage hours only,0.9742
+Usage + weekend + late night + minor + platform + device + comparison + gender,0.9715
+Usage + sleep duration + sleep quality + late night,0.98
