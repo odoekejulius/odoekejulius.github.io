@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Student Dropout Risk — Interactive Analysis</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c111a;
+      --panel: rgb(var(--ch-fill) / .055);
+      --line: rgb(var(--ch-ink) / .12);
+      --text: #f3f5fb;
+      --muted: #a3aec2;
+      --soft: #76839b;
+      --accent: #b4c2ff;
+      --mint: #9edccc;
+      --amber: #f2c77d;
+      --ch-fill: 255 255 255;
+      --ch-ink: 214 224 255;
+      --ch-accent: 180 194 255;
+      --ch-glow: 123 145 213;
+      --ch-deep: 5 9 16;
+      --bar-a: #8fa7ed;
+      --bar-b: #a1dacf;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: clamp(18px, 4vw, 42px);
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 86% 0%, rgb(var(--ch-glow) / .14), transparent 32rem),
+        var(--bg);
+    }
+    main { width: min(1050px, 100%); margin: auto; }
+    .topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; color: var(--soft); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+    .status { color: var(--mint); }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    h1 { max-width: 760px; margin: 19px 0 10px; font-size: clamp(2.1rem, 5.5vw, 3.8rem); line-height: 1.06; letter-spacing: -.04em; }
+    h1 span { color: var(--accent); }
+    .intro { max-width: 730px; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.75; }
+    .callout { margin-top: 17px; padding: 14px 16px; border: 1px solid rgb(var(--ch-accent) / .2); border-radius: 12px; background: rgb(var(--ch-accent) / .05); color: var(--muted); font-size: .7rem; line-height: 1.7; }
+    .callout strong { color: var(--text); }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 19px; }
+    .metric, .panel, .finding { border: 1px solid var(--line); background: linear-gradient(145deg, rgb(var(--ch-fill) / .065), rgb(var(--ch-fill) / .025)); box-shadow: inset 0 1px 0 rgb(var(--ch-fill) / .045); }
+    .metric { min-width: 0; padding: 15px; border-radius: 12px; }
+    .metric strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.45rem, 3.6vw, 2.15rem); font-weight: 400; letter-spacing: -.04em; }
+    .metric span { color: var(--soft); font-size: .64rem; line-height: 1.55; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+    .panel { min-width: 0; padding: 19px; border-radius: 14px; }
+    .panel-heading { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    h2 { margin: 0; font-size: 1.2rem; }
+    .panel-heading p { margin: 5px 0 0; color: var(--soft); font-size: .66rem; line-height: 1.55; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+    .driver-select { max-width: 100%; padding: 8px 28px 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: #151c29; color: var(--text); font: inherit; font-size: .68rem; }
+    .bars { display: grid; gap: 13px; }
+    .bar-row { display: grid; grid-template-columns: minmax(95px, 1.1fr) minmax(40px, 2fr) 44px; align-items: center; gap: 9px; color: var(--muted); font-size: .67rem; }
+    .bar-label { overflow-wrap: anywhere; }
+    .track { height: 9px; overflow: hidden; border-radius: 99px; background: rgb(var(--ch-fill) / .07); }
+    .fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--bar-a), var(--bar-b)); }
+    .value { color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+    .tier-list, .model-list, .flag-list { display: grid; gap: 11px; }
+    .tier-row, .model-row { display: grid; grid-template-columns: minmax(88px, .9fr) minmax(50px, 1.3fr) 48px; align-items: center; gap: 10px; }
+    .tier-name, .model-name { color: var(--muted); font-size: .67rem; line-height: 1.4; }
+    .tier-meta, .model-value { color: var(--text); font-size: .68rem; text-align: right; font-variant-numeric: tabular-nums; }
+    .tier-detail { display: block; margin-top: 3px; color: var(--soft); font-size: .59rem; }
+    .section-wide { margin-top: 12px; }
+    .flag-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .flag-row { display: grid; grid-template-columns: 24px minmax(45px, 1fr) 44px; align-items: center; gap: 8px; color: var(--muted); font-size: .63rem; }
+    .flag-row.threshold .flag-count { color: var(--mint); font-weight: 700; }
+    .flag-count { color: var(--soft); text-align: center; font-variant-numeric: tabular-nums; }
+    .flag-row .track { height: 7px; }
+    .flag-rate { color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+    .flag-note { margin: 12px 0 0; color: var(--soft); font-size: .63rem; line-height: 1.6; }
+    .fairness-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: .67rem; text-align: left; }
+    th { padding: 8px 6px; border-bottom: 1px solid var(--line); color: var(--soft); font-size: .57rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+    td { padding: 9px 6px; border-bottom: 1px solid rgb(var(--ch-ink) / .07); color: var(--muted); font-variant-numeric: tabular-nums; }
+    td:last-child { color: var(--text); }
+    .fairness-note { margin: 0; color: var(--muted); font-size: .69rem; line-height: 1.75; }
+    .fairness-note + .fairness-note { margin-top: 11px; }
+    .quality-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+    .finding { padding: 13px; border-radius: 10px; }
+    .finding strong { display: block; color: var(--accent); font-family: Consolas, monospace; font-size: .7rem; font-weight: 500; }
+    .finding span { display: block; margin-top: 5px; color: var(--muted); font-size: .64rem; line-height: 1.6; }
+    .caution { margin-top: 12px; padding: 14px 16px; border: 1px solid rgb(242 199 125 / .24); border-radius: 11px; background: rgb(242 199 125 / .055); color: var(--muted); font-size: .69rem; line-height: 1.7; }
+    .caution strong { color: var(--amber); }
+    .note { margin: 13px 2px 0; color: var(--soft); font-size: .62rem; line-height: 1.65; }
+    @media (max-width: 720px) {
+      body { padding: 18px 14px; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid, .fairness-grid { grid-template-columns: 1fr; }
+      .quality-grid { grid-template-columns: 1fr; }
+      .panel { padding: 15px; }
+    }
+    @media (max-width: 460px) {
+      .flag-list { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: minmax(85px, 1.1fr) minmax(35px, 2fr) 40px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f6fb; --text: #0f172a; --muted: #475569; --soft: #5b6579; --accent: #3949b8; --mint: #0b7d5c; --amber: #946200;
+      --ch-fill: 15 23 52; --ch-ink: 30 41 90; --ch-accent: 57 73 184; --ch-glow: 120 140 230; --ch-deep: 30 41 90;
+      --bar-a: #4a5bd0; --bar-b: #2b9e7c;
+    }
+    :root[data-theme="light"] .metric, :root[data-theme="light"] .panel, :root[data-theme="light"] .finding { background: rgb(255 255 255 / .82); box-shadow: 0 8px 24px rgb(30 41 90 / .07); }
+    :root[data-theme="light"] .driver-select { background: #fff; }
+  </style>
+  <script>
+    try {
+      if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (error) {
+      console.warn("Unable to restore the saved color theme.", error);
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <div class="topline"><span>Student retention · Interactive analysis</span><span class="status">Aggregate results only</span></div>
+    <h1>Student dropout risk, <span>examined.</span></h1>
+    <p class="intro">An end-to-end analysis of 100,000 student records, moving from data-quality checks through risk drivers, model evaluation, and fairness review. This public view uses aggregate results only; individual student records are not included.</p>
+    <div class="callout"><strong>Dataset caveat:</strong> the report describes unusually smooth, monotonic patterns and demographic fields with almost no effect, which suggests simulated data. Treat these results as a demonstration of the analysis workflow—not validated estimates for a real institution.</div>
+
+    <section class="metric-grid" aria-label="Project summary metrics">
+      <div class="metric"><strong>100,000</strong><span>student records reviewed</span></div>
+      <div class="metric"><strong>32.0%</strong><span>overall dropout rate · 32,004 students</span></div>
+      <div class="metric"><strong>0.90</strong><span>five-fold out-of-sample AUC · full model</span></div>
+      <div class="metric"><strong>69.7%</strong><span>dropouts in the High/Critical tiers · 28.6% of students</span></div>
+    </section>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="drivers-heading">
+        <div class="panel-heading">
+          <div><h2 id="drivers-heading">Where dropout rates rise</h2><p>Observed group rates; select a driver family to compare.</p></div>
+          <label>
+            <span class="sr-only">Choose driver group</span>
+            <select class="driver-select" id="driver-select" aria-label="Choose a driver group">
+              <option value="academic">Academic signals</option>
+              <option value="engagement">Engagement signals</option>
+              <option value="financial">Financial and work</option>
+            </select>
+          </label>
+        </div>
+        <div class="bars" id="driver-chart" role="list" aria-live="polite"></div>
+        <p class="note">These are observed associations in this dataset, not estimates of causal effects.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="tiers-heading">
+        <div class="panel-heading">
+          <div><h2 id="tiers-heading">Calibrated risk tiers</h2><p>Observed dropout rate and share of all recorded dropouts.</p></div>
+        </div>
+        <div class="tier-list">
+          <div class="tier-row"><span class="tier-name">Low<span class="tier-detail">51,404 students</span></span><div class="track" role="img" aria-label="6.1 percent observed dropout"><div class="fill" style="width:6.1%"></div></div><span class="tier-meta">6.1%<span class="tier-detail">9.8% of dropouts</span></span></div>
+          <div class="tier-row"><span class="tier-name">Moderate<span class="tier-detail">20,027 students</span></span><div class="track" role="img" aria-label="32.7 percent observed dropout"><div class="fill" style="width:32.7%"></div></div><span class="tier-meta">32.7%<span class="tier-detail">20.5% of dropouts</span></span></div>
+          <div class="tier-row"><span class="tier-name">High<span class="tier-detail">14,712 students</span></span><div class="track" role="img" aria-label="65.4 percent observed dropout"><div class="fill" style="width:65.4%"></div></div><span class="tier-meta">65.4%<span class="tier-detail">30.1% of dropouts</span></span></div>
+          <div class="tier-row"><span class="tier-name">Critical<span class="tier-detail">13,857 students</span></span><div class="track" role="img" aria-label="91.6 percent observed dropout"><div class="fill" style="width:91.6%"></div></div><span class="tier-meta">91.6%<span class="tier-detail">39.6% of dropouts</span></span></div>
+        </div>
+        <p class="note">High and Critical tiers contain 28,569 students and 22,314 of the recorded dropouts. Thresholds are practical choices, not statistical optima.</p>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="models-heading">
+        <div class="panel-heading">
+          <div><h2 id="models-heading">Model comparison</h2><p>Five-fold out-of-sample ROC AUC; higher is better.</p></div>
+        </div>
+        <div class="model-list">
+          <div class="model-row"><span class="model-name">Full model · protected attributes excluded</span><div class="track" role="img" aria-label="AUC 0.9037"><div class="fill" style="width:90.37%"></div></div><span class="model-value">0.904</span></div>
+          <div class="model-row"><span class="model-name">Engagement signals only</span><div class="track" role="img" aria-label="AUC 0.8808"><div class="fill" style="width:88.08%"></div></div><span class="model-value">0.881</span></div>
+          <div class="model-row"><span class="model-name">Leading indicators only · no grades</span><div class="track" role="img" aria-label="AUC 0.8306"><div class="fill" style="width:83.06%"></div></div><span class="model-value">0.831</span></div>
+          <div class="model-row"><span class="model-name">Leading-only · no income, first-gen, or scholarship</span><div class="track" role="img" aria-label="AUC 0.8199"><div class="fill" style="width:81.99%"></div></div><span class="model-value">0.820</span></div>
+        </div>
+        <p class="note">The report retained logistic regression for interpretability; a tested gradient-boosting model did not improve AUC.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="flags-heading">
+        <div class="panel-heading">
+          <div><h2 id="flags-heading">Risk flags compound</h2><p>Observed dropout rate by count of transparent warning flags.</p></div>
+        </div>
+        <div class="flag-list" id="flag-chart" role="list" aria-label="Dropout rates by risk flag count"></div>
+        <p class="flag-note">The report suggests three flags as a practical point to offer support, not to make an automatic decision. Groups with few records are more volatile.</p>
+      </section>
+    </div>
+
+    <section class="panel section-wide" aria-labelledby="fairness-heading">
+      <div class="panel-heading">
+        <div><h2 id="fairness-heading">Fairness review</h2><p>Protected attributes were excluded from the model inputs, then group outcomes were audited.</p></div>
+      </div>
+      <div class="fairness-grid">
+        <div>
+          <table>
+            <thead><tr><th>Gender group</th><th>Records</th><th>Flagged</th><th>False positive rate</th></tr></thead>
+            <tbody>
+              <tr><td>Female</td><td>50,731</td><td>28.5%</td><td>9.3%</td></tr>
+              <tr><td>Male</td><td>47,224</td><td>28.7%</td><td>9.2%</td></tr>
+              <tr><td>Other</td><td>2,045</td><td>28.1%</td><td>7.6%</td></tr>
+            </tbody>
+          </table>
+          <p class="note">Gender-group rates are close in this dataset; the smaller “Other” group should be interpreted cautiously.</p>
+        </div>
+        <div>
+          <p class="fairness-note">The report found similar flag rates across gender and international-status groups. Nationality-group flag rates ranged from 27.3% to 29.5%.</p>
+          <p class="fairness-note">A disparity remains by family income: the false-positive rate was 14.5% for low-income students versus 4.8% for high-income students. A risk flag should prompt a supportive, human-reviewed conversation—not a penalty.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section-wide" aria-labelledby="quality-heading">
+      <div class="panel-heading">
+        <div><h2 id="quality-heading">Data checks and method</h2><p>Quality checks from the analysis report; no student-level records are shown.</p></div>
+      </div>
+      <div class="quality-grid">
+        <div class="finding"><strong>100,000</strong><span>records · 34 source fields</span></div>
+        <div class="finding"><strong>0</strong><span>missing values, duplicate rows/IDs, or tested rule violations</span></div>
+        <div class="finding"><strong>5-fold</strong><span>out-of-fold scoring so each record was scored by a model that did not train on it</span></div>
+      </div>
+      <p class="note">The report retained and documented ambiguous or unusual fields rather than silently deleting rows. It notes possible outcome-timing leakage and provides a leading-indicators-only model as a check.</p>
+      <div class="caution"><strong>Use responsibly:</strong> these figures are observational and likely from simulated data. Validate the workflow on appropriate real data before using it. Risk tiers are not diagnoses; keep a human in the loop, check fairness regularly, and test support interventions with pilots.</div>
+    </section>
+  </main>
+  <script>
+    const driverData = {
+      academic: [
+        { label: "No failed units", value: 4.5 },
+        { label: "One failed unit", value: 13.7 },
+        { label: "7+ failed units", value: 80.0 }
+      ],
+      engagement: [
+        { label: "Attendance >90%", value: 16.1 },
+        { label: "Attendance ≤50%", value: 59.2 },
+        { label: "Zero library visits", value: 77.4 }
+      ],
+      financial: [
+        { label: "Tuition up to date", value: 28.6 },
+        { label: "Tuition overdue", value: 44.2 },
+        { label: "Low income + overdue", value: 53.0 },
+        { label: "Working 20+ hrs/week", value: 45.3 }
+      ]
+    };
+
+    const riskFlags = [
+      { count: 0, rate: 3.1, students: 9825 },
+      { count: 1, rate: 8.1, students: 19736 },
+      { count: 2, rate: 17.5, students: 22294 },
+      { count: 3, rate: 33.2, students: 18859 },
+      { count: 4, rate: 54.0, students: 13511 },
+      { count: 5, rate: 72.5, students: 8467 },
+      { count: 6, rate: 85.1, students: 4473 },
+      { count: 7, rate: 93.8, students: 2022 },
+      { count: 8, rate: 97.1, students: 661 },
+      { count: 9, rate: 100.0, students: 135 },
+      { count: 10, rate: 94.1, students: 17 }
+    ];
+
+    const driverSelect = document.querySelector("#driver-select");
+    const driverChart = document.querySelector("#driver-chart");
+    const flagChart = document.querySelector("#flag-chart");
+
+    const renderDrivers = () => {
+      driverChart.replaceChildren();
+      driverData[driverSelect.value].forEach(({ label, value }) => {
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.setAttribute("role", "listitem");
+        const name = document.createElement("span");
+        name.className = "bar-label";
+        name.textContent = label;
+        const track = document.createElement("div");
+        track.className = "track";
+        track.setAttribute("aria-hidden", "true");
+        const fill = document.createElement("div");
+        fill.className = "fill";
+        fill.style.width = `${value}%`;
+        track.append(fill);
+        const rate = document.createElement("span");
+        rate.className = "value";
+        rate.textContent = `${value.toFixed(1)}%`;
+        row.append(name, track, rate);
+        driverChart.append(row);
+      });
+    };
+
+    riskFlags.forEach(({ count, rate, students }) => {
+      const row = document.createElement("div");
+      row.className = `flag-row${count === 3 ? " threshold" : ""}`;
+      row.setAttribute("role", "listitem");
+      const flagCount = document.createElement("span");
+      flagCount.className = "flag-count";
+      flagCount.textContent = count;
+      const track = document.createElement("div");
+      track.className = "track";
+      track.setAttribute("role", "img");
+      track.setAttribute("aria-label", `${rate.toFixed(1)} percent dropout; ${students.toLocaleString()} students`);
+      const fill = document.createElement("div");
+      fill.className = "fill";
+      fill.style.width = `${rate}%`;
+      track.append(fill);
+      const percent = document.createElement("span");
+      percent.className = "flag-rate";
+      percent.textContent = `${rate.toFixed(1)}%`;
+      row.append(flagCount, track, percent);
+      flagChart.append(row);
+    });
+
+    driverSelect.addEventListener("change", renderDrivers);
+    renderDrivers();
+  </script>
+</body>
+</html>

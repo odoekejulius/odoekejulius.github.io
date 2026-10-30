@@ -234,6 +234,7 @@
             </div>
             <iframe
               class="analytics-preview"
+              data-sync-theme
               src="assets/data-analytics/world-cup-2026/dashboard-preview.html?v=22"
               title="Interactive preview of the FIFA World Cup 2026 data analytics project"
               loading="lazy">
@@ -291,6 +292,37 @@
               <div class="analytics-project-links">
                 <a class="text-link" href="assets/data-analytics/world-cup-2026/dashboard-preview.html?v=22" target="_blank" rel="noopener noreferrer">Open interactive dashboard <span aria-hidden="true">↗</span></a>
                 <a class="text-link" href="assets/data-analytics/world-cup-2026/analysis-report-preview.html?v=22" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="project-card analytics-project-card dropout-project-card reveal">
+          <div class="analytics-project-heading">
+            <div>
+              <div class="project-meta"><span>Data analytics</span><span>Student retention</span></div>
+              <h3>Student dropout risk, examined.</h3>
+              <p>An end-to-end study of 100,000 student records: data-quality checks, dropout drivers, out-of-fold risk modelling, transparent risk tiers, and a fairness review. The public dashboard uses aggregate findings only; no student-level records are published.</p>
+              <div class="tag-list"><span>Data quality</span><span>Logistic regression</span><span>Risk analysis</span><span>Fairness audit</span></div>
+            </div>
+            <div class="analytics-scope"><span class="scope-number">100k</span><span>student records analysed</span></div>
+          </div>
+          <details class="analytics-explorer">
+            <summary>Explore the student dropout analysis</summary>
+            <div class="analytics-preview-heading">
+              <span><i class="viewer-status" aria-hidden="true"></i>Interactive project preview</span>
+              <span>Explore risk drivers, model performance, and fairness</span>
+            </div>
+            <iframe
+              class="analytics-preview student-dropout-preview"
+              data-sync-theme
+              src="assets/data-analytics/student-dropout-risk/dashboard-preview.html"
+              title="Interactive student dropout risk analysis dashboard"
+              loading="lazy">
+            </iframe>
+            <div class="analytics-project-footer">
+              <p><strong>Important caveat:</strong> the report says the unusually smooth patterns suggest a simulated dataset. Figures are illustrative, observational associations—not causal effects or validated institutional estimates.</p>
+              <div class="analytics-project-links">
+                <a class="text-link" href="assets/data-analytics/student-dropout-risk/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
               </div>
             </div>
           </details>
@@ -475,34 +507,6 @@
               </div>
             </details>
           </div>
-        </div>
-        <div class="records-case-study reveal">
-          <div class="section-heading">
-            <p class="eyebrow">Redacted case study</p>
-            <h2>Personal records, <span class="text-gradient">organized with care.</span></h2>
-          </div>
-          <article class="project-card records-case-study-card">
-            <div class="project-content">
-              <div class="project-meta"><span>Records collection · Redacted overview</span><span>Private source files</span></div>
-              <p>A compact, interactive inventory of a mixed employment and education records collection. The preview groups files by type and broad category; personal documents, images, names, and form details are deliberately not published.</p>
-            </div>
-            <details class="records-case-study-explorer">
-              <summary>Explore the redacted collection overview</summary>
-              <iframe
-                src="assets/previews/records-collection-preview.html"
-                title="Interactive redacted overview of an employment and education records collection"
-                loading="lazy"
-                referrerpolicy="no-referrer">
-              </iframe>
-            </details>
-          </article>
-        </div>
-        <div class="cms-document-section" data-cms-documents hidden>
-          <div class="section-heading">
-            <p class="eyebrow">More to explore</p>
-            <h2>Additional <span class="text-gradient">documents.</span></h2>
-          </div>
-          <div class="project-grid cms-document-grid" data-cms-document-cards></div>
         </div>
       </div>
     </section>

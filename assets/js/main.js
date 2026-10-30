@@ -62,11 +62,13 @@
     let fitObserver;
     let fitTimeout;
     const syncPreviewTheme = () => {
-      const target = analyticsPreview.contentDocument?.documentElement;
-      if (!target) return;
       const theme = document.documentElement.getAttribute("data-theme");
-      if (theme) target.setAttribute("data-theme", theme);
-      else target.removeAttribute("data-theme");
+      document.querySelectorAll("[data-sync-theme]").forEach((preview) => {
+        const target = preview.contentDocument?.documentElement;
+        if (!target) return;
+        if (theme) target.setAttribute("data-theme", theme);
+        else target.removeAttribute("data-theme");
+      });
       scheduleAnalyticsFit();
     };
 
@@ -83,6 +85,9 @@
     };
 
     window.addEventListener("resize", scheduleAnalyticsFit, { passive: true });
+    document.querySelectorAll("[data-sync-theme]").forEach((preview) => {
+      preview.addEventListener("load", syncPreviewTheme);
+    });
     analyticsPreview.addEventListener("load", () => {
       syncPreviewTheme();
       window.requestAnimationFrame(() => window.requestAnimationFrame(fitAnalyticsPreview));
@@ -291,8 +296,7 @@
   const cmsCollections = [
     { path: "content/website-projects.json", selector: '[data-cms-projects="web"]', type: "project", category: "Web development" },
     { path: "content/analytics-projects.json", selector: '[data-cms-projects="analytics"]', type: "project", category: "Data analytics" },
-    { path: "content/media.json", selector: "[data-cms-media]", type: "media" },
-    { path: "content/documents.json", selector: "[data-cms-document-cards]", type: "document" }
+    { path: "content/media.json", selector: "[data-cms-media]", type: "media" }
   ];
 
   const loadSiteSettings = async () => {
@@ -539,28 +543,6 @@
     return card;
   };
 
-  const createDocumentCard = (entry) => {
-    const card = document.createElement("article");
-    card.className = "project-card cms-document-card";
-    const title = typeof entry.title === "string" && entry.title.trim() ? entry.title.trim() : "Document";
-    const coverImage = createProjectImage(entry.cover_image, `Cover image for ${title}`);
-    if (coverImage) card.append(coverImage);
-    const content = document.createElement("div");
-    content.className = "project-content";
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    content.append(heading);
-    if (typeof entry.description === "string" && entry.description.trim()) {
-      const description = document.createElement("p");
-      description.className = "cms-writeup";
-      description.textContent = entry.description.trim();
-      content.append(description);
-    }
-    addProjectLink(content, "Open document", entry.document_file);
-    card.append(content);
-    return card;
-  };
-
   const loadCmsCollection = async ({ path, selector, type, category }) => {
     const target = document.querySelector(selector);
     if (!target) return;
@@ -573,9 +555,7 @@
         if (!entry || typeof entry !== "object" || Array.isArray(entry)) return;
         const card = type === "project"
           ? createProjectCard(entry, category)
-          : type === "media"
-            ? createMediaCard(entry)
-            : createDocumentCard(entry);
+          : createMediaCard(entry);
         target.append(card);
       });
       const cards = Array.from(target.children);
@@ -584,7 +564,7 @@
         card.hidden = index >= visibleLimit;
       });
       if (cards.length > visibleLimit) {
-        const itemLabel = type === "media" ? "media items" : type === "document" ? "documents" : "projects";
+        const itemLabel = type === "media" ? "media items" : "projects";
         const toggle = document.createElement("button");
         toggle.className = "collection-toggle";
         toggle.type = "button";
@@ -603,9 +583,6 @@
       if (type === "media" && target.childElementCount) {
         document.querySelector("[data-cms-media-section]")?.removeAttribute("hidden");
         document.querySelectorAll("[data-cms-media-link]").forEach((link) => link.removeAttribute("hidden"));
-      }
-      if (type === "document" && target.childElementCount) {
-        target.closest("[data-cms-documents]")?.removeAttribute("hidden");
       }
     } catch (error) {
       console.error(`Unable to load portfolio content from ${path}.`, error);

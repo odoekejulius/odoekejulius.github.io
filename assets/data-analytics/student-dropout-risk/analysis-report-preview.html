@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Student Dropout Risk — Analysis Notes</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1018;
+      --panel: rgb(var(--ch-fill) / .045);
+      --line: rgb(var(--ch-ink) / .12);
+      --text: #f2f4fa;
+      --muted: #a7b0c2;
+      --soft: #78849a;
+      --accent: #b4c2ff;
+      --amber: #f2c77d;
+      --ch-fill: 255 255 255;
+      --ch-ink: 214 224 255;
+      --ch-accent: 180 194 255;
+      --ch-glow: 123 145 213;
+      --ch-deep: 4 8 14;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: clamp(22px, 6vw, 70px); color: var(--text); background: radial-gradient(ellipse at 88% 0, rgb(var(--ch-glow) / .13), transparent 34rem), var(--bg); }
+    main { width: min(850px, 100%); margin: auto; }
+    .eyebrow { color: var(--accent); font: .66rem/1.5 Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    h1 { margin: 18px 0 10px; font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.04; letter-spacing: -.04em; }
+    h1 span { color: var(--accent); }
+    h2 { margin: 0 0 10px; font-size: 1.38rem; }
+    .byline, .note { color: var(--soft); font-size: .73rem; line-height: 1.7; }
+    .lead { max-width: 720px; margin: 23px 0; color: var(--muted); font-size: .94rem; line-height: 1.8; }
+    .callout { padding: 17px 19px; border: 1px solid rgb(var(--ch-accent) / .23); border-radius: 13px; background: rgb(var(--ch-accent) / .055); color: var(--muted); font-size: .78rem; line-height: 1.75; }
+    .callout strong { color: var(--text); }
+    section { margin-top: 15px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+    p, li { color: var(--muted); font-size: .78rem; line-height: 1.8; }
+    p { margin: 8px 0 0; }
+    ul, ol { margin: 10px 0 0; padding-left: 20px; }
+    li + li { margin-top: 6px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 15px; }
+    .metric { padding: 13px; border: 1px solid rgb(var(--ch-ink) / .1); border-radius: 10px; }
+    .metric strong { display: block; color: var(--text); font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; font-weight: 400; }
+    .metric span { display: block; margin-top: 4px; color: var(--soft); font-size: .61rem; line-height: 1.5; }
+    .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .check { padding: 11px 12px; border: 1px solid rgb(var(--ch-ink) / .08); border-radius: 9px; color: var(--muted); font-size: .68rem; line-height: 1.6; }
+    .check strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: .71rem; }
+    .table-wrap { overflow-x: auto; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: .66rem; text-align: left; }
+    th { padding: 8px 6px; border-bottom: 1px solid var(--line); color: var(--soft); font-size: .56rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+    td { padding: 9px 6px; border-bottom: 1px solid rgb(var(--ch-ink) / .07); color: var(--muted); font-variant-numeric: tabular-nums; }
+    td:last-child { color: var(--text); }
+    .model { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 13px; }
+    .model span { padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; color: var(--muted); font-size: .66rem; }
+    .model b { color: var(--accent); font-size: .72rem; font-weight: 400; }
+    .caution { margin-top: 14px; padding: 14px 16px; border: 1px solid rgb(242 199 125 / .24); border-radius: 10px; background: rgb(242 199 125 / .055); color: var(--muted); font-size: .7rem; line-height: 1.7; }
+    .caution strong { color: var(--amber); }
+    @media (max-width: 620px) {
+      body { padding: 22px 15px; }
+      section { padding: 16px; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .checks { grid-template-columns: 1fr; }
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f6fb; --text: #0f172a; --muted: #475569; --soft: #5b6579; --accent: #3949b8; --amber: #946200;
+      --ch-fill: 15 23 52; --ch-ink: 30 41 90; --ch-accent: 57 73 184; --ch-glow: 120 140 230; --ch-deep: 30 41 90;
+    }
+    :root[data-theme="light"] section, :root[data-theme="light"] .metric, :root[data-theme="light"] .check { background: rgb(255 255 255 / .82); box-shadow: 0 8px 24px rgb(30 41 90 / .06); }
+  </style>
+  <script>
+    try {
+      if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (error) {
+      console.warn("Unable to restore the saved color theme.", error);
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Data analytics · Project notes</p>
+    <h1>Student dropout <span>risk analysis.</span></h1>
+    <p class="byline">Prepared by Julius Chibuzo Odo-Eke · Analysis report dated October 30, 2026</p>
+    <p class="lead">This project checks a 100,000-record student dataset, examines academic, engagement, financial, and wellbeing signals associated with dropout, evaluates an out-of-fold risk model, and audits group outcomes. This public report presents aggregate results only; the student-level source file is not published.</p>
+    <div class="callout"><strong>Interpret the dataset cautiously:</strong> the report notes unusually smooth, monotonic patterns and minimal demographic effects, suggesting the data may be simulated. The workflow is demonstrative; the figures are not validated institutional estimates.</div>
+
+    <section>
+      <h2>At a glance</h2>
+      <div class="metrics">
+        <div class="metric"><strong>100,000</strong><span>student records</span></div>
+        <div class="metric"><strong>32.0%</strong><span>overall dropout rate</span></div>
+        <div class="metric"><strong>0.904</strong><span>full-model five-fold AUC</span></div>
+        <div class="metric"><strong>28.6%</strong><span>in High/Critical tiers, containing 69.7% of dropouts</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Questions explored</h2>
+      <ul>
+        <li>How large is the observed dropout rate, and which signals show the strongest association?</li>
+        <li>Can a model separate outcomes without using protected attributes, and can it identify risk before grades arrive?</li>
+        <li>How do transparent risk flags and tier thresholds concentrate outreach capacity?</li>
+        <li>Do model scores and decision rates differ across groups, and what safeguards would responsible use require?</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data quality and preparation</h2>
+      <p>The report describes 100,000 records and 34 source fields. No missing values, duplicate rows or IDs, or violations of the tested unit-count and work-status rules were found. No rows were removed; plausibility issues were flagged for review, and derived fields and analysis bands were added.</p>
+      <div class="checks">
+        <div class="check"><strong>Consistency checks</strong>Passed tested units-enrolled and work-hours/job-flag rules.</div>
+        <div class="check"><strong>Ambiguous fields</strong>Prior-term GPA and international-status definitions need confirmation with a data owner.</div>
+        <div class="check"><strong>Plausibility flags</strong>Age and extreme values were retained and documented rather than silently filtered.</div>
+        <div class="check"><strong>Timing caveat</strong>Outcome timing versus input features was not documented; a leading-indicators-only model was also evaluated.</div>
+      </div>
+      <p class="note">The original student-level file contains person-level records and is intentionally kept out of this public presentation.</p>
+    </section>
+
+    <section>
+      <h2>What the grouped data shows</h2>
+      <p>Academic signals have the largest observed spreads: the report records an 85.5 percentage-point range across semester-one GPA groups and 75.6 points across failed-unit groups. Dropout was 4.5% for students with no failed units, 13.7% with one failed unit, and 80.0% with seven or more.</p>
+      <p>Engagement also separates groups: dropout was 59.2% among students with attendance at or below 50%, compared with 16.1% above 90%; the zero-library-visits group was 77.4%. Financial pressure and work overlap: low-income students with tuition not up to date had a 53.0% rate, and students working at least 20 hours weekly had 45.3%.</p>
+      <p>Risk flags compound: the observed rate rises from 3.1% at zero flags to 33.2% at three, 72.5% at five, and 97.1% at eight. The highest-count groups are small, so their rates are especially volatile.</p>
+    </section>
+
+    <section>
+      <h2>Risk model and capacity view</h2>
+      <p>The report evaluated logistic regression using academic, behavioural, financial, and wellbeing features, excluding gender, nationality, disability, and international status. Scores were out-of-fold across five folds. A tested gradient-boosting model did not improve on the simpler model.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model input set</th><th>Five-fold AUC</th><th>Interpretation</th></tr></thead>
+          <tbody>
+            <tr><td>Full model · protected attributes excluded</td><td>0.9037</td><td>All included feature groups</td></tr>
+            <tr><td>Engagement signals only</td><td>0.8808</td><td>Attendance, submissions, deadlines, LMS, library</td></tr>
+            <tr><td>Leading indicators only</td><td>0.8306</td><td>No GPA, units, or grades</td></tr>
+            <tr><td>Leading-only, fewer financial/context inputs</td><td>0.8199</td><td>Behaviour, wellbeing, and work signals</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>High and Critical tiers contain 28,569 students (28.6% of the dataset) and 22,314 of the 32,004 observed dropouts (69.7%). The report’s impact scenarios estimate 1,116, 2,231, or 3,347 additional students retained if 5%, 10%, or 15% of expected dropouts in that group were prevented. These are assumption-driven scenarios, not measured intervention effects.</p>
+    </section>
+
+    <section>
+      <h2>Fairness and responsible use</h2>
+      <p>Protected attributes were excluded from model inputs, then group outcomes were audited at a 50% decision threshold. Gender and international-status rates were broadly similar in this dataset, but removing protected attributes does not rule out proxy effects.</p>
+      <p>The audit found a family-income false-positive-rate gap: 14.5% for low-income students versus 4.8% for high-income students. A flag should prompt an offer of help and a human-reviewed conversation—not a penalty or an automatic decision.</p>
+      <p>Recommendations include validating the analysis on real institutional data, reviewing fairness each term, keeping a human in the loop, logging interventions, and piloting supports before estimating their impact.</p>
+    </section>
+
+    <div class="caution"><strong>Limitations:</strong> these are observational associations, not causal effects. The source report describes the dataset as likely simulated; specific rates and model performance should not be generalized to real students. Risk thresholds are practical choices, not statistical optima, and should be tuned to capacity and validated with appropriate data governance.</div>
+    <p class="note">The interactive dashboard and this report are a portfolio presentation of aggregate findings. They do not expose student-level data or provide operational predictions about individuals.</p>
+  </main>
+</body>
+</html>

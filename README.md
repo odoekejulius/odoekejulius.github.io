@@ -36,9 +36,9 @@ The freelance timeline starts in 2019 to match the CV. The two CV download links
 
 The site includes a GitHub-backed Sveltia CMS dashboard at `https://odoekejulius.github.io/admin/`. It does not need a PHP server, database, or secret stored in the website. The dashboard accepts GitHub access-token sign-in only. Do not use the GitHub OAuth sign-in button: GitHub Pages does not provide the separate OAuth service that button requires. Click **Sign In Using Access Token** and enter a GitHub fine-grained personal access token that has access only to the `odoekejulius/odoekejulius.github.io` repository and **Contents: Read and write** permission. The token stays in your browser's local storage; never paste it into a website file or commit it. Sign out on shared devices.
 
-Use the dashboard to update the homepage portrait under **Site settings → Profile**, or add website projects, data analytics projects, YouTube videos (or small uploaded videos), and additional documents. For the portrait, upload or choose an image and update its description for screen readers. Write project descriptions, add screenshots or files, and save. An analytics entry can include an **Analysis ZIP source** and an optional **Interactive HTML preview path or URL**. The project card embeds the prepared preview inside a collapsed **Explore interactive project** panel; the ZIP itself is not shown as a download link. The CMS cannot unpack and turn arbitrary ZIP files into a World Cup-style dashboard: prepare the self-contained HTML preview separately, then set its path in the CMS. The CMS commits the content and uploaded media to this repository; GitHub Pages publishes them after deployment finishes. New collections appear in their matching portfolio sections. The featured projects, CV, and certificates remain in their current sections.
+Use the dashboard to update the homepage portrait under **Site settings → Profile**, or add website projects, data analytics projects, and YouTube videos (or small uploaded videos). For the portrait, upload or choose an image and update its description for screen readers. Write project descriptions, add screenshots or files, and save. An analytics entry can include a prepared, self-contained HTML dashboard in **Interactive project preview**. The project card embeds it inside a collapsed **Explore interactive project** panel. A ZIP is not converted into a dashboard automatically: build the preview from safe, aggregated results, then upload the HTML. Never upload student-level, identity, employment, client, or other private data; CMS uploads are public even if the page has no download link. The CMS commits the content and uploaded media to this repository; GitHub Pages publishes them after deployment finishes. New collections appear in their matching portfolio sections. The featured projects, CV, and certificates remain in their current sections.
 
-All uploaded files and documents—including ZIP archives and every file inside them—are public and can be copied by visitors, even when the page does not display a download link. Inspect and sanitize archives before uploading; never publish identity, employment, student, client, or other private records. Keep ZIP and video uploads small because they are committed to the GitHub repository; use a link to suitable external hosting for larger files. CMS uploads are stored under `assets/uploads/`, and content records are in `content/`. New changes are committed directly to the `main` branch and go live after deployment.
+All uploaded files and documents are public and can be copied by visitors, even when the page does not display a download link. Keep raw student-level datasets, identity, employment, client, and other private records outside the public repository. Upload only reviewed, privacy-safe previews and images. Keep video uploads small; use a YouTube link for larger videos. CMS uploads are stored under `assets/uploads/`, and content records are in `content/`. New changes are committed directly to the `main` branch and go live after deployment.
 
 The layout and appearance are in `assets/css/style.css`; navigation, animations, content rendering, and PDF rendering are in `assets/js/main.js`. The self-hosted Mozilla PDF.js 4.10.38 renderer and its Apache 2.0 license are in `assets/js/vendor/`.
 
@@ -50,13 +50,13 @@ GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** p
 
 ## Add images and other file types
 
-Portfolio media is uploaded through the admin dashboard and stored in `assets/uploads/`. The CMS can add screenshots to project cards, YouTube links or small video files to the Videos & Media section, and downloadable documents with descriptions. Visitors can open or copy every published file. For large videos, embed YouTube rather than uploading the video to the GitHub repository. The built-in CV and certificate previews are unchanged.
+Portfolio media is uploaded through the admin dashboard and stored in `assets/uploads/`. The CMS can add screenshots to project cards and YouTube links or small video files to the Videos & Media section. Visitors can open or copy every published file. For large videos, embed YouTube rather than uploading the video to the GitHub repository. The built-in CV and certificate previews are unchanged.
 
-The redacted records-collection preview at `assets/previews/records-collection-preview.html` shows aggregate file-format counts and broad categories only; its source archive and original documents are kept outside the public web root. The World Cup project lists its report, workbook, and all six CSV files in the expandable **Project files and data** section. To add another Office file, copy one of its entries in `index.html`, update the filename, title, file link, and iframe title, and keep the `data-office-preview` and `data-office-frame` attributes. The site script builds the Microsoft preview URL from the associated file link. Add a PowerPoint file the same way when one is available. Remember that every deployed asset is public and may be copied by visitors.
+The World Cup project lists its report, workbook, and all six CSV files in the expandable **Project files and data** section. To add another Office file, copy one of its entries in `index.html`, update the filename, title, file link, and iframe title, and keep the `data-office-preview` and `data-office-frame` attributes. The site script builds the Microsoft preview URL from the associated file link. Add a PowerPoint file the same way when one is available. Remember that every deployed asset is public and may be copied by visitors.
 
 ## Add portfolio work
 
-Add new website and analytics entries from the admin dashboard instead of editing the page markup. The existing World Cup project dashboard is a self-contained interactive preview at `assets/data-analytics/world-cup-2026/dashboard-preview.html`; its project notes are at `assets/data-analytics/world-cup-2026/analysis-report-preview.html`. Its source files remain grouped under the same folder.
+Add new website and analytics entries from the admin dashboard instead of editing the page markup. Interactive previews should be self-contained HTML built from reviewed, aggregate findings. The World Cup and Student Dropout Risk dashboards and project notes live under their respective folders in `assets/data-analytics/`. Their source datasets stay outside the public web root.
 
 ## Project structure
 
@@ -75,8 +75,7 @@ Add new website and analytics entries from the admin dashboard instead of editin
 ├── content/
 │   ├── website-projects.json
 │   ├── analytics-projects.json
-│   ├── media.json
-│   └── documents.json
+│   └── media.json
 └── assets/
     ├── favicon.svg
     ├── css/

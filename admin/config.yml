@@ -56,7 +56,7 @@ collections:
     label_singular: Analytics project
     file: /content/analytics-projects.json
     identifier_field: title
-    description: New projects appear in the Data analytics section. Only the first three show initially; visitors can expand the list. Every upload is public—never upload identity, employment, student, client, or other private records. A ZIP is not converted into a dashboard automatically.
+    description: New projects appear in the Data analytics section. Only the first three show initially; visitors can expand the list. Uploaded files are public—never upload identity, employment, student, client, or other private records.
     fields:
       - { label: Project title, name: title, widget: string }
       - { label: Year, name: year, widget: string, required: false }
@@ -73,8 +73,7 @@ collections:
         widget: list
         required: false
         field: { label: Tool or method, name: tag, widget: string }
-      - { label: Analysis ZIP source (public file), name: project_archive, widget: file, accept: ".zip,application/zip,application/x-zip-compressed", required: false }
-      - { label: Interactive HTML preview path or URL, name: project_preview_url, widget: string, required: false, hint: "Optional. Link a separately prepared interactive HTML project preview. Uploading a ZIP alone cannot create a dashboard." }
+      - { label: Interactive project preview (self-contained HTML), name: project_preview_url, widget: file, accept: ".html,text/html", required: false, hint: "Upload a prepared, self-contained HTML dashboard. The project card embeds it in an expandable preview. Do not upload student-level or otherwise private data." }
       - { label: Project or dashboard URL, name: live_url, widget: string, required: false }
 
   - name: media
@@ -88,16 +87,4 @@ collections:
       - { label: Description, name: description, widget: text }
       - { label: YouTube URL, name: youtube_url, widget: string, required: false }
       - { label: "Video file (MP4, WebM or Ogg; small files only)", name: video_file, widget: file, accept: "video/mp4,video/webm,video/ogg", required: false }
-      - { label: Cover image, name: cover_image, widget: image, required: false }
-
-  - name: documents
-    label: Additional documents
-    label_singular: Document
-    file: /content/documents.json
-    identifier_field: title
-    description: Uploaded documents are publicly accessible. Do not upload private or sensitive files.
-    fields:
-      - { label: Document title, name: title, widget: string }
-      - { label: Description, name: description, widget: text }
-      - { label: Document file, name: document_file, widget: file }
       - { label: Cover image, name: cover_image, widget: image, required: false }
