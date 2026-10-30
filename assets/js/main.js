@@ -299,6 +299,22 @@
     { path: "content/media.json", selector: "[data-cms-media]", type: "media" }
   ];
 
+  const updateProjectCountStats = () => {
+    const projectCounts = {
+      "website-projects": document.querySelectorAll("#website-projects .project-featured").length
+        + document.querySelectorAll('[data-cms-projects="web"] > .cms-project-card').length,
+      "analytics-projects": document.querySelectorAll("#analytics-projects > .container > .analytics-project-card").length
+        + document.querySelectorAll('[data-cms-projects="analytics"] > .cms-project-card').length
+    };
+
+    Object.entries(projectCounts).forEach(([source, count]) => {
+      const counter = document.querySelector(`[data-count-source="${source}"]`);
+      if (!counter) return;
+      counter.dataset.count = String(count);
+      counter.textContent = count.toLocaleString("en-US");
+    });
+  };
+
   const loadSiteSettings = async () => {
     const portrait = document.querySelector(".portrait-frame img");
     if (!portrait) return;
@@ -949,6 +965,7 @@
         target.append(card);
       });
       const cards = Array.from(target.children);
+      if (type === "project") updateProjectCountStats();
       const visibleLimit = 3;
       cards.forEach((card, index) => {
         card.hidden = index >= visibleLimit;
