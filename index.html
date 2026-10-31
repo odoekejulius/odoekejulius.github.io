@@ -49,7 +49,7 @@
     }
   </script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=34">
+  <link rel="stylesheet" href="assets/css/style.css?v=35">
   <script>
     (() => {
       const root = document.documentElement;
@@ -67,35 +67,38 @@
     })();
   </script>
   <script src="assets/js/vendor/jszip.min.js" defer></script>
-  <script src="assets/js/main.js?v=34" defer></script>
+  <script src="assets/js/main.js?v=35" defer></script>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <span class="reading-progress" aria-hidden="true"></span>
     <div class="container nav-wrap">
+      <span class="reading-progress" aria-hidden="true"></span>
       <a class="brand" href="#top" aria-label="Julius Odo-Eke, home">
         <span class="brand-mark" aria-hidden="true">J<span>.</span></span>
         <span class="brand-name">Julius Odo-Eke</span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
-        <span></span><span></span>
-      </button>
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
         <a href="#about">About</a>
         <a href="#website-projects">Websites</a>
         <a href="#analytics-projects">Analytics</a>
         <a href="#media" data-cms-media-link hidden>Videos</a>
         <a href="#experience">Experience</a>
-        <a href="#documents">Documents</a>
         <a href="#skills">Skills</a>
-        <a class="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+        <a href="#documents">Documents</a>
+        <a class="nav-cta button button-primary" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
       </nav>
-      <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+      <div class="header-actions">
+        <a class="nav-cta button button-primary" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+        <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
       </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -438,6 +441,36 @@
       </div>
     </section>
 
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-heading"><p class="eyebrow">Skills &amp; tools</p><h2>What I use to <span class="text-gradient">get the work done.</span></h2></div>
+          <p class="section-intro">Technical skills backed by hands-on client work, sales reporting, healthcare data, and classroom teaching.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><span class="skill-number">01</span><h3>Web development</h3><p>Developing and supporting full-stack sites and web applications for real business needs.</p><div class="tag-list"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span><span>React</span><span>Web hosting</span></div></article>
+          <article class="skill-card reveal"><span class="skill-number">02</span><h3>Data &amp; reporting</h3><p>Turning day-to-day records into clearer summaries that can support decisions.</p><div class="tag-list"><span>SQL</span><span>Excel</span><span>Tableau</span><span>Google Sheets</span><span>R</span><span>Data visualisation</span><span>Star-schema modelling</span></div></article>
+          <article class="skill-card reveal"><span class="skill-number">03</span><h3>Health information</h3><p>Experience supporting accurate records and reporting in a healthcare setting.</p><div class="tag-list"><span>EMR</span><span>NMRS</span><span>NDR</span><span>RADET</span><span>Microsoft Office</span></div></article>
+          <article class="skill-card reveal"><span class="skill-number">04</span><h3>Teaching &amp; collaboration</h3><p>Explaining technical ideas clearly, supporting learners, and working with clients.</p><div class="tag-list"><span>ICT education</span><span>Communication</span><span>Problem solving</span><span>Training</span><span>Digital marketing</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section education-section" id="education">
+      <div class="container">
+        <div class="section-heading reveal"><p class="eyebrow">Education &amp; credentials</p><h2>Grounded in science. <span class="text-gradient">Always learning.</span></h2></div>
+        <div class="education-grid">
+          <article class="education-card reveal"><span class="card-kicker">2014 — 2021</span><h3>B.Sc. Agriculture (Soil Science)</h3><p class="timeline-place">University of Nigeria, Nsukka</p><p>Studied statistics, data analysis, and research methodology alongside soil science. The degree strengthened my ability to investigate a question, work with evidence, and explain findings.</p></article>
+          <article class="education-card reveal"><span class="card-kicker">2006 — 2012</span><h3>Senior Secondary Certificate</h3><p class="timeline-place">Universal Comprehensive Secondary School, Nsukka</p><p>Completed secondary education with NECO and WAEC qualifications.</p></article>
+        </div>
+        <div class="cert-list reveal" aria-label="Certifications">
+          <a href="#google-cert-preview"><span class="cert-year">2023</span><span><strong>Google Data Analytics Professional Certificate</strong><small>Coursera / Google</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
+          <a href="#web-development-preview"><span class="cert-year">2023</span><span><strong>Web Development Certificate</strong><small>Digital Dreams ICT Academy, Enugu</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
+          <a href="#nysc-preview"><span class="cert-year">2023</span><span><strong>NYSC Certificate of National Service</strong><small>National Youth Service Corps</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
     <section class="section documents-section" id="documents">
       <div class="container">
         <div class="section-top reveal">
@@ -563,36 +596,6 @@
       </div>
     </section>
 
-    <section class="section skills-section" id="skills">
-      <div class="container">
-        <div class="section-top reveal">
-          <div class="section-heading"><p class="eyebrow">Skills &amp; tools</p><h2>What I use to <span class="text-gradient">get the work done.</span></h2></div>
-          <p class="section-intro">Technical skills backed by hands-on client work, sales reporting, healthcare data, and classroom teaching.</p>
-        </div>
-        <div class="skills-grid">
-          <article class="skill-card reveal"><span class="skill-number">01</span><h3>Web development</h3><p>Developing and supporting full-stack sites and web applications for real business needs.</p><div class="tag-list"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span><span>React</span><span>Web hosting</span></div></article>
-          <article class="skill-card reveal"><span class="skill-number">02</span><h3>Data &amp; reporting</h3><p>Turning day-to-day records into clearer summaries that can support decisions.</p><div class="tag-list"><span>SQL</span><span>Excel</span><span>Tableau</span><span>Google Sheets</span><span>R</span><span>Data visualisation</span><span>Star-schema modelling</span></div></article>
-          <article class="skill-card reveal"><span class="skill-number">03</span><h3>Health information</h3><p>Experience supporting accurate records and reporting in a healthcare setting.</p><div class="tag-list"><span>EMR</span><span>NMRS</span><span>NDR</span><span>RADET</span><span>Microsoft Office</span></div></article>
-          <article class="skill-card reveal"><span class="skill-number">04</span><h3>Teaching &amp; collaboration</h3><p>Explaining technical ideas clearly, supporting learners, and working with clients.</p><div class="tag-list"><span>ICT education</span><span>Communication</span><span>Problem solving</span><span>Training</span><span>Digital marketing</span></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section education-section" id="education">
-      <div class="container">
-        <div class="section-heading reveal"><p class="eyebrow">Education &amp; credentials</p><h2>Grounded in science. <span class="text-gradient">Always learning.</span></h2></div>
-        <div class="education-grid">
-          <article class="education-card reveal"><span class="card-kicker">2014 — 2021</span><h3>B.Sc. Agriculture (Soil Science)</h3><p class="timeline-place">University of Nigeria, Nsukka</p><p>Studied statistics, data analysis, and research methodology alongside soil science. The degree strengthened my ability to investigate a question, work with evidence, and explain findings.</p></article>
-          <article class="education-card reveal"><span class="card-kicker">2006 — 2012</span><h3>Senior Secondary Certificate</h3><p class="timeline-place">Universal Comprehensive Secondary School, Nsukka</p><p>Completed secondary education with NECO and WAEC qualifications.</p></article>
-        </div>
-        <div class="cert-list reveal" aria-label="Certifications">
-          <a href="#google-cert-preview"><span class="cert-year">2023</span><span><strong>Google Data Analytics Professional Certificate</strong><small>Coursera / Google</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
-          <a href="#web-development-preview"><span class="cert-year">2023</span><span><strong>Web Development Certificate</strong><small>Digital Dreams ICT Academy, Enugu</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
-          <a href="#nysc-preview"><span class="cert-year">2023</span><span><strong>NYSC Certificate of National Service</strong><small>National Youth Service Corps</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
-
     <section class="section process-section" id="process">
       <div class="container">
         <div class="section-top reveal">
@@ -682,30 +685,38 @@
     <div class="container footer-wrap">
       <div class="footer-main">
         <div class="footer-brand">
-          <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">J<span>.</span></span><span class="brand-name">Julius Odo-Eke</span></a>
+          <a class="brand" href="#top" aria-label="Julius Odo-Eke, back to top"><span class="brand-mark" aria-hidden="true">J<span>.</span></span><span class="brand-name">Julius Odo-Eke</span></a>
+          <p class="footer-tagline">Full-stack web developer, data analyst and ICT educator, based in Abuja, Nigeria.</p>
+          <a class="footer-status" href="#contact"><span class="availability-dot" aria-hidden="true"></span>Open to roles &amp; select projects</a>
         </div>
         <div class="footer-column">
-          <span class="footer-label">Explore</span>
-          <a href="#about">About</a>
+          <span class="footer-label">Work</span>
           <a href="#website-projects">Website projects</a>
           <a href="#analytics-projects">Data analytics</a>
           <a href="#media" data-cms-media-link hidden>Videos &amp; media</a>
-          <a href="#experience">Experience</a>
-          <a href="#process">How I work</a>
-          <a href="#documents">Documents</a>
-          <a href="terms.html">Terms of service</a>
         </div>
         <div class="footer-column">
-          <span class="footer-label">Say hello</span>
-          <a href="mailto:odoekejulius@gmail.com">Email Julius <span aria-hidden="true">↗</span></a>
+          <span class="footer-label">About</span>
+          <a href="#about">Profile</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#documents">Documents</a>
+          <a href="#process">How I work</a>
+        </div>
+        <div class="footer-column footer-connect">
+          <span class="footer-label">Connect</span>
+          <a href="mailto:odoekejulius@gmail.com">Email <span aria-hidden="true">↗</span></a>
           <a href="https://wa.me/2348108249125" target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a>
           <a href="https://linkedin.com/in/odoekejc" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href="assets/documents/julius-odoeke-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© <span id="year">2026</span> Julius Chibuzo Odo-Eke</span>
-        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
-        <span class="footer-location"><span class="caption-dot"></span> Abuja, Nigeria</span>
+        <div class="footer-bottom-links">
+          <a href="terms.html">Terms of service</a>
+          <a class="footer-top-link" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
       </div>
     </div>
   </footer>

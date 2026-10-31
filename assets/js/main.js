@@ -25,6 +25,12 @@
     if (event.key === "Escape") closeMenu();
   });
 
+  document.addEventListener("click", (event) => {
+    if (navigation?.classList.contains("is-open") && !header?.contains(event.target)) closeMenu();
+  });
+
+  window.matchMedia("(min-width: 981px)").addEventListener?.("change", closeMenu);
+
   const updateScrollState = () => {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollProgress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
