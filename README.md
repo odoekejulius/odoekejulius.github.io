@@ -69,6 +69,11 @@ Add new website and analytics entries from the admin dashboard instead of editin
 ├── README.md
 ├── 404.html
 ├── .nojekyll
+├── .github/
+│   └── workflows/
+│       └── update-og-image.yml
+├── tools/
+│   └── generate_og_image.py
 ├── admin/
 │   ├── index.html
 │   └── config.yml
@@ -127,4 +132,12 @@ Add new website and analytics entries from the admin dashboard instead of editin
 
 ## Recent design updates
 
-Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and embedded analytics dashboards. The CMS project package preview uses the vendored JSZip 3.10.1 library under its included MIT license. Bump asset cache versions when referenced files change, and keep `style.css?v=` and `main.js?v=` identical on `index.html`, `terms.html` and `404.html` (currently `35`), so no page loads a stale copy of a shared file. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
+Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and embedded analytics dashboards. The CMS project package preview uses the vendored JSZip 3.10.1 library under its included MIT license. Bump asset cache versions when referenced files change, and keep `style.css?v=` and `main.js?v=` identical on `index.html`, `terms.html` and `404.html` (currently `36`), so no page loads a stale copy of a shared file. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
+
+## Social preview image (follows your profile photo)
+
+`assets/images/og-cover.png` is the card shown when the site link is shared (WhatsApp, LinkedIn, X, Chrome, search results). It is built from your current profile photo by `tools/generate_og_image.py`, which reads the photo from `content/site-settings.json` (`portrait_image`, the field the admin panel edits) and falls back to `assets/images/julius-odoeke.jpeg`.
+
+The workflow `.github/workflows/update-og-image.yml` runs the script on GitHub whenever the photo changes: replacing `assets/images/julius-odoeke.*`, uploading a new portrait through the admin panel, or running it by hand from the repository's Actions tab ("Update social preview image", then "Run workflow"). It commits the new card and adds a fresh `?v=` fingerprint to the `og:image` and `twitter:image` links in `index.html`, so link-preview caches fetch the new picture. Allow a minute or two after changing the photo; apps that already cached the old preview can take longer, and LinkedIn's Post Inspector or Facebook's Sharing Debugger can refresh them immediately.
+
+To change the wording on the card (name, roles, location line), edit the constants at the top of `tools/generate_og_image.py`. To rebuild it on your own computer: `pip install pillow`, then `python tools/generate_og_image.py`.
