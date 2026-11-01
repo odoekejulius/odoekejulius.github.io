@@ -1,7 +1,11 @@
 (() => {
   const loadPortfolio = async () => {
     try {
-      const response = await fetch("/", { credentials: "same-origin" });
+      const route = encodeURIComponent(window.location.pathname);
+      const response = await fetch(`/?route=${route}`, {
+        credentials: "same-origin",
+        cache: "no-store"
+      });
       if (!response.ok) {
         throw new Error(`Homepage request failed with status ${response.status}.`);
       }
