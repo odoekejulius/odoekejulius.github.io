@@ -20,6 +20,7 @@
     [...sectionRoutes].map(([sectionId, route]) => [route, sectionId])
   );
   window.history.scrollRestoration = "manual";
+  let waitingForInitialRoute = false;
   const routeForTarget = (target) => {
     const section = target?.closest("main section[id]");
     return sectionRoutes.get(section?.id) ?? "/";
@@ -1048,8 +1049,13 @@
         target.after(toggle);
       }
       if (type === "media" && target.childElementCount) {
-        document.querySelector("[data-cms-media-section]")?.removeAttribute("hidden");
+        const mediaSection = document.querySelector("[data-cms-media-section]");
+        mediaSection?.removeAttribute("hidden");
         document.querySelectorAll("[data-cms-media-link]").forEach((link) => link.removeAttribute("hidden"));
+        if (waitingForInitialRoute && currentRoute() === "/videos") {
+          waitingForInitialRoute = false;
+          mediaSection?.scrollIntoView({ behavior: "auto", block: "start" });
+        }
       }
     } catch (error) {
       console.error(`Unable to load portfolio content from ${path}.`, error);
@@ -1066,10 +1072,15 @@
     : null;
   const initialTarget = initialHashTarget
     ?? document.getElementById(routeSections.get(currentRoute()) ?? "top");
+  waitingForInitialRoute = Boolean(
+    routeSections.has(currentRoute())
+    && initialTarget
+    && !initialTarget.getClientRects().length
+  );
   if (initialHashTarget && !certificateLibrary?.contains(initialHashTarget)) {
     window.history.replaceState(window.history.state, "", routeForTarget(initialHashTarget));
   }
-  if (initialTarget && !certificateLibrary?.contains(initialTarget)) {
+  if (initialTarget && !certificateLibrary?.contains(initialTarget) && !waitingForInitialRoute) {
     initialTarget.scrollIntoView({ behavior: "auto", block: "start" });
   }
 
@@ -1085,6 +1096,7 @@
         .filter((entry) => entry.isIntersecting)
         .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top)[0];
       if (!activeEntry) return;
+      if (waitingForInitialRoute) return;
 
       const section = activeEntry.target;
       sectionLinks.forEach((link) => {
