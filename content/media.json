@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "title": "How the Internet Works in 9 Minutes",
+    "description": "A concise explainer from ByteByteGo on how the internet moves data, from network infrastructure and packet switching to protocols such as TCP/IP, BGP, and HTTP.",
+    "youtube_url": "https://www.youtube.com/watch?v=sMHzfigUxz4"
+  }
+]
