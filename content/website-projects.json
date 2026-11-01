@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "title": "Julius Odo-Eke Portfolio Website",
+    "year": "2026",
+    "description": "An independently designed and built portfolio that brings my web development, data analysis and teaching work together. Hosted on GitHub Pages, it pairs responsive layouts and clean section URLs with project showcases and search-ready profile details.",
+    "image": "/assets/images/portfolio/portfolio-home-desktop.jpg",
+    "image_alt": "Desktop homepage of the Julius Odo-Eke portfolio, showing the introduction, navigation and profile portrait.",
+    "screenshots": [
+      {
+        "image": "/assets/images/portfolio/portfolio-websites-desktop.jpg",
+        "caption": "Website projects section"
+      },
+      {
+        "image": "/assets/images/portfolio/portfolio-home-mobile.jpg",
+        "caption": "Responsive mobile homepage"
+      },
+      {
+        "image": "/assets/images/portfolio/portfolio-navigation-recording.gif",
+        "caption": "Screen recording: browsing portfolio sections"
+      },
+      {
+        "image": "/assets/images/portfolio/portfolio-mobile-recording.gif",
+        "caption": "Screen recording: mobile navigation"
+      }
+    ],
+    "highlights": [
+      "Responsive portfolio with clean, directly shareable section URLs.",
+      "Sveltia CMS collections for published projects and videos, alongside public document previews.",
+      "Performance-conscious loading: ZIP previews load on demand, and YouTube embeds wait for a visitor to press play."
+    ],
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub Pages",
+      "Sveltia CMS"
+    ],
+    "live_url": "https://odoekejulius.github.io/"
+  }
+]
