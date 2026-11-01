@@ -2,7 +2,7 @@
   const loadPortfolio = async () => {
     try {
       const requestedPath = window.location.pathname.replace(/\/+$/, "") || "/";
-      const response = await fetch("/", {
+      const response = await fetch(`/?route=${encodeURIComponent(requestedPath)}`, {
         credentials: "same-origin",
         cache: "no-store"
       });
