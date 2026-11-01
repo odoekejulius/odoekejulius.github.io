@@ -1,0 +1,67 @@
+name: Publish section URL behavior
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-section-url.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  update-section-urls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update section URL as visitors scroll
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("assets/js/main.js")
+          original = path.read_text(encoding="utf-8")
+          start = original.index('  const sectionLinks = navigation?.querySelectorAll(\'a[href^="#"]\') ?? [];')
+          end = original.index('  const projects = document.querySelectorAll(".project-card");', start)
+          replacement = '''  const sectionLinks = navigation?.querySelectorAll('a[href^="#"]') ?? [];
+          if ("IntersectionObserver" in window && sectionLinks.length) {
+            const sectionObserver = new IntersectionObserver((entries) => {
+              const activeEntry = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top)[0];
+              if (!activeEntry) return;
+
+              const section = activeEntry.target;
+              sectionLinks.forEach((link) => {
+                if (link.getAttribute("href") === `#${section.id}`) {
+                  link.setAttribute("aria-current", "location");
+                } else {
+                  link.removeAttribute("aria-current");
+                }
+              });
+
+              const currentTarget = window.location.hash
+                ? document.getElementById(window.location.hash.slice(1))
+                : null;
+              const isNestedTarget = currentTarget && currentTarget !== section && section.contains(currentTarget);
+              if (!isNestedTarget && window.location.hash !== `#${section.id}`) {
+                window.history.replaceState(window.history.state, "", `#${section.id}`);
+              }
+            }, { rootMargin: "-30% 0px -60% 0px" });
+
+            document.querySelectorAll("main section[id]").forEach((section) => sectionObserver.observe(section));
+          }
+
+          '''
+          updated = original[:start] + replacement + original[end:]
+          if updated == original:
+              raise SystemExit("Section URL observer was not updated")
+          path.write_text(updated, encoding="utf-8")
+          PY
+      - name: Commit and publish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/main.js
+          git commit -m "Update section URL while scrolling"
+          git push origin HEAD:main
