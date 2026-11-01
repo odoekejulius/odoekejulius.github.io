@@ -1005,7 +1005,8 @@
       description.textContent = entry.description.trim();
       content.append(description);
     }
-    if (!videoId && videoFile) addProjectLink(content, "Open video", videoFile);
+    if (videoId) addProjectLink(content, "Watch on YouTube", entry.youtube_url);
+    else if (videoFile) addProjectLink(content, "Open video", videoFile);
     card.append(content);
     return card;
   };
