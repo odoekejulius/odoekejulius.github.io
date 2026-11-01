@@ -26,6 +26,27 @@
     return sectionRoutes.get(section?.id) ?? "/";
   };
   const currentRoute = () => window.location.pathname.replace(/\/+$/, "") || "/";
+  let zipLibraryPromise;
+  const loadZipLibrary = () => {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (!zipLibraryPromise) {
+      zipLibraryPromise = new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = new URL("assets/js/vendor/jszip.min.js", document.baseURI).href;
+        script.async = true;
+        script.addEventListener("load", () => {
+          if (window.JSZip) resolve(window.JSZip);
+          else reject(new Error("The project ZIP reader did not initialize."));
+        }, { once: true });
+        script.addEventListener("error", () => {
+          zipLibraryPromise = undefined;
+          reject(new Error("The project ZIP reader did not load."));
+        }, { once: true });
+        document.head.append(script);
+      });
+    }
+    return zipLibraryPromise;
+  };
 
   const closeMenu = () => {
     menuButton?.setAttribute("aria-expanded", "false");
@@ -495,7 +516,7 @@
       loading = true;
       status.textContent = "Loading project preview…";
       try {
-        if (!window.JSZip) throw new Error("The project ZIP reader did not load.");
+        await loadZipLibrary();
         const response = await fetch(url);
         if (!response.ok) throw new Error(`The project package could not be loaded (HTTP ${response.status}).`);
         const archiveBlob = await response.blob();
@@ -972,14 +993,37 @@
     media.className = "cms-media-player";
 
     if (videoId) {
-      const frame = document.createElement("iframe");
-      frame.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
-      frame.title = title;
-      frame.loading = "lazy";
-      frame.referrerPolicy = "strict-origin-when-cross-origin";
-      frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      frame.allowFullscreen = true;
-      media.append(frame);
+      const playButton = document.createElement("button");
+      playButton.type = "button";
+      playButton.className = "cms-video-preview";
+      playButton.setAttribute("aria-label", `Play ${title}`);
+      const thumbnail = document.createElement("img");
+      thumbnail.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      thumbnail.alt = "";
+      thumbnail.width = 480;
+      thumbnail.height = 360;
+      thumbnail.loading = "lazy";
+      thumbnail.decoding = "async";
+      const playIcon = document.createElement("span");
+      playIcon.className = "cms-video-play";
+      playIcon.setAttribute("aria-hidden", "true");
+      const playSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      playSvg.setAttribute("viewBox", "0 0 24 24");
+      const playPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      playPath.setAttribute("d", "M8 5.8a1 1 0 0 1 1.5-.86l10.1 6.2a1 1 0 0 1 0 1.72l-10.1 6.2a1 1 0 0 1-1.5-.86V5.8Z");
+      playSvg.append(playPath);
+      playIcon.append(playSvg);
+      playButton.append(thumbnail, playIcon);
+      playButton.addEventListener("click", () => {
+        const frame = document.createElement("iframe");
+        frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+        frame.title = title;
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        frame.allowFullscreen = true;
+        media.replaceChildren(frame);
+      }, { once: true });
+      media.append(playButton);
     } else if (videoFile) {
       const video = document.createElement("video");
       video.controls = true;
