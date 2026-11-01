@@ -19,6 +19,7 @@
   const routeSections = new Map(
     [...sectionRoutes].map(([sectionId, route]) => [route, sectionId])
   );
+  window.history.scrollRestoration = "manual";
   const routeForTarget = (target) => {
     const section = target?.closest("main section[id]");
     return sectionRoutes.get(section?.id) ?? "/";
