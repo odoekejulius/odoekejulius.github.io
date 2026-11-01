@@ -1017,16 +1017,28 @@
   const sectionLinks = navigation?.querySelectorAll('a[href^="#"]') ?? [];
   if ("IntersectionObserver" in window && sectionLinks.length) {
     const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        sectionLinks.forEach((link) => {
-          if (link.getAttribute("href") === `#${entry.target.id}`) {
-            link.setAttribute("aria-current", "location");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
+      const activeEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top)[0];
+      if (!activeEntry) return;
+
+      const section = activeEntry.target;
+      sectionLinks.forEach((link) => {
+        if (link.getAttribute("href") === `#${section.id}`) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
       });
+
+      const currentTarget = window.location.hash
+        ? document.getElementById(window.location.hash.slice(1))
+        : null;
+      const isNestedTarget = currentTarget && currentTarget !== section && section.contains(currentTarget);
+      if (!isNestedTarget && window.location.hash !== `#${section.id}`) {
+        window.history.replaceState(window.history.state, "", `#${section.id}`);
+      }
+
     }, { rootMargin: "-30% 0px -60% 0px" });
 
     document.querySelectorAll("main section[id]").forEach((section) => sectionObserver.observe(section));
