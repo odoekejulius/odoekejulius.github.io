@@ -112,12 +112,11 @@ button { font: inherit; }
 .eyebrow-item { white-space: nowrap; }
 .eyebrow-item + .eyebrow-item::before { margin-right: 10px; content: "·"; }
 @media (max-width: 640px) {
-  .hero-copy > .eyebrow { display: block; text-align: center; }
-  .hero-copy > .eyebrow .eyebrow-dot { display: block; margin: 0 auto 12px; }
-  .hero-copy > .eyebrow .eyebrow-item { display: inline-block; }
-  .hero-copy > .eyebrow .eyebrow-dot + .eyebrow-item { display: block; margin-bottom: 4px; }
+  /* Phones: line one is the dot beside "Full-stack developer"; line two is "Data analyst · Educator" */
+  .hero-copy > .eyebrow { flex-wrap: wrap; justify-content: center; gap: 8px 10px; }
+  .hero-copy > .eyebrow::after { height: 0; flex: 0 0 100%; order: 1; content: ""; }
+  .hero-copy > .eyebrow .eyebrow-dot + .eyebrow-item ~ .eyebrow-item { order: 2; }
   .hero-copy > .eyebrow .eyebrow-dot + .eyebrow-item + .eyebrow-item::before { display: none; }
-  .hero-copy > .eyebrow .eyebrow-item + .eyebrow-item + .eyebrow-item::before { margin-left: 10px; }
 }
 
 /* Frosted navigation */
