@@ -3,6 +3,27 @@
   const progress = document.querySelector(".reading-progress");
   const menuButton = document.querySelector(".menu-toggle");
   const navigation = document.querySelector("#site-nav");
+  const sectionRoutes = new Map([
+    ["top", "/"],
+    ["about", "/about"],
+    ["website-projects", "/websites"],
+    ["analytics-projects", "/analytics"],
+    ["media", "/videos"],
+    ["experience", "/experience"],
+    ["skills", "/skills"],
+    ["education", "/education"],
+    ["documents", "/documents"],
+    ["process", "/process"],
+    ["contact", "/contact"]
+  ]);
+  const routeSections = new Map(
+    [...sectionRoutes].map(([sectionId, route]) => [route, sectionId])
+  );
+  const routeForTarget = (target) => {
+    const section = target?.closest("main section[id]");
+    return sectionRoutes.get(section?.id) ?? "/";
+  };
+  const currentRoute = () => window.location.pathname.replace(/\/+$/, "") || "/";
 
   const closeMenu = () => {
     menuButton?.setAttribute("aria-expanded", "false");
@@ -281,7 +302,7 @@
       const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
       if (!target || !certificateLibrary.contains(target)) return;
       event.preventDefault();
-      window.history.pushState(null, "", link.hash);
+      window.history.pushState(null, "", routeForTarget(target));
       openCertificateTarget(target);
     });
 
@@ -306,6 +327,26 @@
     }
   }
 
+  document.addEventListener("click", (event) => {
+    const link = event.target instanceof Element
+      ? event.target.closest('a[href^="#"]')
+      : null;
+    if (!link) return;
+
+    const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+    if (!target || certificateLibrary?.contains(target)) return;
+
+    event.preventDefault();
+    const route = routeForTarget(target);
+    if (currentRoute() !== route || window.location.hash) {
+      window.history.pushState(null, "", route);
+    }
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start"
+    });
+  });
+
   const cmsCollections = [
     { path: "content/website-projects.json", selector: '[data-cms-projects="web"]', type: "project", category: "Web development" },
     { path: "content/analytics-projects.json", selector: '[data-cms-projects="analytics"]', type: "project", category: "Data analytics" },
@@ -325,6 +366,11 @@
       if (!counter) return;
       counter.dataset.count = String(count);
       counter.textContent = count.toLocaleString("en-US");
+      const label = document.querySelector(`[data-project-count-label="${source}"]`);
+      if (label) {
+        const projectName = source === "website-projects" ? "website" : "data analysis";
+        label.textContent = `${projectName} project${count === 1 ? "" : "s"} completed`;
+      }
     });
   };
 
@@ -1014,6 +1060,23 @@
     cmsCollections.forEach(loadCmsCollection);
   }
 
+  const initialHashTarget = window.location.hash
+    ? document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
+    : null;
+  const initialTarget = initialHashTarget
+    ?? document.getElementById(routeSections.get(currentRoute()) ?? "top");
+  if (initialHashTarget && !certificateLibrary?.contains(initialHashTarget)) {
+    window.history.replaceState(window.history.state, "", routeForTarget(initialHashTarget));
+  }
+  if (initialTarget && !certificateLibrary?.contains(initialTarget)) {
+    initialTarget.scrollIntoView({ behavior: "auto", block: "start" });
+  }
+
+  window.addEventListener("popstate", () => {
+    const target = document.getElementById(routeSections.get(currentRoute()) ?? "top");
+    target?.scrollIntoView({ behavior: "auto", block: "start" });
+  });
+
   const sectionLinks = navigation?.querySelectorAll('a[href^="#"]') ?? [];
   if ("IntersectionObserver" in window && sectionLinks.length) {
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -1032,11 +1095,12 @@
       });
 
       const currentTarget = window.location.hash
-        ? document.getElementById(window.location.hash.slice(1))
+        ? document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
         : null;
-      const isNestedTarget = currentTarget && currentTarget !== section && section.contains(currentTarget);
-      if (!isNestedTarget && window.location.hash !== `#${section.id}`) {
-        window.history.replaceState(window.history.state, "", `#${section.id}`);
+      const nestedTarget = currentTarget && currentTarget !== section && section.contains(currentTarget);
+      const route = routeForTarget(nestedTarget ? currentTarget : section);
+      if (currentRoute() !== route || window.location.hash) {
+        window.history.replaceState(window.history.state, "", route);
       }
 
     }, { rootMargin: "-30% 0px -60% 0px" });
