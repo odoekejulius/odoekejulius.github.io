@@ -3,12 +3,707 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#080b12">
+  <meta name="google-site-verification" content="lKw2MJKOAzaLV7G92PlsBbsFZqcVp-Los6WNyoxJ-W8">
+  <meta name="author" content="Julius Chibuzo Odo-Eke">
+  <meta name="description" content="Julius Chibuzo Odo-Eke is an Abuja-based full-stack web developer, data analyst, and educator. Explore his projects, experience, and credentials.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://odoekejulius.github.io/">
-  <title>About | Julius Odo-Eke</title>
+  <base href="/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:site_name" content="Julius Odo-Eke">
+  <meta property="og:title" content="Julius Odo-Eke | Web Developer &amp; Data Analyst in Abuja">
+  <meta property="og:description" content="Explore the work and experience of Julius Chibuzo Odo-Eke, an Abuja-based full-stack web developer, data analyst, and educator.">
+  <meta property="og:url" content="https://odoekejulius.github.io/">
+  <meta property="og:image" content="https://odoekejulius.github.io/assets/images/og-cover.png?v=13cb2f820b">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Portrait of Julius Chibuzo Odo-Eke">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Julius Odo-Eke | Web Developer &amp; Data Analyst in Abuja">
+  <meta name="twitter:description" content="Explore the work and experience of Julius Chibuzo Odo-Eke, an Abuja-based full-stack web developer, data analyst, and educator.">
+  <meta name="twitter:image" content="https://odoekejulius.github.io/assets/images/og-cover.png?v=13cb2f820b">
+  <title>Julius Odo-Eke | Web Developer &amp; Data Analyst in Abuja</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://odoekejulius.github.io/#person",
+      "name": "Julius Chibuzo Odo-Eke",
+      "url": "https://odoekejulius.github.io/",
+      "image": "https://odoekejulius.github.io/assets/images/julius-odoeke.jpeg",
+      "jobTitle": ["Full-stack web developer", "Data analyst", "Educator"],
+      "description": "Abuja-based full-stack web developer, data analyst, and educator. Explore website projects, analytics work, experience, and credentials.",
+      "email": "odoekejulius@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Abuja",
+        "addressCountry": "NG"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Nigeria, Nsukka"
+      },
+      "knowsAbout": ["Full-stack web development", "Data analytics", "Data visualization", "Education"],
+      "sameAs": ["https://linkedin.com/in/odoekejc"]
+    }
+  </script>
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css?v=40">
+  <script>
+    (() => {
+      const root = document.documentElement;
+      root.classList.add("js");
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light" || savedTheme === "dark") {
+          root.setAttribute("data-theme", savedTheme);
+          const themeColor = document.querySelector('meta[name="theme-color"]');
+          if (themeColor) themeColor.content = getComputedStyle(root).getPropertyValue("--bg").trim();
+        }
+      } catch (error) {
+        console.warn("Unable to restore the saved color theme.", error);
+      }
+    })();
+  </script>
+  <script src="assets/js/main.js?v=46" defer></script>
 </head>
 <body>
-  <main><noscript><p>Enable JavaScript to view this portfolio section.</p></noscript></main>
-  <script src="/assets/js/route-loader.js?v=6"></script>
+  <div class="ambient" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <span class="reading-progress" aria-hidden="true"></span>
+      <a class="brand" href="#top" aria-label="Julius Odo-Eke, home">
+        <img class="brand-mark" src="assets/favicon.svg?v=2" alt="" width="36" height="36">
+        <span class="brand-name">Julius Odo-Eke</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#website-projects">Websites</a>
+        <a href="#analytics-projects">Analytics</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#documents">Documents</a>
+        <a class="nav-cta button button-primary" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+      </nav>
+      <div class="header-actions">
+        <a class="nav-cta button button-primary" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+        <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+      </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span class="eyebrow-item">Full-stack developer</span><span class="eyebrow-item">Data analyst</span><span class="eyebrow-item">Educator</span></p>
+          <h1>Technology, data and teaching that <span class="text-gradient">work in practice.</span></h1>
+          <p class="hero-lede">I’m Julius Chibuzo Odo-Eke, a Soil Science graduate and full-stack web developer. I build useful web products, work carefully with data, and make technology easier to understand.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#website-projects">Website projects <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="#analytics-projects">Data analytics <span aria-hidden="true">↘</span></a>
+            <a class="button button-ghost" href="assets/documents/julius-odoeke-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-note"><span class="note-line"></span><span>Web development · Data analysis · Education</span></div>
+        </div>
+        <div class="hero-art">
+          <div class="portrait-frame">
+            <img src="assets/images/julius-odoeke.jpeg" alt="Julius Chibuzo Odo-Eke" width="800" height="1200" fetchpriority="high">
+          </div>
+          <div class="portrait-meta">
+            <span><i class="availability-dot" aria-hidden="true"></i>Open to roles &amp; select projects</span>
+            <span>Abuja, Nigeria</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-band" aria-label="Highlights">
+      <div class="container stats-grid">
+        <div class="stat reveal"><strong><span data-count="6">6</span></strong><span>roles held since 2019</span></div>
+        <div class="stat reveal"><strong><span data-count="3">3</span></strong><span>online platforms built from scratch</span></div>
+        <div class="stat reveal"><strong><span data-count="2" data-count-source="website-projects">2</span></strong><span data-project-count-label="website-projects">website projects completed</span></div>
+        <div class="stat reveal"><strong><span data-count="3" data-count-source="analytics-projects">3</span></strong><span data-project-count-label="analytics-projects">data analysis projects completed</span></div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="container about-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Profile</p>
+          <h2>A broad foundation. <span class="text-gradient">A practical approach.</span></h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>I’m Julius Chibuzo Odo-Eke, based in Abuja, Nigeria. My background brings together full-stack web development, data analysis, teaching, and a degree in Soil Science from the University of Nigeria, Nsukka. That mix has taught me to look beyond the code or spreadsheet and understand the people who rely on the result.</p>
+          <p>In recent web projects, I’ve built customer-facing experiences as well as the administrative tools behind them. My analytics work includes cleaning and exploring tournament data, building clear summaries, and checking records against their source. Earlier roles introduced me to health information systems and careful records management. I’ve also taught computer science and other subjects to secondary-school students.</p>
+          <p>I like work that is useful, clear, and maintainable. I take time to understand the brief, communicate progress, and test the details before a project is handed over.</p>
+          <div class="about-facts">
+            <div class="fact"><strong>Web</strong><span>Thoughtful, responsive websites</span></div>
+            <div class="fact"><strong>Data</strong><span>Clear analysis and reporting</span></div>
+            <div class="fact"><strong>Education</strong><span>Practical teaching and support</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section work-section" id="website-projects">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-heading">
+            <p class="eyebrow">01 / Website projects</p>
+            <h2>Websites built for <span class="text-gradient">real people.</span></h2>
+          </div>
+          <p class="section-intro">Browse featured website work first. Expand the collection whenever you want to see more.</p>
+        </div>
+        <div class="project-grid website-project-grid">
+          <article class="project-card project-featured reveal">
+            <a class="project-image" href="assets/images/renacido/renacido-storefront-home.png" target="_blank" rel="noopener noreferrer" aria-label="View the Renacido Pharmacy storefront screenshot">
+              <img src="assets/images/renacido/renacido-storefront-home.png" alt="Renacido Pharmacy online storefront, with product and consultation links" width="1270" height="562" loading="lazy">
+              <span class="image-link" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-content">
+              <div class="project-meta"><span>Web development</span><span>2025</span></div>
+              <h3>Renacido Pharmacy</h3>
+              <p>A client e-commerce build designed to make the pharmacy easier to shop with online. The work brings together a public storefront, customer sign-in, shopping and consultation journeys, and an administration area for day-to-day store management.</p>
+              <ul class="highlights">
+                <li>Live chat between customers and the pharmacy’s admin team, with email alerts</li>
+                <li>Kept customer sign-in, pharmacy storefront and admin tools in clearly separate areas</li>
+                <li>An admin area the owners run themselves: products, orders and customers</li>
+              </ul>
+              <div class="tag-list"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>E-commerce</span></div>
+              <div class="project-gallery" aria-label="Renacido Pharmacy website and dashboard screenshots">
+                <a href="assets/images/renacido/renacido-customer-sign-in.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-customer-sign-in.png" alt="Customer sign-in page for Renacido Pharmacy" width="1269" height="568" loading="lazy">
+                  <span>Customer sign-in</span>
+                </a>
+                <a href="assets/images/renacido/renacido-storefront-footer.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-storefront-footer.png" alt="Renacido Pharmacy website footer with storefront navigation and contact details" width="1261" height="561" loading="lazy">
+                  <span>Website footer</span>
+                </a>
+                <a href="assets/images/renacido/renacido-admin-dashboard.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-admin-dashboard.png" alt="Renacido Pharmacy administration dashboard menu showing store management areas" width="1080" height="2004" loading="lazy">
+                  <span>Administration</span>
+                </a>
+                <a href="assets/images/renacido/renacido-admin-sign-in.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-admin-sign-in.png" alt="Administrator sign-in page for Renacido Pharmacy" width="1261" height="564" loading="lazy">
+                  <span>Admin sign-in</span>
+                </a>
+              </div>
+              <a class="text-link" href="https://renacidopharmacy.com" target="_blank" rel="noopener noreferrer">Visit live website <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <div class="cms-project-grid project-grid" data-cms-projects="web"></div>
+          <div class="in-progress">
+            <article class="mini-project reveal"><span class="status-pill">In development</span><h3>C.Zara Enterprise</h3><p>An online store for a natural foods business in Abuja, with an admin area so the owners can manage their own products, orders and customers.</p></article>
+            <article class="mini-project reveal"><span class="status-pill">In development</span><h3>Nethub</h3><p>A bill-payment platform for airtime, data, electricity, TV subscriptions and other everyday payments.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section analytics-section" id="analytics-projects">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-heading">
+            <p class="eyebrow">02 / Data analytics projects</p>
+            <h2>Questions answered <span class="text-gradient">with data.</span></h2>
+          </div>
+          <p class="section-intro">A concise collection of analysis and dashboards. Open a project to explore the details, or expand the list to see more work.</p>
+        </div>
+        <article class="project-card analytics-project-card reveal">
+          <div class="analytics-project-heading">
+            <div>
+              <div class="project-meta"><span>Data analytics</span><span>FIFA World Cup 2026</span></div>
+              <h3>World Cup performance, made explorable.</h3>
+              <p>An end-to-end tournament analysis: cleaning match and team data, correcting status mismatches, shaping the results into an analysis-ready model, and exploring team and confederation performance.</p>
+              <div class="tag-list"><span>Data cleaning</span><span>Excel</span><span>Data modelling</span><span>Exploratory analysis</span></div>
+            </div>
+            <div class="analytics-scope"><span class="scope-number">92</span><span>matches in the supplied snapshot</span></div>
+          </div>
+          <details class="analytics-explorer">
+            <summary>Explore the dashboard, report &amp; data</summary>
+            <div class="analytics-preview-heading">
+              <span><i class="viewer-status" aria-hidden="true"></i>Interactive project preview</span>
+              <span>Choose a group to explore its standings</span>
+            </div>
+            <iframe
+              class="analytics-preview"
+              data-sync-theme
+              src="assets/data-analytics/world-cup-2026/dashboard-preview.html?v=22"
+              title="Interactive preview of the FIFA World Cup 2026 data analytics project"
+              loading="lazy">
+            </iframe>
+            <div class="analytics-project-footer">
+              <p><strong>Snapshot note:</strong> this project dataset ends on July 5, 2026, during the Round of 16; it is a dated analysis snapshot, not a final-tournament report.</p>
+              <details class="project-files">
+                <summary>Project files and data</summary>
+                <ul class="project-file-list">
+                <li>
+                  <div class="project-file-details"><strong>Analysis report</strong><small>Microsoft Word · DOCX</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/analysis-report.docx" target="_blank" rel="noopener noreferrer">Open file</a>
+                  <details class="office-preview" data-office-preview>
+                    <summary>Preview in browser</summary>
+                    <iframe data-office-frame title="Microsoft Word preview of the World Cup analysis report" loading="lazy" referrerpolicy="no-referrer"></iframe>
+                    <p><span data-office-status>Microsoft's online preview needs this site and file to be published over HTTPS.</span> If it is unavailable, <a href="assets/data-analytics/world-cup-2026/analysis-report.docx" target="_blank" rel="noopener noreferrer">open the Word file</a>.</p>
+                  </details>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Tableau data workbook</strong><small>Microsoft Excel · XLSX</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/tableau-data.xlsx" target="_blank" rel="noopener noreferrer">Open file</a>
+                  <details class="office-preview" data-office-preview>
+                    <summary>Preview in browser</summary>
+                    <iframe data-office-frame title="Microsoft Excel preview of the Tableau data workbook" loading="lazy" referrerpolicy="no-referrer"></iframe>
+                    <p><span data-office-status>Microsoft's online preview needs this site and file to be published over HTTPS.</span> If it is unavailable, <a href="assets/data-analytics/world-cup-2026/tableau-data.xlsx" target="_blank" rel="noopener noreferrer">open the Excel file</a>.</p>
+                  </details>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Cleaned match data</strong><small>Comma-separated values · CSV</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/matches_clean.csv" target="_blank" rel="noopener noreferrer">View data</a>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Group standings</strong><small>Comma-separated values · CSV</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/group_standings.csv" target="_blank" rel="noopener noreferrer">View data</a>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Team match records</strong><small>Comma-separated values · CSV</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/fact_team_match.csv" target="_blank" rel="noopener noreferrer">View data</a>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Team summary</strong><small>Comma-separated values · CSV</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/dim_team_summary.csv" target="_blank" rel="noopener noreferrer">View data</a>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Confederation summary</strong><small>Comma-separated values · CSV</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/confederation_summary.csv" target="_blank" rel="noopener noreferrer">View data</a>
+                </li>
+                <li>
+                  <div class="project-file-details"><strong>Data cleaning log</strong><small>Comma-separated values · CSV</small></div>
+                  <a class="project-file-link" href="assets/data-analytics/world-cup-2026/data_cleaning_log.csv" target="_blank" rel="noopener noreferrer">View data</a>
+                </li>
+                </ul>
+                <p class="project-files-note">Online previews need a public file link and are handled by Microsoft. The file itself remains available through its direct link.</p>
+              </details>
+              <div class="analytics-project-links">
+                <a class="text-link" href="assets/data-analytics/world-cup-2026/dashboard-preview.html?v=22" target="_blank" rel="noopener noreferrer">Open interactive dashboard <span aria-hidden="true">↗</span></a>
+                <a class="text-link" href="assets/data-analytics/world-cup-2026/analysis-report-preview.html?v=22" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="project-card analytics-project-card dropout-project-card reveal">
+          <div class="analytics-project-heading">
+            <div>
+              <div class="project-meta"><span>Data analytics</span><span>Student retention</span></div>
+              <h3>Student dropout risk, examined.</h3>
+              <p>An end-to-end study of 100,000 student records: data-quality checks, dropout drivers, out-of-fold risk modelling, transparent risk tiers, and a fairness review. The public dashboard uses aggregate findings only; no student-level records are published.</p>
+              <div class="tag-list"><span>Data quality</span><span>Logistic regression</span><span>Risk analysis</span><span>Fairness audit</span></div>
+            </div>
+            <div class="analytics-scope"><span class="scope-number">100k</span><span>student records analysed</span></div>
+          </div>
+          <details class="analytics-explorer">
+            <summary>Explore the student dropout analysis</summary>
+            <div class="analytics-preview-heading">
+              <span><i class="viewer-status" aria-hidden="true"></i>Interactive project preview</span>
+              <span>Explore risk drivers, model performance, and fairness</span>
+            </div>
+            <iframe
+              class="analytics-preview student-dropout-preview"
+              data-sync-theme
+              src="assets/data-analytics/student-dropout-risk/dashboard-preview.html"
+              title="Interactive student dropout risk analysis dashboard"
+              loading="lazy">
+            </iframe>
+            <div class="analytics-project-footer">
+              <p><strong>Important caveat:</strong> the report says the unusually smooth patterns suggest a simulated dataset. Figures are illustrative, observational associations—not causal effects or validated institutional estimates.</p>
+              <div class="analytics-project-links">
+                <a class="text-link" href="assets/data-analytics/student-dropout-risk/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="project-card analytics-project-card social-wellbeing-project-card reveal">
+          <div class="analytics-project-heading">
+            <div>
+              <div class="project-meta"><span>Data analytics</span><span>Student wellbeing</span></div>
+              <h3>Social media use and student wellbeing.</h3>
+              <p>An end-to-end analysis of 4,500 student records: data-quality checks, usage tiers, wellbeing and sleep associations, platform comparisons, and recommendations. The public preview presents aggregate results only.</p>
+              <div class="tag-list"><span>Data quality</span><span>Excel</span><span>Exploratory analysis</span><span>Wellbeing research</span></div>
+            </div>
+            <div class="analytics-scope"><span class="scope-number">4,500</span><span>records analysed</span></div>
+          </div>
+          <details class="analytics-explorer">
+            <summary>Explore the social media wellbeing analysis</summary>
+            <div class="analytics-preview-heading">
+              <span><i class="viewer-status" aria-hidden="true"></i>Interactive project preview</span>
+              <span>Compare reported outcomes across daily-use tiers</span>
+            </div>
+            <iframe
+              class="analytics-preview"
+              data-sync-theme
+              src="assets/data-analytics/social-media-wellbeing/dashboard-preview.html"
+              title="Interactive social media use and student wellbeing analysis dashboard"
+              loading="lazy">
+            </iframe>
+            <div class="analytics-project-footer">
+              <p><strong>Interpret with care:</strong> the report says the unusually smooth relationships are typical of simulated or heavily engineered data. These are observational associations, not causal or clinical findings, and should be validated on real survey data before informing policy.</p>
+              <details class="project-files">
+                <summary>Project files and aggregate data</summary>
+                <ul class="project-file-list">
+                  <li><div class="project-file-details"><strong>Project report notes</strong><small>HTML · reviewed aggregate findings</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read report</a></li>
+                  <li><div class="project-file-details"><strong>Usage-tier summary</strong><small>Aggregate CSV · grouped by broad daily-use bands</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/usage_tier_summary.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Usage associations</strong><small>Aggregate CSV · estimates and confidence intervals</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/usage_effects.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Platform comparison</strong><small>Aggregate CSV · platform summaries and adjusted estimates</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/platform_comparison.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>GPA model decomposition</strong><small>Aggregate CSV · usage, sleep, and stress models</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/gpa_decomposition.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Late-night adjusted estimates</strong><small>Aggregate CSV · outcomes adjusted for daily usage</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/late_night_adjusted.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Correlation summary</strong><small>Aggregate CSV · reported variable relationships</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/correlations.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Minor and adult slopes</strong><small>Aggregate CSV · comparison of reported associations</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/minor_vs_adult_slopes.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Model comparison</strong><small>Aggregate CSV · five-fold AUC</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/model_comparison.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>What-if estimates</strong><small>Aggregate CSV · illustrative usage-reduction scenarios</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/whatif_usage_reduction.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Data-quality log</strong><small>Aggregate CSV · checks, findings, and actions</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/data_quality_log.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>Impact-label checks</strong><small>Aggregate CSV · label-predictability audit</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/impact_label_check.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                  <li><div class="project-file-details"><strong>KPI summary</strong><small>Aggregate CSV · overall sample summaries</small></div><a class="project-file-link" href="assets/data-analytics/social-media-wellbeing/kpi_summary.csv" target="_blank" rel="noopener noreferrer">View data</a></li>
+                </ul>
+                <p class="project-files-note">The public files contain aggregate findings only. The source archive and individual student records are not published.</p>
+              </details>
+              <div class="analytics-project-links">
+                <a class="text-link" href="assets/data-analytics/social-media-wellbeing/dashboard-preview.html" target="_blank" rel="noopener noreferrer">Open interactive dashboard <span aria-hidden="true">↗</span></a>
+                <a class="text-link" href="assets/data-analytics/social-media-wellbeing/analysis-report-preview.html" target="_blank" rel="noopener noreferrer">Read project notes <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </details>
+        </article>
+        <div class="cms-project-grid project-grid" data-cms-projects="analytics"></div>
+      </div>
+    </section>
+
+    <section class="section experience-section" id="experience">
+      <div class="container experience-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Where I’ve been</p>
+          <h2>Experience across <span class="text-gradient">technology, data and teaching.</span></h2>
+          <p class="section-intro">A career that moves between building digital services, working with business and health data, and helping students learn.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <span class="timeline-marker"></span><div class="timeline-top"><h3>Full-stack Web Developer &amp; Data Analyst</h3><time>2019 — Present</time></div>
+            <p class="timeline-place">Self-employed · FCT, Abuja</p>
+            <p>Builds and supports web products for clients, from public websites and e-commerce to digital-service platforms. Recent work includes Renacido Pharmacy, where the storefront and administration tools were developed to support customers and the day-to-day needs of the business.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-marker"></span><div class="timeline-top"><h3>Computer Science Teacher</h3><time>2025</time></div>
+            <p class="timeline-place">Samkings Secondary School · Abuja</p>
+            <p>Prepared and taught computer science lessons for junior and senior secondary classes, covering computer fundamentals, Microsoft Office, and introductory programming.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-marker"></span><div class="timeline-top"><h3>Corps Member and Teacher (NYSC)</h3><time>2022 — 2023</time></div>
+            <p class="timeline-place">Holy Spirit Secondary School · Ebenebe, Anambra</p>
+            <p>Completed national service as a teacher, teaching Agricultural Science to senior students and Physical &amp; Health Education to junior classes.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-marker"></span><div class="timeline-top"><h3>ICT Manager</h3><time>2020</time></div>
+            <p class="timeline-place">ICT Department · Nsukka, Enugu State</p>
+            <p>Handled computer maintenance and software troubleshooting, supported staff with day-to-day ICT, and assisted with data entry and record keeping.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-marker"></span><div class="timeline-top"><h3>Marketing Manager</h3><time>2019 — 2022</time></div>
+            <p class="timeline-place">Samez Paints and Chemicals · Nsukka</p>
+            <p>Recorded daily sales and prepared management reports in Excel. Used the figures to help inform pricing and restocking, while improving the accuracy of routine records.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="timeline-marker"></span><div class="timeline-top"><h3>Data Management Volunteer</h3><time>2019</time></div>
+            <p class="timeline-place">Bentevi Pharmacy / IHVN · Karu, FCT</p>
+            <p>Helped maintain patient records and prepare routine reports in a healthcare setting, working with systems including EMR, NMRS, NDR, and RADET.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-heading"><p class="eyebrow">Skills &amp; tools</p><h2>What I use to <span class="text-gradient">get the work done.</span></h2></div>
+          <p class="section-intro">Technical skills backed by hands-on client work, sales reporting, healthcare data, and classroom teaching.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><span class="skill-number">01</span><h3>Web development</h3><p>Developing and supporting full-stack sites and web applications for real business needs.</p><div class="tag-list"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span><span>React</span><span>Web hosting</span></div></article>
+          <article class="skill-card reveal"><span class="skill-number">02</span><h3>Data &amp; reporting</h3><p>Turning day-to-day records into clearer summaries that can support decisions.</p><div class="tag-list"><span>SQL</span><span>Excel</span><span>Tableau</span><span>Google Sheets</span><span>R</span><span>Data visualisation</span><span>Star-schema modelling</span></div></article>
+          <article class="skill-card reveal"><span class="skill-number">03</span><h3>Health information</h3><p>Experience supporting accurate records and reporting in a healthcare setting.</p><div class="tag-list"><span>EMR</span><span>NMRS</span><span>NDR</span><span>RADET</span><span>Microsoft Office</span></div></article>
+          <article class="skill-card reveal"><span class="skill-number">04</span><h3>Teaching &amp; collaboration</h3><p>Explaining technical ideas clearly, supporting learners, and working with clients.</p><div class="tag-list"><span>Education</span><span>Communication</span><span>Problem solving</span><span>Training</span><span>Digital marketing</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section education-section" id="education">
+      <div class="container">
+        <div class="section-heading reveal"><p class="eyebrow">Education &amp; credentials</p><h2>Grounded in science. <span class="text-gradient">Always learning.</span></h2></div>
+        <div class="education-grid">
+          <article class="education-card reveal"><span class="card-kicker">2014 — 2021</span><h3>B.Sc. Agriculture (Soil Science)</h3><p class="timeline-place">University of Nigeria, Nsukka</p><p>Studied statistics, data analysis, and research methodology alongside soil science. The degree strengthened my ability to investigate a question, work with evidence, and explain findings.</p></article>
+          <article class="education-card reveal"><span class="card-kicker">2006 — 2012</span><h3>Senior Secondary Certificate</h3><p class="timeline-place">Universal Comprehensive Secondary School, Nsukka</p><p>Completed secondary education with NECO and WAEC qualifications.</p></article>
+        </div>
+        <div class="cert-list reveal" aria-label="Certifications">
+          <a href="#google-cert-preview"><span class="cert-year">2023</span><span><strong>Google Data Analytics Professional Certificate</strong><small>Coursera / Google</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
+          <a href="#web-development-preview"><span class="cert-year">2023</span><span><strong>Web Development Certificate</strong><small>Digital Dreams ICT Academy, Enugu</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
+          <a href="#nysc-preview"><span class="cert-year">2023</span><span><strong>NYSC Certificate of National Service</strong><small>National Youth Service Corps</small></span><span class="cert-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section documents-section" id="documents">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-heading">
+            <p class="eyebrow">CV &amp; documents</p>
+            <h2>A closer look at <span class="text-gradient">my experience.</span></h2>
+          </div>
+          <p class="section-intro">Browse my CV and professional credentials. PDFs open in your browser’s viewer, and certificate scans can be viewed at full size.</p>
+        </div>
+        <div class="documents-layout">
+          <aside class="documents-sidebar">
+            <p class="documents-label">Document library</p>
+            <a class="document-card" href="#cv-preview">
+              <span class="document-icon" aria-hidden="true">PDF</span>
+              <span class="document-details">
+                <strong>Curriculum vitae</strong>
+                <small>Julius Chibuzo Odo-Eke · 3 pages</small>
+                <span class="document-action">View preview <span aria-hidden="true">↓</span></span>
+              </span>
+              <span class="document-chevron" aria-hidden="true">↘</span>
+            </a>
+            <a class="document-card" href="#google-cert-preview">
+              <span class="document-icon" aria-hidden="true">PDF</span>
+              <span class="document-details"><strong>Google Data Analytics</strong><small>Professional Certificate · Google / Coursera</small><span class="document-action">View preview <span aria-hidden="true">↓</span></span></span>
+              <span class="document-chevron" aria-hidden="true">↘</span>
+            </a>
+            <a class="document-card" href="#web-development-preview">
+              <span class="document-icon" aria-hidden="true">IMG</span>
+              <span class="document-details"><strong>Web Development</strong><small>Digital Dreams ICT Academy, Enugu</small><span class="document-action">View certificate <span aria-hidden="true">↓</span></span></span>
+              <span class="document-chevron" aria-hidden="true">↘</span>
+            </a>
+            <a class="document-card" href="#nysc-preview">
+              <span class="document-icon" aria-hidden="true">IMG</span>
+              <span class="document-details"><strong>NYSC Certificate</strong><small>Certificate of National Service</small><span class="document-action">View certificate <span aria-hidden="true">↓</span></span></span>
+              <span class="document-chevron" aria-hidden="true">↘</span>
+            </a>
+            <p class="document-privacy">These public files can be saved or copied. Static hosting cannot restrict access to published documents.</p>
+          </aside>
+          <div class="document-previews">
+            <div class="document-viewer reveal" id="cv-preview">
+              <div class="viewer-heading">
+                <span><i class="viewer-status" aria-hidden="true"></i>Curriculum vitae</span>
+                <span>PDF <b>·</b> 3 pages</span>
+              </div>
+              <div
+                class="pdf-canvas-preview cv-pdf-preview"
+                data-pdf-preview
+                data-pdf-source="assets/documents/julius-odoeke-cv.pdf"
+                role="region"
+                aria-label="Curriculum vitae PDF preview"
+                tabindex="0"
+                aria-busy="true">
+                <p class="pdf-preview-status" role="status">Loading CV preview…</p>
+              </div>
+              <iframe
+                class="pdf-native-frame"
+                src="assets/documents/julius-odoeke-cv.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"
+                title="Preview of Julius Chibuzo Odo-Eke’s curriculum vitae"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              </iframe>
+              <p class="viewer-fallback">Open the original PDF in your browser: <a href="assets/documents/julius-odoeke-cv.pdf" target="_blank" rel="noopener noreferrer">CV PDF</a></p>
+            </div>
+            <details class="certificate-library" id="certificate-library">
+              <summary>
+                <span class="certificate-library-copy">
+                  <strong>Professional certificates</strong>
+                  <small>Google Data Analytics, Web Development &amp; NYSC</small>
+                </span>
+                <span class="certificate-library-count">3 documents</span>
+                <span class="certificate-library-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="certificate-library-content">
+                <div class="certificate-library-items">
+                  <div class="document-viewer" id="google-cert-preview">
+                    <div class="viewer-heading">
+                      <span><i class="viewer-status" aria-hidden="true"></i>Google Data Analytics Professional Certificate</span>
+                      <span>PDF</span>
+                    </div>
+                    <div
+                      class="pdf-canvas-preview"
+                      data-pdf-preview
+                      data-pdf-source="assets/documents/google-data-analytics-professional-certificate.pdf"
+                      role="region"
+                      aria-label="Google Data Analytics Professional Certificate PDF preview"
+                      aria-busy="true">
+                      <p class="pdf-preview-status" role="status">Loading certificate preview…</p>
+                    </div>
+                    <iframe
+                      class="pdf-native-frame certificate-pdf-frame"
+                      src="assets/documents/google-data-analytics-professional-certificate.pdf#toolbar=0&amp;navpanes=0&amp;view=Fit"
+                      title="Preview of the Google Data Analytics Professional Certificate"
+                      loading="lazy"
+                      referrerpolicy="no-referrer">
+                    </iframe>
+                    <p class="viewer-fallback"><a href="assets/documents/google-data-analytics-professional-certificate.pdf" target="_blank" rel="noopener noreferrer">Data Analytics Certificate</a></p>
+                  </div>
+                  <figure class="document-viewer document-image-viewer" id="web-development-preview">
+                    <figcaption class="viewer-heading">
+                      <span><i class="viewer-status" aria-hidden="true"></i>Web Development Certificate</span>
+                      <span>Digital Dreams ICT Academy</span>
+                    </figcaption>
+                    <a href="assets/documents/web-development-certificate.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Web Development Certificate image">
+                      <img src="assets/documents/web-development-certificate.jpg" alt="Web Development Certificate from Digital Dreams ICT Academy, Enugu" loading="lazy">
+                    </a>
+                    <p class="viewer-fallback">Tap or click the certificate to view the full-size image.</p>
+                  </figure>
+                  <figure class="document-viewer document-image-viewer" id="nysc-preview">
+                    <figcaption class="viewer-heading">
+                      <span><i class="viewer-status" aria-hidden="true"></i>NYSC Certificate of National Service</span>
+                      <span>National Youth Service Corps</span>
+                    </figcaption>
+                    <a href="assets/documents/nysc-certificate-of-national-service.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size NYSC Certificate of National Service image">
+                      <img src="assets/documents/nysc-certificate-of-national-service.jpg" alt="NYSC Certificate of National Service" loading="lazy">
+                    </a>
+                    <p class="viewer-fallback">Tap or click the certificate to view the full-size image.</p>
+                  </figure>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process-section" id="process">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-heading"><p class="eyebrow">How I work</p><h2>A clear process, <span class="text-gradient">no surprises.</span></h2></div>
+          <p class="section-intro">The same habits that run through my web, data and teaching work.</p>
+        </div>
+        <ol class="process-grid">
+          <li class="process-step reveal"><span>01</span><h3>Understand the brief</h3><p>I take time to learn what you need and who will rely on the result.</p></li>
+          <li class="process-step reveal"><span>02</span><h3>Build and communicate</h3><p>I keep you updated on progress instead of disappearing until the end.</p></li>
+          <li class="process-step reveal"><span>03</span><h3>Test the details</h3><p>Small errors add up, so I check the work against its source before it ships.</p></li>
+          <li class="process-step reveal"><span>04</span><h3>Hand over clearly</h3><p>You get something useful, clear and maintainable that you can run yourself.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-wrap reveal">
+        <div class="contact-copy">
+          <p class="eyebrow">Have a project in mind?</p>
+          <h2>Let’s make something <span class="text-gradient">useful.</span></h2>
+          <p>For web development, data work, or education opportunities, reach out directly. I’d be glad to hear what you’re working on.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button button-primary" href="mailto:odoekejulius@gmail.com?subject=Let%27s%20work%20together">Email Julius <span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="https://wa.me/2348108249125" target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a>
+          <a class="contact-link" href="https://linkedin.com/in/odoekejc" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="contact-link" href="assets/documents/julius-odoeke-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+          <span class="email-note">odoekejulius@gmail.com</span>
+        </div>
+      </div>
+      <div class="container">
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <div class="composer-heading">
+            <div class="composer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M21 3 10.8 13.2M21 3l-6.5 18-3.7-7.8L3 9.5 21 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="composer-title">
+              <p class="composer-kicker">A note to Julius</p>
+              <h3>Start a conversation</h3>
+              <p>Share a little about what you have in mind. I’ll be glad to hear from you.</p>
+            </div>
+            <span class="composer-badge"><i aria-hidden="true"></i> Opens your email app</span>
+          </div>
+          <div class="composer-fields">
+            <label>
+              <span>Your name</span>
+              <input name="name" type="text" autocomplete="name" placeholder="e.g. Alex Johnson" minlength="2" maxlength="100" required aria-describedby="name-error">
+              <small class="field-error" id="name-error"></small>
+            </label>
+            <label>
+              <span>Email address</span>
+              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required aria-describedby="email-error">
+              <small class="field-error" id="email-error"></small>
+            </label>
+            <label class="form-wide">
+              <span>What would you like to discuss?</span>
+              <select name="topic" required>
+                <option value="Website development">Website development</option>
+                <option value="Data analysis">Data analysis</option>
+                <option value="Teaching and training">Teaching and training</option>
+                <option value="Job opportunity">Job opportunity</option>
+                <option value="Something else">Something else</option>
+              </select>
+            </label>
+            <label class="form-wide">
+              <span>Your message</span>
+              <textarea name="message" rows="6" minlength="20" maxlength="4000" placeholder="A few details about your project, question, or opportunity..." required aria-describedby="message-hint message-count message-error"></textarea>
+              <span class="message-meta">
+                <small id="message-hint">Please include at least 20 characters.</small>
+                <small id="message-count" aria-live="polite">0 / 4,000</small>
+              </span>
+              <small class="field-error" id="message-error"></small>
+            </label>
+          </div>
+          <div class="composer-submit">
+            <button class="button button-primary" type="submit">Prepare email <span aria-hidden="true">↗</span></button>
+            <p class="composer-privacy">Your message stays in your email app until you choose to send it.</p>
+          </div>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="#top" aria-label="Julius Odo-Eke, back to top"><img class="brand-mark" src="assets/favicon.svg?v=2" alt="" width="40" height="40"><span class="brand-name">Julius Odo-Eke</span></a>
+          <p class="footer-tagline">Full-stack web developer, data analyst and educator, based in Abuja, Nigeria.</p>
+          <a class="footer-status" href="#contact"><span class="availability-dot" aria-hidden="true"></span>Open to roles &amp; select projects</a>
+        </div>
+        <div class="footer-column">
+          <span class="footer-label">Work</span>
+          <a href="#website-projects">Website projects</a>
+          <a href="#analytics-projects">Data analytics</a>
+        </div>
+        <div class="footer-column">
+          <span class="footer-label">About</span>
+          <a href="#about">Profile</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#documents">Documents</a>
+          <a href="#process">How I work</a>
+        </div>
+        <div class="footer-column footer-connect">
+          <span class="footer-label">Connect</span>
+          <a href="mailto:odoekejulius@gmail.com">Email <span aria-hidden="true">↗</span></a>
+          <a href="https://wa.me/2348108249125" target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a>
+          <a href="https://linkedin.com/in/odoekejc" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href="assets/documents/julius-odoeke-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Julius Chibuzo Odo-Eke</span>
+        <div class="footer-bottom-links">
+          <a href="terms.html">Terms of service</a>
+          <a class="footer-top-link" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

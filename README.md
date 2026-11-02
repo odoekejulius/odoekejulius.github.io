@@ -42,6 +42,8 @@ All uploaded files and documents are public and can be copied by visitors, even 
 
 The layout and appearance are in `assets/css/style.css`; navigation, animations, content rendering, and PDF rendering are in `assets/js/main.js`. The self-hosted Mozilla PDF.js 4.10.38 renderer and its Apache 2.0 license are in `assets/js/vendor/`.
 
+The clean section URLs each serve the complete portfolio HTML so direct visits and refreshes do not display an intermediate loading page. After editing `index.html`, synchronize those route files with `powershell -ExecutionPolicy Bypass -File tools/sync-section-pages.ps1`.
+
 ## CV and public documents
 
 The CV and Google Data Analytics certificate PDFs and the Web Development and NYSC certificate scans are grouped under `assets/documents/`. The `#documents` section renders PDF pages in responsive canvases on desktop and mobile; the CV preview has its own scroll area so visitors can read all pages without scrolling the whole site. PDF.js loading and page rendering have timeouts; if a browser cannot finish rendering, the native PDF viewer opens inside the same scroll area without an extra error message. The direct PDF link remains available below. The three certificates are grouped in a collapsible library that closes again after it scrolls out of view. Certificate images open at full size when tapped.
