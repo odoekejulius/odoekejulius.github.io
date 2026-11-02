@@ -13,20 +13,12 @@
       {
         "image": "/assets/images/portfolio/portfolio-home-mobile.jpg",
         "caption": "Responsive mobile homepage"
-      },
-      {
-        "image": "/assets/images/portfolio/portfolio-navigation-recording.gif",
-        "caption": "Screen recording: browsing portfolio sections"
-      },
-      {
-        "image": "/assets/images/portfolio/portfolio-mobile-recording.gif",
-        "caption": "Screen recording: mobile navigation"
       }
     ],
     "highlights": [
       "Responsive portfolio with clean, directly shareable section URLs.",
-      "Sveltia CMS collections for published projects and videos, alongside public document previews.",
-      "Performance-conscious loading: ZIP previews load on demand, and YouTube embeds wait for a visitor to press play."
+      "Sveltia CMS collections for published projects, alongside public document previews.",
+      "Performance-conscious loading: ZIP previews load on demand to keep initial page loads lighter."
     ],
     "tags": [
       "HTML",

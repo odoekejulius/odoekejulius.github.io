@@ -39,6 +39,17 @@ collections:
         fields:
           - { label: Screenshot, name: image, widget: image }
           - { label: Caption, name: caption, widget: string }
+      - { label: YouTube project video URL (optional; used instead of an uploaded video), name: youtube_url, widget: string, required: false, hint: "Paste a YouTube video URL. YouTube videos load only after a visitor chooses to play." }
+      - label: Project video file (optional; used when no YouTube URL is set)
+        name: video_file
+        widget: file
+        accept: "video/mp4,video/webm,video/ogg"
+        required: false
+        media_libraries:
+          default:
+            config:
+              max_file_size: 15728640
+        hint: "Upload an MP4, WebM, or Ogg file up to 15 MB. The video is public and appears with playback controls in the project card."
       - label: Highlights
         name: highlights
         widget: list
@@ -60,6 +71,26 @@ collections:
     fields:
       - { label: Project title, name: title, widget: string }
       - { label: Year, name: year, widget: string, required: false }
+      - { label: Main screenshot, name: image, widget: image, required: false }
+      - { label: Screenshot description (alt text), name: image_alt, widget: string, required: false }
+      - label: Additional screenshots
+        name: screenshots
+        widget: list
+        required: false
+        fields:
+          - { label: Screenshot, name: image, widget: image }
+          - { label: Caption, name: caption, widget: string }
+      - { label: YouTube project video URL (optional; used instead of an uploaded video), name: youtube_url, widget: string, required: false, hint: "Paste a YouTube video URL. YouTube videos load only after a visitor chooses to play." }
+      - label: Project video file (optional; used when no YouTube URL is set)
+        name: video_file
+        widget: file
+        accept: "video/mp4,video/webm,video/ogg"
+        required: false
+        media_libraries:
+          default:
+            config:
+              max_file_size: 15728640
+        hint: "Upload an MP4, WebM, or Ogg file up to 15 MB. The video is public and appears with playback controls in the project card."
       - label: Analysis project files (ZIP)
         name: project_package_url
         widget: file
@@ -70,16 +101,3 @@ collections:
             config:
               max_file_size: 15728640
         hint: "The public ZIP may contain HTML, CSV, Excel, PDF/Word/PowerPoint reports, images, and source-code files. The site previews files inside the collapsed project card. Upload only data and records that are safe for the public; never include private person-level, student, identity, employment, client, or confidential files."
-
-  - name: media
-    label: Videos and media
-    label_singular: Video or media item
-    file: /content/media.json
-    identifier_field: title
-    description: Add a YouTube link or upload a small video. All published media is public.
-    fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Description, name: description, widget: text }
-      - { label: YouTube URL, name: youtube_url, widget: string, required: false }
-      - { label: "Video file (MP4, WebM or Ogg; small files only)", name: video_file, widget: file, accept: "video/mp4,video/webm,video/ogg", required: false }
-      - { label: Cover image, name: cover_image, widget: image, required: false }

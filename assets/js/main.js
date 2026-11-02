@@ -8,7 +8,6 @@
     ["about", "/about"],
     ["website-projects", "/websites"],
     ["analytics-projects", "/analytics"],
-    ["media", "/videos"],
     ["experience", "/experience"],
     ["skills", "/skills"],
     ["education", "/education"],
@@ -20,7 +19,6 @@
     [...sectionRoutes].map(([sectionId, route]) => [route, sectionId])
   );
   window.history.scrollRestoration = "manual";
-  let waitingForInitialRoute = false;
   const routeForTarget = (target) => {
     const section = target?.closest("main section[id]");
     return sectionRoutes.get(section?.id) ?? "/";
@@ -371,9 +369,8 @@
   });
 
   const cmsCollections = [
-    { path: "content/website-projects.json", selector: '[data-cms-projects="web"]', type: "project", category: "Web development" },
-    { path: "content/analytics-projects.json", selector: '[data-cms-projects="analytics"]', type: "project", category: "Data analytics" },
-    { path: "content/media.json", selector: "[data-cms-media]", type: "media" }
+    { path: "content/website-projects.json", selector: '[data-cms-projects="web"]', category: "Web development" },
+    { path: "content/analytics-projects.json", selector: '[data-cms-projects="analytics"]', category: "Data analytics" }
   ];
 
   const updateProjectCountStats = () => {
@@ -876,12 +873,81 @@
     return article;
   };
 
+  const getYouTubeId = (value) => {
+    const href = safePublicUrl(value);
+    if (!href) return "";
+    const url = new URL(href);
+    const host = url.hostname.replace(/^www\./, "");
+    let videoId = "";
+    if (host === "youtu.be") videoId = url.pathname.slice(1).split("/")[0];
+    else if (host === "youtube.com" || host === "m.youtube.com") {
+      if (url.pathname === "/watch") videoId = url.searchParams.get("v") || "";
+      else videoId = url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)/)?.[1] || "";
+    }
+    return /^[\w-]{11}$/.test(videoId) ? videoId : "";
+  };
+
+  const createProjectVideo = (entry, title) => {
+    const videoId = getYouTubeId(entry.youtube_url);
+    const videoFile = safePublicUrl(entry.video_file);
+    if (!videoId && !videoFile) return null;
+
+    const media = document.createElement("div");
+    media.className = "cms-project-video";
+    if (videoId) {
+      const preview = document.createElement("button");
+      preview.type = "button";
+      preview.className = "cms-video-preview";
+      preview.setAttribute("aria-label", `Play ${title} video`);
+      const thumbnail = document.createElement("img");
+      thumbnail.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      thumbnail.alt = "";
+      thumbnail.width = 480;
+      thumbnail.height = 360;
+      thumbnail.loading = "lazy";
+      thumbnail.decoding = "async";
+      const playIcon = document.createElement("span");
+      playIcon.className = "cms-video-play";
+      playIcon.setAttribute("aria-hidden", "true");
+      playIcon.textContent = "▶";
+      preview.append(thumbnail, playIcon);
+      preview.addEventListener("click", () => {
+        const frame = document.createElement("iframe");
+        frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+        frame.title = `${title} video`;
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        frame.allowFullscreen = true;
+        media.replaceChildren(frame);
+      }, { once: true });
+      media.append(preview);
+    } else {
+      const url = new URL(videoFile);
+      const extension = url.pathname.match(/\.(mp4|webm|ogg)$/i)?.[1].toLowerCase();
+      if (!extension) return null;
+      const video = document.createElement("video");
+      video.controls = true;
+      video.preload = "metadata";
+      video.playsInline = true;
+      const poster = safePublicUrl(entry.image);
+      if (poster) video.poster = poster;
+      const source = document.createElement("source");
+      source.src = videoFile;
+      source.type = `video/${extension}`;
+      video.append(source);
+      media.append(video);
+    }
+    return media;
+  };
+
   const createProjectCard = (entry, category) => {
     const card = document.createElement("article");
     card.className = "project-card cms-project-card";
     const title = typeof entry.title === "string" && entry.title.trim() ? entry.title.trim() : "Untitled project";
     const image = createProjectImage(entry.image, typeof entry.image_alt === "string" ? entry.image_alt : `Screenshot for ${title}`);
     if (image) card.append(image);
+    const video = createProjectVideo(entry, title);
+    if (video) card.append(video);
 
     const content = document.createElement("div");
     content.className = "project-content";
@@ -960,102 +1026,12 @@
 
     const projectUrl = safePublicUrl(entry.live_url);
     if (projectUrl && !/\.zip(?:$|[?#])/i.test(projectUrl)) addProjectLink(content, "View project", projectUrl);
+    if (getYouTubeId(entry.youtube_url)) addProjectLink(content, "Watch project video on YouTube", entry.youtube_url);
     card.append(content);
     return card;
   };
 
-  const getYouTubeId = (value) => {
-    const href = safePublicUrl(value);
-    if (!href) return "";
-    try {
-      const url = new URL(href);
-      const host = url.hostname.replace(/^www\./, "");
-      let videoId = "";
-      if (host === "youtu.be") videoId = url.pathname.slice(1).split("/")[0];
-      else if (host === "youtube.com" || host === "m.youtube.com") {
-        if (url.pathname === "/watch") videoId = url.searchParams.get("v") || "";
-        else videoId = url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)/)?.[1] || "";
-      }
-      return /^[\w-]{11}$/.test(videoId) ? videoId : "";
-    } catch {
-      return "";
-    }
-  };
-
-  const createMediaCard = (entry) => {
-    const card = document.createElement("article");
-    card.className = "project-card cms-media-card";
-    const title = typeof entry.title === "string" && entry.title.trim() ? entry.title.trim() : "Video";
-    const videoId = getYouTubeId(entry.youtube_url);
-    const videoFile = safePublicUrl(entry.video_file);
-    const coverImage = safePublicUrl(entry.cover_image);
-    const media = document.createElement("div");
-    media.className = "cms-media-player";
-
-    if (videoId) {
-      const playButton = document.createElement("button");
-      playButton.type = "button";
-      playButton.className = "cms-video-preview";
-      playButton.setAttribute("aria-label", `Play ${title}`);
-      const thumbnail = document.createElement("img");
-      thumbnail.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-      thumbnail.alt = "";
-      thumbnail.width = 480;
-      thumbnail.height = 360;
-      thumbnail.loading = "lazy";
-      thumbnail.decoding = "async";
-      const playIcon = document.createElement("span");
-      playIcon.className = "cms-video-play";
-      playIcon.setAttribute("aria-hidden", "true");
-      const playSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      playSvg.setAttribute("viewBox", "0 0 24 24");
-      const playPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      playPath.setAttribute("d", "M8 5.8a1 1 0 0 1 1.5-.86l10.1 6.2a1 1 0 0 1 0 1.72l-10.1 6.2a1 1 0 0 1-1.5-.86V5.8Z");
-      playSvg.append(playPath);
-      playIcon.append(playSvg);
-      playButton.append(thumbnail, playIcon);
-      playButton.addEventListener("click", () => {
-        const frame = document.createElement("iframe");
-        frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
-        frame.title = title;
-        frame.referrerPolicy = "strict-origin-when-cross-origin";
-        frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        frame.allowFullscreen = true;
-        media.replaceChildren(frame);
-      }, { once: true });
-      media.append(playButton);
-    } else if (videoFile) {
-      const video = document.createElement("video");
-      video.controls = true;
-      video.preload = "metadata";
-      video.playsInline = true;
-      if (coverImage) video.poster = coverImage;
-      const source = document.createElement("source");
-      source.src = videoFile;
-      source.type = /\.webm(?:$|[?#])/i.test(videoFile) ? "video/webm" : /\.ogg(?:$|[?#])/i.test(videoFile) ? "video/ogg" : "video/mp4";
-      video.append(source);
-      media.append(video);
-    }
-
-    if (media.childElementCount) card.append(media);
-    const content = document.createElement("div");
-    content.className = "project-content";
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    content.append(heading);
-    if (typeof entry.description === "string" && entry.description.trim()) {
-      const description = document.createElement("p");
-      description.className = "cms-writeup";
-      description.textContent = entry.description.trim();
-      content.append(description);
-    }
-    if (videoId) addProjectLink(content, "Watch on YouTube", entry.youtube_url);
-    else if (videoFile) addProjectLink(content, "Open video", videoFile);
-    card.append(content);
-    return card;
-  };
-
-  const loadCmsCollection = async ({ path, selector, type, category }) => {
+  const loadCmsCollection = async ({ path, selector, category }) => {
     const target = document.querySelector(selector);
     if (!target) return;
     try {
@@ -1065,42 +1041,29 @@
       if (!Array.isArray(entries)) throw new Error("The collection must contain a JSON array.");
       entries.forEach((entry) => {
         if (!entry || typeof entry !== "object" || Array.isArray(entry)) return;
-        const card = type === "project"
-          ? createProjectCard(entry, category)
-          : createMediaCard(entry);
-        target.append(card);
+        target.append(createProjectCard(entry, category));
       });
       const cards = Array.from(target.children);
-      if (type === "project") updateProjectCountStats();
+      updateProjectCountStats();
       const visibleLimit = 3;
       cards.forEach((card, index) => {
         card.hidden = index >= visibleLimit;
       });
       if (cards.length > visibleLimit) {
-        const itemLabel = type === "media" ? "media items" : "projects";
         const toggle = document.createElement("button");
         toggle.className = "collection-toggle";
         toggle.type = "button";
         toggle.setAttribute("aria-expanded", "false");
-        toggle.textContent = `Show all ${cards.length} ${itemLabel}`;
+        toggle.textContent = `Show all ${cards.length} projects`;
         toggle.addEventListener("click", () => {
           const expanded = toggle.getAttribute("aria-expanded") !== "true";
           toggle.setAttribute("aria-expanded", String(expanded));
           cards.forEach((card, index) => {
             card.hidden = !expanded && index >= visibleLimit;
           });
-          toggle.textContent = expanded ? "Show fewer" : `Show all ${cards.length} ${itemLabel}`;
+          toggle.textContent = expanded ? "Show fewer" : `Show all ${cards.length} projects`;
         });
         target.after(toggle);
-      }
-      if (type === "media" && target.childElementCount) {
-        const mediaSection = document.querySelector("[data-cms-media-section]");
-        mediaSection?.removeAttribute("hidden");
-        document.querySelectorAll("[data-cms-media-link]").forEach((link) => link.removeAttribute("hidden"));
-        if (waitingForInitialRoute && currentRoute() === "/videos") {
-          waitingForInitialRoute = false;
-          mediaSection?.scrollIntoView({ behavior: "auto", block: "start" });
-        }
       }
     } catch (error) {
       console.error(`Unable to load portfolio content from ${path}.`, error);
@@ -1117,15 +1080,10 @@
     : null;
   const initialTarget = initialHashTarget
     ?? document.getElementById(routeSections.get(currentRoute()) ?? "top");
-  waitingForInitialRoute = Boolean(
-    routeSections.has(currentRoute())
-    && initialTarget
-    && !initialTarget.getClientRects().length
-  );
   if (initialHashTarget && !certificateLibrary?.contains(initialHashTarget)) {
     window.history.replaceState(window.history.state, "", routeForTarget(initialHashTarget));
   }
-  if (initialTarget && !certificateLibrary?.contains(initialTarget) && !waitingForInitialRoute) {
+  if (initialTarget && !certificateLibrary?.contains(initialTarget)) {
     initialTarget.scrollIntoView({ behavior: "auto", block: "start" });
   }
 
@@ -1141,8 +1099,6 @@
         .filter((entry) => entry.isIntersecting)
         .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top)[0];
       if (!activeEntry) return;
-      if (waitingForInitialRoute) return;
-
       const section = activeEntry.target;
       sectionLinks.forEach((link) => {
         if (link.getAttribute("href") === `#${section.id}`) {
