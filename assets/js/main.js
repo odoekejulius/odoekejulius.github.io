@@ -1157,10 +1157,10 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const counters = document.querySelectorAll("[data-count]");
   const runCounter = (el) => {
-    const target = Number(el.dataset.count);
     const start = performance.now();
     const tick = (now) => {
       const p = Math.min(1, (now - start) / 1400);
+      const target = Number(el.dataset.count);
       el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString("en-US");
       if (p < 1) requestAnimationFrame(tick);
     };
