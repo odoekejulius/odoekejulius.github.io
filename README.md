@@ -54,7 +54,7 @@ GitHub Pages serves files publicly. Hiding the PDF viewer toolbar does **not** p
 
 Project images and files are uploaded through the admin dashboard and stored in `assets/uploads/`. Website and analytics projects support a main screenshot, an additional screenshot gallery, and an optional YouTube video or uploaded MP4/WebM/Ogg video. Analytics projects also support a ZIP package of public-safe analysis materials; images inside the package can also be previewed. Visitors can access every published file, even when the page does not provide a download link. The built-in CV and certificate previews are unchanged.
 
-The World Cup project lists its report, workbook, and all six CSV files in the expandable **Project files and data** section. To add another Office file, copy one of its entries in `index.html`, update the filename, title, file link, and iframe title, and keep the `data-office-preview` and `data-office-frame` attributes. The site script builds the Microsoft preview URL from the associated file link. Add a PowerPoint file the same way when one is available. Remember that every deployed asset is public and may be copied by visitors.
+The World Cup project lists its Power BI-ready workbook, report, and six aggregate CSV model tables in the expandable **Project files and data** section. The embedded dashboard is a custom browser preview, not a native Power BI report; the report includes steps for recreating its visuals in Power BI. The incoming archive's student-level datasets are intentionally excluded from the public site. To add another Office file, copy one of its entries in `index.html`, update the filename, title, file link, and iframe title, and keep the `data-office-preview` and `data-office-frame` attributes. The site script builds the Microsoft preview URL from the associated file link. Add a PowerPoint file the same way when one is available. Remember that every deployed asset is public and may be copied by visitors.
 
 ## Add portfolio work
 
@@ -101,9 +101,9 @@ Add new website and analytics entries from the admin dashboard instead of editin
     │       ├── fact_team_match.csv
     │       ├── group_standings.csv
     │       ├── matches_clean.csv
-    │       ├── analysis-report.docx
+    │       ├── WorldCup2026_PowerBI_Data.xlsx
     │       ├── dashboard-source.jsx
-    │       └── tableau-data.xlsx
+    │       └── analysis-report.docx
     │   ├── student-dropout-risk/
     │       ├── dashboard-preview.html
     │       └── analysis-report-preview.html
