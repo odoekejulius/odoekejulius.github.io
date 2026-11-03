@@ -92,13 +92,13 @@
 </head>
 <body>
   <main>
-    <div class="topline"><span>Data project · Power BI-ready model · Interactive web preview</span></div>
+    <div class="topline"><span>Data project · Interactive dashboard</span></div>
     <h1>FIFA World Cup 2026 <span>performance, explored.</span></h1>
-    <p class="intro">Explore a custom browser dashboard built from the same clean match and team tables supplied in the Power BI-ready workbook. Use the workbook and six aggregate CSVs to reproduce the model and visuals in Power BI.</p>
-    <div class="snapshot"><span>Power BI-ready · 6 model tables</span><span>Data through July 5, 2026</span><span>Group stage → Round of 16</span><span>Prepared by Julius Odo-Eke</span></div>
+    <p class="intro">Explore World Cup 2026 match results, group standings, and team and confederation performance.</p>
+    <div class="snapshot"><span>Data through July 5, 2026</span><span>Group stage → Round of 16</span><span>Prepared by Julius Odo-Eke</span></div>
 
     <section class="metric-grid" aria-label="Project summary metrics">
-      <div class="metric"><strong>92</strong><span>matches in this snapshot</span></div>
+      <div class="metric"><strong>92</strong><span>matches analysed</span></div>
       <div class="metric"><strong>269</strong><span>goals recorded</span></div>
       <div class="metric"><strong>48</strong><span>teams represented</span></div>
       <div class="metric"><strong>2.92</strong><span>goals per match</span></div>
@@ -107,14 +107,14 @@
     <div class="analysis-grid">
       <section class="panel" aria-labelledby="confederation-heading">
         <div class="panel-heading">
-          <div><h2 id="confederation-heading">Goals by confederation</h2><p>Goals scored in the supplied match snapshot</p></div>
+          <div><h2 id="confederation-heading">Goals by confederation</h2><p>Compare goals scored across confederations</p></div>
         </div>
         <div class="chart" id="confederation-chart" role="list"></div>
       </section>
 
       <section class="panel" aria-labelledby="standings-heading">
         <div class="panel-heading">
-          <div><h2 id="standings-heading">Group standings</h2><p>Explore the source standings by group</p></div>
+          <div><h2 id="standings-heading">Group standings</h2><p>Select a group to view the standings</p></div>
           <label class="group-control" for="group-select">Group
             <select id="group-select" aria-label="Choose a group"></select>
           </label>
@@ -130,14 +130,14 @@
 
     <section class="panel report" aria-labelledby="report-heading">
       <div class="panel-heading">
-        <div><h2 id="report-heading">What the analysis surfaced</h2><p>Cleaning, validation, and reporting notes from the accompanying project report</p></div>
+        <div><h2 id="report-heading">Project highlights</h2><p>Key findings from the analysis</p></div>
       </div>
       <div class="report-grid">
-        <div class="finding"><span>01 / VALIDATION</span><p>The supplied report records no duplicate rows or orphaned team names, and notes that score/winner combinations were internally consistent.</p></div>
-        <div class="finding"><span>02 / CORRECTIONS</span><p>Three team elimination labels were corrected by cross-checking the match log: Mexico, South Africa, and the United States.</p></div>
-        <div class="finding"><span>03 / DATA MODEL</span><p>Match-level and team-level data were shaped into a reusable model for comparing form, goals, standings, and confederations.</p></div>
+        <div class="finding"><span>01 / MATCHES</span><p>The analysis covers 92 matches through the Round of 16.</p></div>
+        <div class="finding"><span>02 / TEAMS</span><p>Compare team results, group standings, and goal totals.</p></div>
+        <div class="finding"><span>03 / CONFEDERATIONS</span><p>Explore scoring and performance across confederations.</p></div>
       </div>
-      <p class="footnote">Coverage is intentionally partial: the report describes 92 of 104 planned tournament matches, ending mid-Round-of-16. Figures here describe that dated project snapshot, not final tournament results.</p>
+      <p class="footnote">This project snapshot ends on July 5, 2026, during the Round of 16; it does not show final tournament results.</p>
     </section>
   </main>
   <script>

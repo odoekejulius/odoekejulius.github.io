@@ -48,28 +48,24 @@
     <p class="eyebrow">Data analytics · Project report preview</p>
     <h1>FIFA World Cup 2026 <span>data analysis.</span></h1>
     <p class="byline">Prepared by Julius Chibuzo Odo-Eke · Report dated July 28, 2026 · Dataset snapshot through July 5, 2026</p>
-    <p class="lead">This project takes match and team tables from source data through cleaning, validation, and exploratory analysis. The companion workbook and six aggregate CSVs are prepared for Power BI; this website contains a separate, custom-built browser preview of the analysis.</p>
-    <div class="callout"><strong>Scope matters:</strong> the files contain 92 matches, covering the group stage through part of the Round of 16. The report notes that the completed 48-team tournament schedule comprises 104 matches, so this is a dated, partial snapshot—not a final-results analysis.</div>
-    <div class="callout"><strong>Power BI hand-off:</strong> the workbook contains the six model tables, and the linked report includes the recommended relationships, DAX measures, and visual-by-visual build guide. No native .pbix file or published Power BI Service report is included.</div>
+    <p class="lead">Explore World Cup 2026 match results, team performance, and group standings in this analysis.</p>
+    <div class="callout"><strong>Coverage:</strong> this project includes 92 matches through part of the Round of 16. It is not a report of the final tournament results.</div>
 
     <section>
       <h2>Cleaning and validation</h2>
-      <p>The report found no duplicate match rows or orphaned team names in the supplied source tables, and checked that score and winner fields were internally consistent. Legitimate blanks were preserved where appropriate; for example, group is not applicable to knockout fixtures, and teams still active in the snapshot had no elimination round.</p>
+      <p>Match scores and winners were consistent, with no duplicate matches or missing team links. Some team elimination statuses needed updating:</p>
       <p>Comparing team elimination labels against match results revealed three status mismatches:</p>
       <div class="corrections">
         <div class="correction"><strong>Mexico</strong><span>Blank elimination value corrected to Round of 16.</span></div>
         <div class="correction"><strong>South Africa</strong><span>Group Stage corrected to Round of 32.</span></div>
         <div class="correction"><strong>United States</strong><span>Round of 32 cleared; still active at the snapshot date.</span></div>
       </div>
-      <p>The recommendation is to derive tournament status from match results instead of maintaining that field manually.</p>
+      <p>Team elimination status should be checked against match results.</p>
     </section>
 
     <section>
-      <h2>Analysis model</h2>
-      <p>Data was organised around match-level results and team-level summaries to support comparisons across fixtures, teams, groups, and confederations.</p>
-      <div class="model" aria-label="Analysis model flow">
-        <span>Match results</span><b aria-hidden="true">→</b><span>Validated team status</span><b aria-hidden="true">→</b><span>Six Power BI model tables</span><b aria-hidden="true">→</b><span>Dashboard exploration</span>
-      </div>
+      <h2>What the analysis covers</h2>
+      <p>Compare match results, team performance, group standings, and confederation scoring.</p>
     </section>
 
     <section>
