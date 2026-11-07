@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>International Bestselling Books — Interactive Preview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c111a;
+      --panel: rgb(var(--ch-fill) / .055);
+      --line: rgb(var(--ch-ink) / .12);
+      --text: #f3f5fb;
+      --muted: #a3aec2;
+      --soft: #76839b;
+      --accent: #b4c2ff;
+      --mint: #9edccc;
+      --amber: #f2c77d;
+      --ch-fill: 255 255 255;
+      --ch-ink: 214 224 255;
+      --ch-accent: 180 194 255;
+      --ch-glow: 123 145 213;
+      --ch-deep: 5 9 16;
+      --bar-a: #8fa7ed;
+      --bar-b: #a1dacf;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: clamp(18px, 4vw, 42px);
+      color: var(--text);
+      background: radial-gradient(ellipse at 86% 0%, rgb(var(--ch-glow) / .14), transparent 32rem), var(--bg);
+    }
+    main { width: min(1050px, 100%); margin: auto; }
+    .topline { color: var(--soft); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+    h1 { max-width: 760px; margin: 18px 0 10px; font-size: clamp(2rem, 5.5vw, 3.7rem); line-height: 1.07; letter-spacing: -.04em; }
+    h1 span { color: var(--accent); }
+    h2 { margin: 0; font-size: 1.18rem; }
+    p { color: var(--muted); line-height: 1.7; }
+    .intro { max-width: 730px; margin: 0; font-size: .89rem; }
+    .caution { margin-top: 17px; padding: 14px 16px; border: 1px solid rgb(242 199 125 / .24); border-radius: 12px; background: rgb(242 199 125 / .055); color: var(--muted); font-size: .72rem; line-height: 1.7; }
+    .caution strong { color: var(--amber); }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+    .metric, .panel, .finding { border: 1px solid var(--line); background: linear-gradient(145deg, rgb(var(--ch-fill) / .065), rgb(var(--ch-fill) / .025)); box-shadow: inset 0 1px 0 rgb(var(--ch-fill) / .045); }
+    .metric { min-width: 0; padding: 15px; border-radius: 12px; }
+    .metric strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.45rem, 4vw, 2.15rem); font-weight: 400; letter-spacing: -.04em; }
+    .metric span { color: var(--soft); font-size: .64rem; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 12px; margin-top: 12px; }
+    .panel { min-width: 0; padding: 19px; border-radius: 14px; }
+    .panel-heading { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .panel-heading p { margin: 5px 0 0; color: var(--soft); font-size: .65rem; }
+    label { color: var(--soft); font-size: .67rem; }
+    select { display: block; max-width: 100%; margin-top: 5px; padding: 8px 28px 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: #151c29; color: var(--text); font: inherit; }
+    .bars { display: grid; gap: 14px; }
+    .bar-row { display: grid; grid-template-columns: minmax(88px, 1fr) minmax(40px, 2fr) 55px; align-items: center; gap: 9px; color: var(--muted); font-size: .67rem; }
+    .bar-label { overflow-wrap: anywhere; }
+    .track { display: block; height: 9px; overflow: hidden; border-radius: 99px; background: rgb(var(--ch-fill) / .08); }
+    .fill { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--bar-a), var(--bar-b)); }
+    .value { color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+    .tier-note { margin: 14px 0 0; color: var(--soft); font-size: .62rem; line-height: 1.6; }
+    .effect-list { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+    .effect-list li { padding-bottom: 12px; border-bottom: 1px solid rgb(var(--ch-ink) / .08); }
+    .effect-list li:last-child { padding-bottom: 0; border: 0; }
+    .effect-list strong { display: block; color: var(--text); font-size: .72rem; font-weight: 500; }
+    .effect-list span { display: block; margin-top: 3px; color: var(--muted); font-size: .65rem; line-height: 1.55; }
+    .finding-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 12px; }
+    .finding { padding: 13px; border-radius: 10px; }
+    .finding strong { display: block; color: var(--accent); font-family: Consolas, monospace; font-size: .7rem; font-weight: 500; }
+    .finding span { display: block; margin-top: 5px; color: var(--muted); font-size: .64rem; line-height: 1.6; }
+    .footnote { margin: 14px 2px 0; color: var(--soft); font-size: .63rem; line-height: 1.65; }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .67rem; text-align: left; }
+    th { padding: 0 6px 8px; color: var(--soft); font-weight: 500; }
+    td { padding: 9px 6px; border-top: 1px solid rgb(var(--ch-ink) / .07); color: var(--muted); font-variant-numeric: tabular-nums; }
+    td:first-child { color: var(--text); }
+    .bar-row.is-null .track .fill { width: 0 !important; }
+    .bar-row.is-highlight .fill { background: linear-gradient(90deg, var(--amber), #f6dca8); }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f6fb; --text: #0f172a; --muted: #475569; --soft: #5b6579; --accent: #3949b8; --mint: #0b7d5c; --amber: #946200;
+      --ch-fill: 15 23 52; --ch-ink: 30 41 90; --ch-accent: 57 73 184; --ch-glow: 120 140 230; --ch-deep: 30 41 90;
+      --bar-a: #4a5bd0; --bar-b: #2b9e7c;
+    }
+    :root[data-theme="light"] .metric, :root[data-theme="light"] .panel, :root[data-theme="light"] .finding { background: rgb(255 255 255 / .82); box-shadow: 0 8px 24px rgb(30 41 90 / .07); }
+    :root[data-theme="light"] select { background: #fff; }
+    @media (max-width: 720px) {
+      body { padding: 18px 14px; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid, .finding-grid { grid-template-columns: 1fr; }
+      .panel { padding: 15px; }
+    }
+    @media (max-width: 390px) { .bar-row { grid-template-columns: minmax(76px, 1fr) minmax(35px, 2fr) 50px; gap: 7px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topline">Data analytics · Interactive project preview</div>
+    <h1>International bestselling books, <span>read as data.</span></h1>
+    <p class="intro">Explore 7,909 monthly top-10 placements from 45 countries between June 2013 and December 2022: who is on the lists, where the authors come from, and how long books stay.</p>
+    <div class="caution"><strong>Coverage warning:</strong> only five countries (Germany, Italy, the United States, Spain and France) have a continuous monthly series, so every trend uses those five. The other 40 countries are snapshots of 1 to 10 months. Italy's list before 2018 follows a different definition and is excluded from the comparable figures. These are top-10 placements, not sales, and the results are associations rather than causes.</div>
+
+    <section class="metric-grid" aria-label="Project summary metrics">
+      <div class="metric"><strong>7,909</strong><span>chart entries across 45 countries and 114 months</span></div>
+      <div class="metric"><strong>3,796</strong><span>unique books by 1,784 authors</span></div>
+      <div class="metric"><strong>43.6%</strong><span>of core entries by single-gender authors are by women (comparable rows)</span></div>
+      <div class="metric"><strong>65%</strong><span>of core entries are by authors from the list country (comparable rows)</span></div>
+    </section>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="trend-heading">
+        <div class="panel-heading">
+          <div><h2 id="trend-heading">Share by year</h2><p id="trend-sub">Core markets, comparable rows</p></div>
+          <div class="controls">
+            <label for="measure-select">Measure
+              <select id="measure-select"><option value="women">Women authors</option><option value="domestic">Domestic authors</option></select>
+            </label>
+            <label for="market-select">Market
+              <select id="market-select"></select>
+            </label>
+          </div>
+        </div>
+        <div class="bars" id="trend-chart" role="list" aria-label="Share of entries by year"></div>
+        <p class="tier-note" id="trend-note"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="rank-heading">
+        <div class="panel-heading">
+          <div><h2 id="rank-heading">Women by chart position</h2><p>Share of entries by women authors at each rank (core, comparable)</p></div>
+        </div>
+        <div class="bars" id="rank-chart" role="list" aria-label="Share of women authors by chart position"></div>
+        <p class="tier-note">Women hold 37.2% of #1 positions against 44.3% of ranks 2 to 10 (p = 0.002). Across the top three the gap is not significant (p = 0.28).</p>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="home-heading">
+        <div class="panel-heading">
+          <div><h2 id="home-heading">Home versus imported</h2><p>Share of each core list by domestic authors and publishers</p></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Country</th><th>Domestic authors</th><th>Domestic publishers</th><th>Odds per year</th></tr></thead>
+            <tbody id="home-table"></tbody>
+          </table>
+        </div>
+        <p class="tier-note">Odds per year is the trend in the domestic author share. Italy's 2013 to 2017 list is excluded from the author figures.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="stay-heading">
+        <div class="panel-heading">
+          <div><h2 id="stay-heading">How long books stay</h2><p id="stay-sub"></p></div>
+        </div>
+        <div class="bars" id="stay-chart" role="list" aria-label="Share of books by months on the list"></div>
+        <p class="tier-note" id="stay-note"></p>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="hhi-heading">
+        <div class="panel-heading">
+          <div><h2 id="hhi-heading">Publisher concentration</h2><p>Herfindahl–Hirschman index, core markets (higher means more concentrated)</p></div>
+        </div>
+        <div class="bars" id="hhi-chart" role="list" aria-label="Publisher concentration by country"></div>
+        <p class="tier-note" id="hhi-note"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="authors-heading">
+        <div class="panel-heading">
+          <div><h2 id="authors-heading">Authors who travel</h2><p>Authors charting in several core markets</p></div>
+        </div>
+        <ul class="effect-list">
+          <li><strong>135 authors</strong><span>charted in two or more core markets.</span></li>
+          <li><strong>49 authors</strong><span>charted in three or more core markets, accounting for 21% of all core entries.</span></li>
+          <li><strong>Five authors</strong><span>charted in all five: Stephen King, Ken Follett, Dan Brown, Haruki Murakami and Jo Nesbø.</span></li>
+          <li><strong>Local stars</strong><span>Guillaume Musso (France) and James Patterson (United States) are essentially single-market authors.</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="finding-grid" aria-label="Additional reported findings">
+      <div class="finding"><strong>Women's share</strong><span>Odds up 3.3% a year (95% CI 1.012 to 1.054), from 44.9% in 2013 to 49.8% in 2022. Entries repeat books across months, so the interval is optimistic.</span></div>
+      <div class="finding"><strong>Domestic share</strong><span>Country-adjusted odds up 13% a year (95% CI 1.106 to 1.159), from 49% in 2013 to 72% in 2022. Flat in the United States (85%).</span></div>
+      <div class="finding"><strong>Fleeting status</strong><span>59% of books appear for a single month and the median stay is one month. The US list churns fastest: 64% of its entries are new that month.</span></div>
+    </section>
+    <p class="footnote">Source: the supplied project report and cleaned tables. The Power BI scripts were checked statically and not opened in Power BI Desktop; this page is a static portfolio preview, not a Power BI report.</p>
+  </main>
+  <script>
+    const DATA = {"women":{"All core markets":[44.9,38.4,41.3,45.0,41.2,42.4,42.6,43.1,47.2,49.8],"Germany":[60.9,44.5,43.7,53.9,43.2,52.9,45.4,45.8,46.7,54.1],"Italy":[null,null,null,null,null,35.0,42.7,41.9,50.0,49.1],"United States":[38.2,41.0,41.0,42.7,33.3,50.9,46.9,58.0,49.6,51.4],"Spain":[40.0,36.7,37.8,43.2,35.8,28.3,32.2,39.2,42.5,56.9],"France":[40.0,31.4,42.5,40.3,52.1,44.9,45.8,30.5,47.5,37.4]},"domestic":{"All core markets":[48.5,56.7,57.3,66.0,60.8,67.5,70.0,67.2,68.5,72.2],"Germany":[28.6,33.3,34.2,55.0,34.2,53.3,50.8,40.8,63.3,65.5],"Italy":[null,null,null,null,null,53.3,65.0,64.2,41.7,53.6],"United States":[84.3,85.8,84.2,85.8,82.5,94.2,87.5,81.7,81.7,82.7],"Spain":[41.4,43.3,51.7,58.0,65.0,67.5,70.8,74.2,81.7,76.4],"France":[38.3,64.2,59.2,65.0,61.7,69.2,75.8,75.0,74.2,82.7]},"rank":[{"rank":1,"v":37.2,"n":503},{"rank":2,"v":44.4,"n":500},{"rank":3,"v":45.8,"n":507},{"rank":4,"v":45.6,"n":509},{"rank":5,"v":42.6,"n":507},{"rank":6,"v":47.1,"n":505},{"rank":7,"v":40.7,"n":504},{"rank":8,"v":42.4,"n":505},{"rank":9,"v":43.7,"n":510},{"rank":10,"v":46.9,"n":508}],"months":[{"label":"1 month","v":59.0},{"label":"2 months","v":19.1},{"label":"3 months","v":8.9},{"label":"4 months","v":5.5},{"label":"5 months","v":2.9},{"label":"6+ months","v":4.5}],"runs":{"n":2653,"one":59.0,"median":1.0,"six":4.5},"hhi":[{"country":"Italy","hhi":624,"top5":49.0},{"country":"United States","hhi":549,"top5":45.0},{"country":"Spain","hhi":528,"top5":42.0},{"country":"France","hhi":361,"top5":33.0},{"country":"Germany","hhi":210,"top5":21.0}],"countries":[{"country":"Germany","author":46.5,"publisher":46.1,"or":1.153,"p":0.0},{"country":"France","author":67.9,"publisher":75.5,"or":1.16,"p":0.0},{"country":"Spain","author":63.8,"publisher":68.0,"or":1.224,"p":0.0},{"country":"Italy","author":55.6,"publisher":76.5,"or":0.91,"p":0.11252},{"country":"United States","author":85.1,"publisher":89.8,"or":0.978,"p":0.46619}]};
+    const years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022];
+    const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = text; return node; };
+    const bar = (label, value, text, options = {}) => {
+      const row = make("div", "bar-row" + (value === null ? " is-null" : "") + (options.highlight ? " is-highlight" : ""));
+      row.setAttribute("role", "listitem");
+      const track = make("span", "track"); track.setAttribute("aria-hidden", "true");
+      const fill = make("span", "fill"); fill.style.width = value === null ? "0%" : `${Math.max(2, value)}%`; track.append(fill);
+      row.append(make("span", "bar-label", label), track, make("span", "value", text));
+      return row;
+    };
+    const measureSelect = document.querySelector("#measure-select");
+    const marketSelect = document.querySelector("#market-select");
+    Object.keys(DATA.women).forEach((market) => { const option = make("option", "", market); option.value = market; marketSelect.append(option); });
+    const trend = document.querySelector("#trend-chart");
+    const renderTrend = () => {
+      const measure = measureSelect.value, market = marketSelect.value, values = DATA[measure][market];
+      document.querySelector("#trend-sub").textContent = `${measure === "women" ? "Entries by women authors" : "Entries by authors from the list country"} · ${market}`;
+      trend.replaceChildren();
+      years.forEach((year, index) => { const value = values[index]; trend.append(bar(String(year), value, value === null ? "n/a" : `${value.toFixed(1)}%`)); });
+      const note = document.querySelector("#trend-note");
+      note.textContent = market === "Italy" ? "Italy's list before 2018 followed a different definition, so only 2018 onward is shown." : measure === "women" ? "Share of entries by single-gender authors. Bars show the percentage out of 100." : "Share of entries with a known author nationality. Bars show the percentage out of 100.";
+    };
+    measureSelect.addEventListener("change", renderTrend); marketSelect.addEventListener("change", renderTrend); renderTrend();
+    const rankChart = document.querySelector("#rank-chart");
+    DATA.rank.forEach((item) => rankChart.append(bar(`#${item.rank}`, item.v, `${item.v.toFixed(1)}%`, { highlight: item.rank === 1 })));
+    const homeTable = document.querySelector("#home-table");
+    DATA.countries.forEach((item) => {
+      const row = make("tr"); [item.country, `${item.author.toFixed(1)}%`, `${item.publisher.toFixed(1)}%`, item.p < 0.05 ? `${item.or.toFixed(3)} (p < 0.05)` : `${item.or.toFixed(3)} (no clear trend)`].forEach((text) => row.append(make("td", "", text))); homeTable.append(row);
+    });
+    const stay = document.querySelector("#stay-chart");
+    DATA.months.forEach((item) => stay.append(bar(item.label, item.v, `${item.v.toFixed(1)}%`)));
+    document.querySelector("#stay-sub").textContent = `${DATA.runs.n.toLocaleString("en-US")} books whose full run is inside the observed window`;
+    document.querySelector("#stay-note").textContent = `${DATA.runs.one.toFixed(0)}% appear for one month, the median stay is ${DATA.runs.median} month, and ${DATA.runs.six.toFixed(1)}% stay six months or more.`;
+    const hhi = document.querySelector("#hhi-chart"); const maxHhi = Math.max(...DATA.hhi.map((item) => item.hhi));
+    DATA.hhi.forEach((item) => hhi.append(bar(item.country, (item.hhi / maxHhi) * 100, String(item.hhi))));
+    document.querySelector("#hhi-note").textContent = "Top five publishers hold " + DATA.hhi.map((item) => `${item.top5}% in ${item.country}`).join(", ") + " of core entries.";
+  </script>
+</body>
+</html>

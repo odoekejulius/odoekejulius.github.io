@@ -1,32 +1,56 @@
 [
-  {
-    "title": "Julius Odo-Eke Portfolio Website",
-    "year": "2026",
-    "description": "An independently designed and built portfolio that brings my web development, data analysis and teaching work together. Hosted on GitHub Pages, it pairs responsive layouts and clean section URLs with project showcases and search-ready profile details.",
-    "image": "/assets/images/portfolio/portfolio-home-desktop.jpg",
-    "image_alt": "Desktop homepage of the Julius Odo-Eke portfolio, showing the introduction, navigation and profile portrait.",
-    "screenshots": [
-      {
-        "image": "/assets/images/portfolio/portfolio-websites-desktop.jpg",
-        "caption": "Website projects section"
-      },
-      {
-        "image": "/assets/images/portfolio/portfolio-home-mobile.jpg",
-        "caption": "Responsive mobile homepage"
-      }
-    ],
-    "highlights": [
-      "Responsive portfolio with clean, directly shareable section URLs.",
-      "Sveltia CMS collections for published projects, alongside public document previews.",
-      "Performance-conscious loading: ZIP previews load on demand to keep initial page loads lighter."
-    ],
-    "tags": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "GitHub Pages",
-      "Sveltia CMS"
-    ],
-    "live_url": "https://odoekejulius.github.io/"
-  }
+ {
+  "title": "Julius Odo-Eke Portfolio Website",
+  "year": "2026",
+  "description": "An independently designed and built portfolio that brings my web development, data analysis and teaching work together. Hosted on GitHub Pages, it pairs responsive layouts and clean section URLs with project showcases and search-ready profile details.",
+  "image": "/assets/images/portfolio/portfolio-home-desktop.jpg",
+  "image_alt": "Desktop homepage of the Julius Odo-Eke portfolio, showing the introduction, navigation and profile portrait.",
+  "screenshots": [
+   {
+    "image": "/assets/images/portfolio/portfolio-websites-desktop.jpg",
+    "caption": "Website projects section"
+   },
+   {
+    "image": "/assets/images/portfolio/portfolio-home-mobile.jpg",
+    "caption": "Responsive mobile homepage"
+   }
+  ],
+  "highlights": [
+   "Responsive portfolio with clean, directly shareable section URLs.",
+   "Sveltia CMS collections for published projects, alongside public document previews.",
+   "Performance-conscious loading: ZIP previews load on demand to keep initial page loads lighter."
+  ],
+  "tags": [
+   "HTML",
+   "CSS",
+   "JavaScript",
+   "GitHub Pages",
+   "Sveltia CMS"
+  ],
+  "live_url": "https://odoekejulius.github.io/"
+ },
+ {
+  "title": "C.Zara Enterprise Website",
+  "year": "2026",
+  "description": "A website for C.Zara Enterprise, a natural foods business based in Kurudu, Abuja. It introduces the business and its products, tells its story, and gives customers a direct WhatsApp line for enquiries. It is hosted live on GitHub Pages.",
+  "highlights": [
+   "Home, About, Gallery and Contact pages in one consistent design",
+   "Product showcase covering natural honey, cashew nuts, groundnuts and red palm oil",
+   "WhatsApp contact built into the header, page calls to action and footer"
+  ],
+  "tags": [
+   "HTML",
+   "CSS",
+   "GitHub Pages"
+  ],
+  "live_url": "https://odoekejulius.github.io/czara/"
+ },
+ {
+  "title": "Nethub",
+  "description": "A multi-page bill-payment platform for airtime, data, TV, electricity, water, betting, education PINs and money transfers, with a customer wallet and an admin control panel. The build is complete. It is waiting for a domain and hosting before it can go live, so there is no public link yet."
+ },
+ {
+  "title": "MedKings Pharmacy Website",
+  "description": "A pharmacy website I built for a client at medkingspharmacy.com. It is offline at the moment: the owner's cPanel hosting subscription expired and has not been renewed, so the site cannot be visited."
+ }
 ]

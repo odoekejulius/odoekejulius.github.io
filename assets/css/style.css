@@ -869,3 +869,16 @@ h1, h2 { text-wrap: balance; }
 @media (max-width: 900px) {
   :root[data-theme="light"] .site-nav { background: rgba(var(--rgb-navy), .985); }
 }
+
+/* Touch comfort: larger hit areas on phones and tablets (mouse layouts are unchanged) */
+@media (pointer: coarse) {
+  .text-link, .project-file-link, .viewer-fallback a { position: relative; }
+  .text-link::after, .project-file-link::after { position: absolute; inset: -12px -4px; content: ""; }
+  .project-files > summary, .office-preview > summary, .cms-project-preview > summary { padding-block: 14px; }
+  .footer-column:not(.footer-connect) { gap: 0; }
+  .footer-connect { gap: 0 24px; }
+  .footer-column a, .footer-bottom a { padding-block: 10px; }
+  .footer-top-link { padding-block: 12px; }
+  .contact-link { padding-block: 12px; }
+  .theme-toggle, .menu-toggle { width: 44px; height: 44px; }
+}

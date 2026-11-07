@@ -1,0 +1,94 @@
+// Paste ONE measure at a time: Modeling > New measure, then paste the line (name = expression).
+// Format column in the guide tells you which format to apply.
+
+// Team form | format: 0 | Rows in the team-match table (two per match)
+Team Matches =
+    COUNTROWS(FactTeamMatch)
+
+// Team form | format: 0 | Distinct matches in the current filter
+Matches Played =
+    DISTINCTCOUNT(FactTeamMatch[match_id])
+
+// Team form | format: 0 | Wins
+Wins =
+    CALCULATE(COUNTROWS(FactTeamMatch), FactTeamMatch[result] = "Win")
+
+// Team form | format: 0 | Draws
+Draws =
+    CALCULATE(COUNTROWS(FactTeamMatch), FactTeamMatch[result] = "Draw")
+
+// Team form | format: 0 | Losses
+Losses =
+    CALCULATE(COUNTROWS(FactTeamMatch), FactTeamMatch[result] = "Loss")
+
+// Team form | format: 0.0% | Wins divided by matches
+Win % =
+    DIVIDE([Wins], [Team Matches])
+
+// Team form | format: 0 | Goals scored
+Goals For =
+    SUM(FactTeamMatch[goals_for])
+
+// Team form | format: 0 | Goals conceded
+Goals Against =
+    SUM(FactTeamMatch[goals_against])
+
+// Team form | format: +0;-0;0 | Goals for minus goals against
+Goal Difference =
+    [Goals For] - [Goals Against]
+
+// Team form | format: 0 | 3 for a win, 1 for a draw
+Points =
+    SUM(FactTeamMatch[points])
+
+// Team form | format: 0 | Matches without conceding
+Clean Sheets =
+    CALCULATE(COUNTROWS(FactTeamMatch), FactTeamMatch[clean_sheet] = TRUE())
+
+// Team form | format: 0.00 | Average goals scored per match
+Goals per Team Match =
+    DIVIDE([Goals For], [Team Matches])
+
+// Tournament | format: 0 | Matches in the Matches table
+Total Matches =
+    COUNTROWS(Matches)
+
+// Tournament | format: 0 | Goals in all matches
+Total Goals =
+    SUM(Matches[total_goals])
+
+// Tournament | format: 0.00 | Average goals per match
+Avg Goals per Match =
+    DIVIDE([Total Goals], [Total Matches])
+
+// Tournament | format: 0 | Matches that ended level (all in the group stage)
+Draw Matches =
+    CALCULATE(COUNTROWS(Matches), Matches[is_draw] = TRUE())
+
+// Tournament | format: 0.0% | Share of matches drawn
+Draw % =
+    DIVIDE([Draw Matches], [Total Matches])
+
+// Tournament | format: 0 | Matches decided on penalties
+Penalty Shootouts =
+    CALCULATE(COUNTROWS(Matches), Matches[decided_by_penalties] = TRUE())
+
+// Tournament | format: 0 | Largest goal margin
+Biggest Win Margin =
+    MAX(Matches[goal_margin])
+
+// Tournament | format: 0 | Most goals in one match
+Highest Match Total =
+    MAX(Matches[total_goals])
+
+// Teams | format: 0 | Teams in the tournament
+Teams Entered =
+    COUNTROWS(DimTeam)
+
+// Teams | format: 0 | Teams not yet eliminated at the data snapshot (July 5, 2026)
+Teams Still Active =
+    CALCULATE(COUNTROWS(DimTeam), DimTeam[still_active] = TRUE())
+
+// Confederations | format: 0 | Teams that reached the Round of 16
+Reached Round of 16 =
+    SUM(ConfederationSummary[reached_round_of_16])

@@ -1,4 +1,4 @@
-match_id,date,stage,stage_order,group,is_knockout,team,opponent,goals_for,goals_against,decided_by_penalties,winner,notes,result,goal_diff,points,clean_sheet,confederation,host_nation,world_cup_debut
+match_id,match_date,stage,stage_order,group,is_knockout,team,opponent,goals_for,goals_against,decided_by_penalties,winner,notes,result,goal_diff,points,clean_sheet,confederation,host_nation,world_cup_debut
 1,2026-06-11,Group Stage,0,A,False,Mexico,South Africa,2,0,False,Mexico,Tournament opening match at Estadio Azteca,Win,2,3,True,CONCACAF,True,False
 1,2026-06-11,Group Stage,0,A,False,South Africa,Mexico,0,2,False,Mexico,Tournament opening match at Estadio Azteca,Loss,-2,0,False,CAF,False,False
 2,2026-06-11,Group Stage,0,A,False,Czechia,South Korea,1,2,False,South Korea,,Loss,-1,0,False,UEFA,False,False

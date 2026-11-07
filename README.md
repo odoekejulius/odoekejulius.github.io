@@ -103,23 +103,38 @@ Add new website and analytics entries from the admin dashboard instead of editin
     │       ├── matches_clean.csv
     │       ├── WorldCup2026_PowerBI_Data.xlsx
     │       ├── dashboard-source.jsx
-    │       └── analysis-report.docx
+    │       ├── analysis-report.docx
+    │       ├── WorldCup2026_PowerBI_Package.zip
+    │       └── powerbi/
+    │           ├── PowerBI_Setup_Guide.md
+    │           ├── Measures_NewMeasure.dax
+    │           └── Validation_Checks.csv
     │   ├── student-dropout-risk/
     │       ├── dashboard-preview.html
     │       └── analysis-report-preview.html
-    │   └── social-media-wellbeing/
+    │   ├── social-media-wellbeing/
     │       ├── dashboard-preview.html
     │       ├── analysis-report-preview.html
     │       └── reviewed aggregate CSV outputs
+    │   └── bestselling-books/
+    │       ├── dashboard-preview.html
+    │       ├── analysis-report-preview.html
+    │       ├── analysis-report.docx
+    │       ├── Books_PowerBI_Data.xlsx
+    │       ├── Books_PowerBI_Package.zip
+    │       ├── dashboard-source.jsx
+    │       ├── country_summary.csv, kpi_summary.csv, yearly_trends_core.csv
+    │       ├── statistical_tests.csv, concentration_core.csv, data_quality_log.csv
+    │       └── powerbi/ (setup guide, DAX measures, validation checks)
     ├── images/
     │   ├── julius-odoeke.jpeg
     │   ├── og-cover.png
     │   └── renacido/
-    │       ├── renacido-admin-dashboard.png
-    │       ├── renacido-admin-sign-in.png
-    │       ├── renacido-customer-sign-in.png
-    │       ├── renacido-storefront-footer.png
-    │       └── renacido-storefront-home.png
+    │       ├── renacido-admin-dashboard.webp
+    │       ├── renacido-admin-sign-in.webp
+    │       ├── renacido-customer-sign-in.webp
+    │       ├── renacido-storefront-footer.webp
+    │       └── renacido-storefront-home.webp
     ├── uploads/              # Media uploaded through the CMS
     └── js/
         ├── main.js
@@ -142,3 +157,11 @@ Ambient aurora and dot-grid background, a highlights band with count-up numbers,
 The workflow `.github/workflows/update-og-image.yml` runs the script on GitHub whenever the photo changes: replacing `assets/images/julius-odoeke.*`, uploading a new portrait through the admin panel, or running it by hand from the repository's Actions tab ("Update social preview image", then "Run workflow"). It commits the new card and adds a fresh `?v=` fingerprint to the `og:image` and `twitter:image` links in `index.html`, so link-preview caches fetch the new picture. Allow a minute or two after changing the photo; apps that already cached the old preview can take longer, and LinkedIn's Post Inspector or Facebook's Sharing Debugger can refresh them immediately.
 
 To change the wording on the card (name, roles, location line), edit the constants at the top of `tools/generate_og_image.py`. To rebuild it on your own computer: `pip install pillow`, then `python tools/generate_og_image.py`.
+
+## Data analytics projects and Power BI packages
+
+There are four hand-built analytics cards in `index.html`: World Cup 2026, Student Dropout Risk, Social Media and Student Wellbeing, and Bestselling Books. The World Cup and Bestselling Books projects use public data, so their workbooks, aggregate CSVs and Power BI packages are published. The Student Dropout and Social Media projects publish only dashboard and report previews (and, for Social Media, reviewed aggregate CSVs); their student-level files and Power BI packages stay out of the public repository.
+
+Each published Power BI package (a ZIP of `powerbi/` and `powerbi_data/`) contains Power Query load scripts, DAX measures, a report theme, a setup guide and a validation sheet whose expected values were recomputed from the raw data and match (18 for World Cup, 23 for Bestselling Books). The scripts were checked statically and have not been opened in Power BI Desktop, and no Power BI report (`.pbix`) is included. The dashboards on this site are browser previews of the intended design.
+
+Sizes and speed: the Renacido screenshots are WebP, the profile photo is recompressed, and the CSS adds larger touch targets only for touch devices (`pointer: coarse`).
