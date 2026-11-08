@@ -8,6 +8,14 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://odoekejulius.github.io/terms.html">
   <title>Terms of Service | Julius Odo-Eke</title>
+  <base href="./">
+  <script>
+    (() => {
+      const pathParts = location.pathname.split("/").filter(Boolean);
+      if (pathParts[pathParts.length - 1] === "terms.html") pathParts.pop();
+      document.querySelector("base").href = `/${pathParts.join("/")}${pathParts.length ? "/" : ""}`;
+    })();
+  </script>
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css?v=48">
   <script>
@@ -26,7 +34,7 @@
       }
     })();
   </script>
-  <script src="assets/js/main.js?v=48" defer></script>
+  <script src="assets/js/main.js?v=49" defer></script>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>

@@ -4,7 +4,7 @@ A responsive, static portfolio site built with HTML, CSS, and vanilla JavaScript
 
 ## Run locally
 
-Open `index.html` directly in a browser to view the site. The canvas-based PDF previews require HTTP or HTTPS; use XAMPP or another local web server to test them. Direct-file mode retains the browser's native PDF viewer and original-PDF links as fallbacks.
+For full site behavior, serve this folder over HTTP with XAMPP or another local web server. Opening `index.html` directly still shows the static layout and native PDF links, but browser security prevents the JSON-backed CMS project cards from loading in `file://` mode. The canvas-based PDF previews also require HTTP or HTTPS.
 
 ## Multiple visitors and scrolling
 
@@ -130,11 +130,11 @@ Add new website and analytics entries from the admin dashboard instead of editin
     │   ├── julius-odoeke.jpeg
     │   ├── og-cover.png
     │   └── renacido/
-    │       ├── renacido-admin-dashboard.webp
-    │       ├── renacido-admin-sign-in.webp
-    │       ├── renacido-customer-sign-in.webp
-    │       ├── renacido-storefront-footer.webp
-    │       └── renacido-storefront-home.webp
+    │       ├── renacido-admin-dashboard.png
+    │       ├── renacido-admin-sign-in.png
+    │       ├── renacido-customer-sign-in.png
+    │       ├── renacido-storefront-footer.png
+    │       └── renacido-storefront-home.png
     ├── uploads/              # Media uploaded through the CMS
     └── js/
         ├── main.js
@@ -148,7 +148,7 @@ Add new website and analytics entries from the admin dashboard instead of editin
 
 ## Recent design updates
 
-Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and embedded analytics dashboards. The CMS project package preview uses the vendored JSZip 3.10.1 library under its included MIT license. Bump asset cache versions when referenced files change, and keep each shared asset's cache version consistent across `index.html`, `terms.html` and `404.html`; the stylesheet is currently version `39` and the main script version `44`. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
+Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and embedded analytics dashboards. The CMS project package preview uses the vendored JSZip 3.10.1 library under its included MIT license. Bump asset cache versions when referenced files change, and keep each shared asset's cache version consistent across `index.html`, `terms.html` and `404.html`; the stylesheet is currently version `48` and the main script version `49`. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
 
 ## Social preview image (follows your profile photo)
 
@@ -164,4 +164,4 @@ There are four hand-built analytics cards in `index.html`: World Cup 2026, Stude
 
 Each published Power BI package (a ZIP of `powerbi/` and `powerbi_data/`) contains Power Query load scripts, DAX measures, a report theme, a setup guide and a validation sheet whose expected values were recomputed from the raw data and match (18 for World Cup, 23 for Bestselling Books). The scripts were checked statically and have not been opened in Power BI Desktop, and no Power BI report (`.pbix`) is included. The dashboards on this site are browser previews of the intended design.
 
-Sizes and speed: the Renacido screenshots are WebP, the profile photo is recompressed, and the CSS adds larger touch targets only for touch devices (`pointer: coarse`).
+Sizes and speed: the Renacido screenshots are PNG, the profile photo is recompressed, and the CSS adds larger touch targets only for touch devices (`pointer: coarse`).

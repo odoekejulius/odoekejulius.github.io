@@ -3,15 +3,15 @@
   "title": "Julius Odo-Eke Portfolio Website",
   "year": "2026",
   "description": "An independently designed and built portfolio that brings my web development, data analysis and teaching work together. Hosted on GitHub Pages, it pairs responsive layouts and clean section URLs with project showcases and search-ready profile details.",
-  "image": "/assets/images/portfolio/portfolio-home-desktop.jpg",
+  "image": "assets/images/portfolio/portfolio-home-desktop.jpg",
   "image_alt": "Desktop homepage of the Julius Odo-Eke portfolio, showing the introduction, navigation and profile portrait.",
   "screenshots": [
    {
-    "image": "/assets/images/portfolio/portfolio-websites-desktop.jpg",
+    "image": "assets/images/portfolio/portfolio-websites-desktop.jpg",
     "caption": "Website projects section"
    },
    {
-    "image": "/assets/images/portfolio/portfolio-home-mobile.jpg",
+    "image": "assets/images/portfolio/portfolio-home-mobile.jpg",
     "caption": "Responsive mobile homepage"
    }
   ],

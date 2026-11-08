@@ -6,8 +6,16 @@
   <meta name="theme-color" content="#080b12">
   <meta name="robots" content="noindex">
   <title>Page not found | Julius Odo-Eke</title>
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/css/style.css?v=47">
+  <base href="./">
+  <script>
+    (() => {
+      const pathParts = location.pathname.split("/").filter(Boolean);
+      pathParts.pop();
+      document.querySelector("base").href = `/${pathParts.join("/")}${pathParts.length ? "/" : ""}`;
+    })();
+  </script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css?v=48">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -16,7 +24,7 @@
       <p class="eyebrow" style="justify-content:center">Error 404</p>
       <h1><span class="text-gradient">Lost.</span></h1>
       <p class="section-intro">That page doesn’t exist, or it has moved. The portfolio is one click away.</p>
-      <p><a class="button button-primary" href="/">Back to the portfolio <span aria-hidden="true">↗</span></a></p>
+      <p><a class="button button-primary" href="index.html">Back to the portfolio <span aria-hidden="true">↗</span></a></p>
     </div>
   </main>
 </body>

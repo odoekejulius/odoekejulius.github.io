@@ -1,0 +1,201 @@
+first_author,entries,core_entries,countries,core_markets,books,months,best_rank,gender_group,nationality
+Elena Ferrante,120,99,13,4,7,57,1,Female,Italy
+Stephen King,92,67,20,5,22,62,1,Male,United States
+Joël Dicker,87,81,8,4,6,58,1,Male,Switzerland
+John Grisham,84,65,13,4,14,61,1,Male,United States
+Guillaume Musso,80,76,5,1,14,62,1,Male,France
+James Patterson,78,71,6,1,65,68,1,Mixed (male + female),United States
+Paula Hawkins,77,55,16,3,3,35,1,Female,United Kingdom
+Jojo Moyes,74,34,17,3,12,44,1,Female,United Kingdom
+Ken Follett,74,62,13,5,9,26,1,Male,United Kingdom
+Andrea Camilleri,71,71,2,2,30,59,1,Male,Italy
+Delia Owens,59,43,13,3,1,35,1,Female,United States
+Lucinda Riley,58,37,11,3,17,42,1,Female,United Kingdom
+E. L. James,57,33,15,4,7,31,1,Female,United Kingdom
+Dan Brown,57,40,19,5,3,25,1,Male,United States
+Valerie Perrin,50,49,3,2,4,37,1,Female,France
+Camilla Läckberg,49,40,9,4,17,36,1,Female,Sweden
+Isabel Allende,48,40,9,4,6,38,1,Female,Chile
+David Baldacci,46,39,5,1,22,44,1,Male,United States
+Arturo Pérez-Reverte,46,42,3,1,10,43,1,Male,Spain
+Gianrico Carofiglio,45,45,1,1,15,45,1,Male,Italy
+Nicholas Sparks,43,37,8,3,10,39,1,Male,United States
+Antonio Manzini,43,43,1,1,19,35,1,Male,Italy
+Jonas Jonasson,42,29,10,3,6,28,1,Male,Sweden
+Sebastian Fitzek,42,36,4,1,14,40,1,Male,Germany
+Colleen Hoover,42,11,20,4,8,15,1,Female,United States
+Anthony Doerr,41,30,8,2,2,33,1,Male,United States
+Marc Levy,40,37,3,1,13,34,1,Male,France
+Jo Nesbø,39,13,18,5,14,31,1,Male,Norway
+John Green,38,18,14,2,5,21,1,Male,United States
+George R. R. Martin,37,16,16,4,10,26,1,Male,United States
+Maurizio De Giovanni,36,36,1,1,27,35,1,Male,Italy
+Haruki Murakami,36,19,17,5,9,28,1,Male,Japan
+J. K. Rowling,35,22,13,4,10,20,1,Female,United Kingdom
+Harlan Coben,35,33,5,3,13,29,1,Male,United States
+[Various],35,31,6,2,18,31,1,Mixed (male + female),Italy
+Lee Child,34,20,9,2,14,31,1,Male,United States
+Megan Maxwell,33,32,2,1,22,33,2,Female,Spain
+Michel Bussi,32,32,1,1,14,26,1,Male,France
+Pierre Lemaitre,32,32,2,2,12,29,1,Male,France
+Danielle Steel,32,25,6,1,27,30,1,Female,United States
+Juan Gómez-Jurado,32,32,1,1,4,29,2,Male,Spain
+Fernando Aramburu,31,31,1,1,3,30,1,Male,Spain
+David Lagercrantz,31,23,11,4,3,12,1,Male,Sweden
+Raphaëlle Giordano,31,31,2,2,5,28,1,Female,France
+Paulo Coelho,31,8,18,4,7,24,1,Male,Brazil
+Michael Connelly,31,27,8,4,14,26,1,Male,United States
+Jussi Adler-Olsen,30,24,6,2,12,24,1,Male,Denmark
+Juli Zeh,29,29,1,1,5,29,1,Female,Germany
+Madeline Miller,29,16,9,2,2,17,1,Female,United States
+Almudena Grandes,28,26,2,1,5,26,1,Female,Spain
+Khaled Hosseini,28,11,15,3,4,23,1,Male,United States
+Matt Haig,27,19,9,2,1,18,1,Male,United Kingdom
+Dorte Hansen,27,27,1,1,3,27,1,Female,Germany
+María Dueñas,26,23,3,1,6,24,1,Female,Spain
+Donna Leon,26,24,5,3,16,25,1,Male,United States
+Lætitia Colombani,26,26,2,2,4,25,1,Female,France
+Maja Lunde,26,24,2,1,5,21,1,Female,Norway
+Donna Tartt,25,21,7,4,1,14,1,Female,United States
+Andrea Vitali,25,25,1,1,12,23,2,Male,Italy
+Virginie Grimaldi,24,24,1,1,6,19,1,Female,France
+Lorenzo Silva,23,23,1,1,9,23,1,Male,Spain
+Clive Cussler,23,21,2,1,19,23,1,Male,United States
+Javier Castillo,23,22,2,1,5,23,1,Male,Spain
+Marco Malvaldi,22,22,1,1,11,22,1,Male,Italy
+Charlotte Link,22,20,3,1,7,21,1,Female,Germany
+Nora Roberts,22,12,7,2,18,20,1,Female,United States
+Stefania Auci,22,22,1,1,3,19,1,Female,Italy
+Michel Houellebecq,22,20,6,4,3,15,1,Male,France
+Amélie Nothomb,22,21,2,1,11,22,1,Female,Belgium
+Santiago Posteguillo,21,20,2,1,5,21,1,Male,Spain
+Volker Klüpfel,21,20,2,1,10,21,1,Male,Germany
+Daniel Silva,21,18,2,1,10,19,1,Male,United States
+Ferdinand von Schirach,21,21,1,1,5,21,1,Male,Germany
+George Orwell,21,1,8,1,2,17,2,Male,United Kingdom
+Julia Navarro,21,20,2,1,5,21,1,Female,Spain
+Margaret Atwood,21,15,7,3,3,16,1,Female,Canada
+Keigo Higashino,21,0,4,0,9,12,1,Male,Japan
+Franck Thilliez,20,20,1,1,9,16,2,Male,France
+Harper Lee,20,10,10,3,2,13,1,Female,United States
+Anna Todd,20,15,5,2,6,12,1,Female,United States
+Robert Galbraith,20,10,9,2,6,20,1,Female,United Kingdom
+Kristin Hannah,20,18,3,1,4,20,1,Female,United States
+Lisa Gardner,20,19,3,2,8,17,2,Female,United States
+Dolores Redondo,20,20,1,1,7,19,1,Female,Spain
+Aurélie Valognes,20,20,1,1,8,17,3,Female,France
+Jean-Christophe Rufin,20,20,1,1,10,18,2,Male,France
+Nele Neuhaus,19,14,4,1,7,19,1,Female,Germany
+Mario Vargas Llosa,19,11,5,1,6,15,1,Male,Peru
+Carlos Ruiz Zafón,18,14,7,3,6,16,1,Male,Spain
+Janet Evanovich,18,17,2,1,15,18,1,Mixed (male + female),United States
+Fred Vargas,18,18,4,4,4,17,1,Female,France
+Mitch Albom,18,11,5,1,5,16,1,Male,United States
+Albert Espinosa,18,18,1,1,7,18,1,Male,Spain
+Alex Michaelides,18,5,9,1,2,16,2,Male,Cyprus
+Eva García Sáenz de Urturi,18,18,1,1,5,18,1,Female,Spain
+Elin Hilderbrand,18,18,1,1,11,18,1,Female,United States
+Fredrik Backman,18,2,10,1,5,17,1,Male,Sweden
+Javier Cercas,17,17,1,1,5,17,1,Male,Spain
+Jodi Picoult,17,11,6,1,7,15,1,Female,United States
+Fabio Volo,17,17,1,1,6,17,1,Male,Italy
+Donato Carrisi,17,17,1,1,11,16,1,Male,Italy
+Bernard Minier,17,17,1,1,7,14,2,Male,France
+Elisabet Benavent,17,17,1,1,5,16,1,Female,Spain
+Graeme Simsion,17,7,6,1,4,13,1,Male,Australia
+Ian McEwan,17,11,7,4,5,16,1,Male,United Kingdom
+Liane Moriarty,16,11,7,2,6,16,1,Female,Australia
+Leïla Slimani,16,16,2,2,4,15,1,Female,Morocco
+Gillian Flynn,16,11,7,2,1,13,1,Female,United States
+Agnès Martin-Lugand,16,16,1,1,8,14,4,Female,France
+Maxime Chattam,15,15,1,1,7,15,3,Male,France
+Manuel Vilas,15,15,1,1,4,15,5,Male,Spain
+Alice Munro,15,10,7,3,6,7,1,Female,Canada
+Sveva Casati Modignani,15,15,1,1,9,15,1,Mixed (male + female),Italy
+J. D. Robb,15,15,1,1,15,15,3,Female,United States
+Julia Quinn,15,10,5,3,7,6,1,Female,United States
+Delphine de Vigan,15,15,1,1,4,15,1,Female,France
+Carmen Mola,15,15,1,1,6,14,1,Male,Spain
+Taylor Jenkins Reid,14,5,9,2,4,12,3,Female,United States
+Bernhard Schlink,14,13,2,1,4,14,1,Male,Germany
+Bonnie Garmus,14,14,2,2,1,9,1,Female,United States
+Amor Towles,14,9,5,1,2,13,2,Male,United States
+Simon Beckett,14,13,2,1,5,14,1,Male,United Kingdom
+Eduardo Mendoza,14,14,1,1,5,14,1,Male,Spain
+David Foenkinos,14,14,1,1,6,14,1,Male,France
+Wolfgang Herrndorf,14,14,1,1,3,13,1,Male,Germany
+John Sandford,14,14,1,1,14,14,1,Male,United States
+Mary Higgins Clark,14,13,3,2,10,12,3,Female,United States
+Karin Slaughter,13,10,3,1,10,12,2,Female,United States
+Melissa Da Costa,13,13,1,1,3,11,4,Female,France
+Martin Walker,13,12,2,1,9,13,1,Male,United Kingdom
+Patrick Modiano,13,13,2,2,7,8,1,Male,France
+Toshikazu Kawaguchi,13,10,4,1,3,10,1,Male,Japan
+Umberto Eco,13,11,6,4,6,9,1,Male,Italy
+Debbie Macomber,13,12,2,1,11,13,3,Female,United States
+Javier Marías,13,12,2,1,3,13,2,Male,Spain
+Ildefonso Falcones,13,13,2,2,4,12,1,Male,Spain
+Sylvain Tesson,13,13,1,1,5,13,1,Male,France
+Susanne Abel,13,13,1,1,3,10,3,Female,Germany
+Mariana Leky,13,13,1,1,3,13,3,Female,Germany
+Luis Landero,12,12,1,1,5,12,2,Male,Spain
+Celeste Ng,12,9,4,1,3,12,4,Female,United States
+Elke Heidenreich,12,12,1,1,2,12,2,Female,Germany
+André Aciman,12,5,6,2,2,9,1,Male,Egypt
+Saša Stanišić,12,11,2,1,2,11,2,Male,Germany
+Benedict Wells,12,12,1,1,2,12,1,Male,Germany
+Colson Whitehead,12,9,3,1,3,12,1,Male,United States
+Arnaldur Indriðason,12,11,2,1,9,12,2,Male,Iceland
+Gilles Legardinier,12,12,1,1,6,11,3,Male,France
+Alessia Gazzola,12,12,1,1,9,12,2,Female,Italy
+Antonio Scurati,12,12,2,2,3,12,1,Male,Italy
+Gabriel García Márquez,12,2,7,1,3,9,3,Male,Colombia
+Alessandro D'Avenia,12,12,1,1,5,12,1,Male,Italy
+Alessandro Robecchi,12,12,1,1,7,11,1,Male,Italy
+Gail Honeyman,11,5,5,1,1,8,1,Female,United Kingdom
+Sarah J. Maas,11,5,6,2,6,11,1,Female,United States
+Hanya Yanagihara,11,5,8,3,2,9,2,Female,United States
+Sally Rooney,11,5,9,3,2,9,1,Female,Ireland
+Martin Suter,11,9,3,1,5,10,1,Male,Switzerland
+Ruth Ware,11,11,1,1,6,11,4,Female,United Kingdom
+Kevin Kwan,11,1,5,1,4,8,2,Male,Singapore
+Elizabeth Strout,11,8,5,3,4,10,2,Female,United States
+Javier Sierra,11,11,1,1,4,11,1,Male,Spain
+Antoine de Saint-Exupéry,11,0,5,0,1,10,1,Male,France
+Kate Morton,11,8,4,2,4,10,2,Female,Australia
+Henning Mankell,11,8,6,3,7,10,4,Male,Sweden
+Marcello Simoni,11,11,1,1,6,11,1,Male,Italy
+Hervé Le Tellier,11,11,3,3,1,10,1,Male,France
+Virginie Despentes,11,11,1,1,3,10,1,Female,France
+Wilbur Smith,11,4,5,1,8,10,2,Male,United Kingdom
+Laurent Gounelle,11,8,3,1,6,10,2,Male,France
+Sylvia Day,11,6,7,3,6,9,1,Female,United States
+Katherine Pancol,11,10,3,2,6,9,1,Female,France
+Carmen Korn,10,10,1,1,3,10,2,Female,Germany
+Carsten Henn,10,10,1,1,2,9,5,Male,Germany
+Erin Doom,10,10,1,1,2,8,1,Female,Italy
+Mary Kay Andrews,10,10,2,2,7,9,3,Female,United States
+Neil Gaiman,10,7,3,1,4,10,1,Male,United Kingdom
+Giorgio Faletti,10,10,1,1,3,9,2,Male,Italy
+Sophie Kinsella,10,3,6,2,6,8,2,Female,United Kingdom
+Marc Elsberg,10,7,3,1,4,9,1,Male,Austria
+Suzanne Collins,10,8,6,4,1,6,1,Female,United States
+Lorenzo Marone,10,10,1,1,6,10,3,Male,Italy
+Chetan Bhagat,10,0,1,0,8,4,1,Male,India
+Stuart Woods,10,10,1,1,10,10,3,Male,United States
+Simonetta Agnello Hornby,10,10,1,1,6,9,2,Female,Italy
+Jan Weiler,10,10,1,1,6,8,1,Male,Germany
+Victoria Hislop,10,0,3,0,7,8,2,Female,United Kingdom
+Bernard Werber,10,7,3,1,6,9,1,Male,France
+Leonardo Padura Fuentes,9,7,3,1,5,8,3,Male,Cuba
+Heather Morris,9,1,9,1,1,9,2,Female,New Zealand
+Lisa Scottoline,9,9,1,1,9,9,2,Female,United States
+Brit Bennett,9,9,1,1,1,9,1,Female,United States
+Luca Bianchini,9,9,1,1,6,9,3,Male,Italy
+Elizabeth George,9,9,3,3,5,9,1,Female,United States
+Jennifer Weiner,9,9,1,1,6,9,5,Female,United States
+Rebecca Gablé,9,9,1,1,5,9,3,Female,Germany
+Rachel Joyce,9,9,1,1,2,9,1,Female,United Kingdom
+Massimo Carlotto,9,9,1,1,7,9,3,Male,Italy
+Jean-Christophe Grangé,9,7,3,1,7,9,2,Male,France
+David Trueba,9,9,1,1,3,9,3,Male,Spain

@@ -1,0 +1,79 @@
+// DAX query view option (Power BI Desktop > DAX query view): paste everything, then click "Update model" on each measure.
+DEFINE
+    MEASURE Books[Entries] =
+        COUNTROWS(Books)
+
+    MEASURE Books[Core Entries] =
+        CALCULATE(COUNTROWS(Books), Books[is_core] = 1)
+
+    MEASURE Books[Unique Books] =
+        DISTINCTCOUNT(Books[book_key])
+
+    MEASURE Books[Unique Authors] =
+        DISTINCTCOUNT(Books[first_author])
+
+    MEASURE Books[Months Covered] =
+        DISTINCTCOUNT(Books[list_month])
+
+    MEASURE Books[Female Entries] =
+        CALCULATE(COUNTROWS(Books), Books[author_gender_group] = "Female")
+
+    MEASURE Books[Male Entries] =
+        CALCULATE(COUNTROWS(Books), Books[author_gender_group] = "Male")
+
+    MEASURE Books[Female Share] =
+        DIVIDE([Female Entries], [Female Entries] + [Male Entries])
+
+    MEASURE Books[Female Share (Comparable)] =
+        CALCULATE([Female Share], Books[list_definition_break] = 0)
+
+    MEASURE Books[Female Share at Number One (Comparable)] =
+        CALCULATE([Female Share], Books[list_rank] = 1, Books[list_definition_break] = 0)
+
+    MEASURE Books[Female Share Ranks 2-10 (Comparable)] =
+        CALCULATE([Female Share], Books[list_rank] > 1, Books[list_definition_break] = 0)
+
+    MEASURE Books[Origin Known Entries] =
+        CALCULATE(COUNTROWS(Books), Books[origin_comparable] = 1)
+
+    MEASURE Books[Domestic Author Entries] =
+        CALCULATE(COUNTROWS(Books), Books[origin_comparable] = 1, Books[author_origin] = "Domestic author")
+
+    MEASURE Books[Domestic Author Share] =
+        DIVIDE([Domestic Author Entries], [Origin Known Entries])
+
+    MEASURE Books[Foreign Author Share] =
+        DIVIDE(CALCULATE(COUNTROWS(Books), Books[origin_comparable] = 1, Books[author_origin] = "Foreign author"), [Origin Known Entries])
+
+    MEASURE Books[Domestic Publisher Share] =
+        DIVIDE(CALCULATE(COUNTROWS(Books), Books[publisher_origin] = "Domestic publisher"), [Entries])
+
+    MEASURE Books[New Entry Share] =
+        DIVIDE(CALCULATE(COUNTROWS(Books), Books[is_new_entry] = 1), [Entries])
+
+    MEASURE Books[Distinct Number One Books] =
+        CALCULATE(DISTINCTCOUNT(Books[book_key]), Books[list_rank] = 1)
+
+    MEASURE Books[Anthology Share] =
+        DIVIDE(CALCULATE(COUNTROWS(Books), Books[is_anthology] = 1), [Entries])
+
+    MEASURE Books[Median Months on List] =
+        CALCULATE(MEDIAN(BookRuns[months_on_list]), BookRuns[run_fully_observed] = 1)
+
+    MEASURE Books[Avg Months on List] =
+        CALCULATE(AVERAGE(BookRuns[months_on_list]), BookRuns[run_fully_observed] = 1)
+
+    MEASURE Books[Share One-Month Runs] =
+        DIVIDE(CALCULATE(COUNTROWS(BookRuns), BookRuns[run_fully_observed] = 1, BookRuns[months_on_list] = 1), CALCULATE(COUNTROWS(BookRuns), BookRuns[run_fully_observed] = 1))
+
+    MEASURE Books[Top 5 Publisher Share] =
+        AVERAGE(ConcentrationCore[top5_publisher_share])
+
+    MEASURE Books[Publisher HHI] =
+        AVERAGE(ConcentrationCore[publisher_hhi])
+
+    MEASURE Books[Authors in 3+ Core Markets] =
+        CALCULATE(COUNTROWS(GlobalAuthors), GlobalAuthors[core_markets] >= 3)
+
+EVALUATE
+    ROW("Measures defined", 1)

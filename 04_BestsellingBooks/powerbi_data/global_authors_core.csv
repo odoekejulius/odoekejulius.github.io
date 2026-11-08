@@ -1,0 +1,136 @@
+first_author,core_entries,core_markets,books,gender_group,nationality
+Elena Ferrante,99,4,7,Female,Italy
+Joël Dicker,81,4,6,Male,Switzerland
+Andrea Camilleri,71,2,30,Male,Italy
+Stephen King,67,5,22,Male,United States
+John Grisham,65,4,14,Male,United States
+Ken Follett,62,5,9,Male,United Kingdom
+Paula Hawkins,55,3,3,Female,United Kingdom
+Valerie Perrin,49,2,4,Female,France
+Delia Owens,43,3,1,Female,United States
+Camilla Läckberg,40,4,17,Female,Sweden
+Dan Brown,40,5,3,Male,United States
+Isabel Allende,40,4,6,Female,Chile
+Lucinda Riley,37,3,17,Female,United Kingdom
+Nicholas Sparks,37,3,10,Male,United States
+Jojo Moyes,34,3,12,Female,United Kingdom
+E. L. James,33,4,7,Female,United Kingdom
+Harlan Coben,33,3,13,Male,United States
+Pierre Lemaitre,32,2,12,Male,France
+Raphaëlle Giordano,31,2,5,Female,France
+[Various],31,2,18,Mixed (male + female),Italy
+Anthony Doerr,30,2,2,Male,United States
+Jonas Jonasson,29,3,6,Male,Sweden
+Michael Connelly,27,4,14,Male,United States
+Lætitia Colombani,26,2,4,Female,France
+Jussi Adler-Olsen,24,2,12,Male,Denmark
+Donna Leon,24,3,16,Male,United States
+David Lagercrantz,23,4,3,Male,Sweden
+J. K. Rowling,22,4,10,Female,United Kingdom
+Donna Tartt,21,4,1,Female,United States
+Lee Child,20,2,14,Male,United States
+Michel Houellebecq,20,4,3,Male,France
+Matt Haig,19,2,1,Male,United Kingdom
+Haruki Murakami,19,5,9,Male,Japan
+Lisa Gardner,19,2,8,Female,United States
+John Green,18,2,5,Male,United States
+Fred Vargas,18,4,4,Female,France
+Leïla Slimani,16,2,4,Female,Morocco
+George R. R. Martin,16,4,10,Male,United States
+Madeline Miller,16,2,2,Female,United States
+Anna Todd,15,2,6,Female,United States
+Margaret Atwood,15,3,3,Female,Canada
+Carlos Ruiz Zafón,14,3,6,Male,Spain
+Bonnie Garmus,14,2,1,Female,United States
+Ildefonso Falcones,13,2,4,Male,Spain
+Patrick Modiano,13,2,7,Male,France
+Mary Higgins Clark,13,2,10,Female,United States
+Jo Nesbø,13,5,14,Male,Norway
+Nora Roberts,12,2,18,Female,United States
+Antonio Scurati,12,2,3,Male,Italy
+Colleen Hoover,11,4,8,Female,United States
+Khaled Hosseini,11,3,4,Male,United States
+Hervé Le Tellier,11,3,1,Male,France
+Gillian Flynn,11,2,1,Female,United States
+Ian McEwan,11,4,5,Male,United Kingdom
+Liane Moriarty,11,2,6,Female,Australia
+Umberto Eco,11,4,6,Male,Italy
+Alice Munro,10,3,6,Female,Canada
+Harper Lee,10,3,2,Female,United States
+Robert Galbraith,10,2,6,Female,United Kingdom
+Katherine Pancol,10,2,6,Female,France
+Julia Quinn,10,3,7,Female,United States
+Mary Kay Andrews,10,2,7,Female,United States
+Elizabeth George,9,3,5,Female,United States
+A. J. Finn,9,2,1,Male,United States
+Kate Morton,8,2,4,Female,Australia
+Bill Clinton,8,2,2,Male,United States
+Don Winslow,8,3,4,Male,United States
+Suzanne Collins,8,4,1,Female,United States
+Elizabeth Strout,8,3,4,Female,United States
+Paulo Coelho,8,4,7,Male,Brazil
+Henning Mankell,8,3,7,Male,Sweden
+Emmanuel Carrère,7,2,2,Male,France
+Paul Auster,7,3,1,Male,United States
+John le Carré,7,3,4,Male,United Kingdom
+Julian Barnes,6,2,3,Male,United Kingdom
+Federico Moccia,6,2,4,Male,Italy
+Sylvia Day,6,3,6,Female,United States
+Stephenie Meyer,6,4,3,Female,United States
+John Irving,6,2,2,Male,United States
+Alicia Giménez Bartlett,6,2,3,Female,Spain
+Erri De Luca,6,2,6,Male,Italy
+Sally Rooney,5,3,2,Female,Ireland
+Sarah J. Maas,5,2,6,Female,United States
+Taylor Jenkins Reid,5,2,4,Female,United States
+Hanya Yanagihara,5,3,2,Female,United States
+André Aciman,5,2,2,Male,Egypt
+Luca Di Fulvio,5,2,3,Male,Italy
+Amanda Gorman,5,2,2,Female,United States
+Rachael Lippincott,5,2,1,Female,United States
+Clara Sanchez,5,2,3,Female,Spain
+Brandon Sanderson,5,2,6,Male,United States
+George Saunders,5,2,3,Male,United States
+Jeffery Deaver,5,2,5,Male,United States
+Jeffrey Archer,4,2,7,Male,United Kingdom
+Patricia Cornwell,4,2,4,Female,United States
+Jonathan Franzen,4,2,2,Male,United States
+Petros Markaris,4,2,5,Male,Greece
+Christopher Paolini,4,2,2,Male,United States
+Lauren Weisberger,4,2,3,Female,United States
+Emma Cline,4,2,1,Female,United States
+Richard Ford,4,2,1,Male,United States
+Éric Vuillard,4,2,2,Male,France
+Cassandra Clare,4,2,4,Female,United States
+Miranda Cowley Heller,3,2,1,Female,United States
+Kazuo Ishiguro,3,2,3,Male,United Kingdom
+Orhan Pamuk,3,2,3,Male,Turkey
+Sophie Kinsella,3,2,6,Female,United Kingdom
+Amy Tan,3,2,1,Female,United States
+Maggie O'Farrell,3,2,2,Female,Ireland
+Olga Tokarczuk,3,2,3,Female,Poland
+Philip Roth,3,2,3,Male,United States
+Mathias Énard,3,2,1,Male,France
+Marco Balzano,3,2,2,Male,Italy
+Glenn Cooper,3,2,3,Male,United States
+Luca D'Andrea,3,2,1,Male,Italy
+Adeline Dieudonne,3,2,1,Female,Belgium
+Christina Lauren,3,2,3,Female,United States
+David Safier,3,2,1,Male,Germany
+Garth Risk Hallberg,3,2,1,Male,United States
+Lisa Hilton,3,3,1,Female,United Kingdom
+Mona Kasten,2,2,5,Female,Germany
+Albert Camus,2,2,2,Male,France
+Hilary Mantel,2,2,1,Female,United Kingdom
+Terry Hayes,2,2,1,Male,United Kingdom
+J. R. R. Tolkien,2,2,3,Male,United Kingdom
+Dave Eggers,2,2,1,Male,United States
+Tess Gerritsen,2,2,1,Female,United States
+Jennifer Armentrout,2,2,2,Female,United States
+Jónas Jónassen,2,2,1,Male,Sweden
+Bernard Cornwell,2,2,2,Male,United Kingdom
+Anne Jacobs,2,2,2,Female,Germany
+Yasmina Reza,2,2,2,Female,France
+Guillermo del Toro,2,2,2,Male,Mexico
+Daniel Pennac,2,2,2,Male,France
+Franz-Olivier Giesbert,2,2,2,Male,France

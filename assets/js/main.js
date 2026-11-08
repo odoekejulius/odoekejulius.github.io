@@ -3,17 +3,21 @@
   const progress = document.querySelector(".reading-progress");
   const menuButton = document.querySelector(".menu-toggle");
   const navigation = document.querySelector("#site-nav");
+  const basePath = new URL(document.baseURI).pathname.replace(/\/+$/, "");
+  const routePath = (route) => route === "/"
+    ? `${basePath}/` || "/"
+    : `${basePath}${route}`;
   const sectionRoutes = new Map([
-    ["top", "/"],
-    ["about", "/about"],
-    ["website-projects", "/websites"],
-    ["analytics-projects", "/analytics"],
-    ["experience", "/experience"],
-    ["skills", "/skills"],
-    ["education", "/education"],
-    ["documents", "/documents"],
-    ["process", "/process"],
-    ["contact", "/contact"]
+    ["top", routePath("/")],
+    ["about", routePath("/about")],
+    ["website-projects", routePath("/websites")],
+    ["analytics-projects", routePath("/analytics")],
+    ["experience", routePath("/experience")],
+    ["skills", routePath("/skills")],
+    ["education", routePath("/education")],
+    ["documents", routePath("/documents")],
+    ["process", routePath("/process")],
+    ["contact", routePath("/contact")]
   ]);
   const routeSections = new Map(
     [...sectionRoutes].map(([sectionId, route]) => [route, sectionId])
@@ -23,7 +27,10 @@
     const section = target?.closest("main section[id]");
     return sectionRoutes.get(section?.id) ?? "/";
   };
-  const currentRoute = () => window.location.pathname.replace(/\/+$/, "") || "/";
+  const currentRoute = () => {
+    const path = window.location.pathname.replace(/\/+$/, "") || "/";
+    return basePath && path === basePath ? `${basePath}/` : path;
+  };
   let zipLibraryPromise;
   const loadZipLibrary = () => {
     if (window.JSZip) return Promise.resolve(window.JSZip);
@@ -530,7 +537,7 @@
         });
         const supportedExtensions = new Set([
           "csv", "docx", "html", "ipynb", "js", "jsx", "json", "md", "pdf", "pptx",
-          "py", "r", "sql", "txt", "ts", "tsx", "xlsx", "xlsm", "png", "jpg", "jpeg", "webp"
+          "py", "r", "sql", "txt", "ts", "tsx", "xlsx", "xlsm", "png", "jpg", "jpeg"
         ]);
         if (!files.length || files.length > 50) throw new Error("A project package must contain between 1 and 50 files.");
         let totalUncompressedSize = 0;
@@ -575,7 +582,7 @@
                 frame.title = `${title} — ${fileInfo.path}`;
                 frame.src = activeObjectUrl;
                 filePreview.append(frame);
-              } else if (["png", "jpg", "jpeg", "webp"].includes(extension)) {
+              } else if (["png", "jpg", "jpeg"].includes(extension)) {
                 const blob = await fileInfo.file.async("blob");
                 activeObjectUrl = URL.createObjectURL(blob);
                 const image = document.createElement("img");

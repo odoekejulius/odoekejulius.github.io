@@ -9,7 +9,17 @@
   <meta name="description" content="Julius Chibuzo Odo-Eke is an Abuja-based full-stack web developer, data analyst, and educator. Explore his projects, experience, and credentials.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://odoekejulius.github.io/">
-  <base href="/">
+  <base href="./">
+  <script>
+    (() => {
+      const pathParts = location.pathname.split("/").filter(Boolean);
+      const lastPart = pathParts[pathParts.length - 1];
+      if (["index.html", "terms.html"].includes(lastPart)) pathParts.pop();
+      const sectionRoutes = ["about", "websites", "analytics", "experience", "skills", "education", "documents", "process", "contact"];
+      if (sectionRoutes.includes(pathParts[pathParts.length - 1])) pathParts.pop();
+      document.querySelector("base").href = `/${pathParts.join("/")}${pathParts.length ? "/" : ""}`;
+    })();
+  </script>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_NG">
   <meta property="og:site_name" content="Julius Odo-Eke">
@@ -67,7 +77,7 @@
       }
     })();
   </script>
-  <script src="assets/js/main.js?v=48" defer></script>
+  <script src="assets/js/main.js?v=49" defer></script>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -166,8 +176,8 @@
         </div>
         <div class="project-grid website-project-grid">
           <article class="project-card project-featured reveal">
-            <a class="project-image" href="assets/images/renacido/renacido-storefront-home.webp" target="_blank" rel="noopener noreferrer" aria-label="View the Renacido Pharmacy storefront screenshot">
-              <img src="assets/images/renacido/renacido-storefront-home.webp" alt="Renacido Pharmacy online storefront, with product and consultation links" width="1270" height="562" loading="lazy">
+            <a class="project-image" href="assets/images/renacido/renacido-storefront-home.png" target="_blank" rel="noopener noreferrer" aria-label="View the Renacido Pharmacy storefront screenshot">
+              <img src="assets/images/renacido/renacido-storefront-home.png" alt="Renacido Pharmacy online storefront, with product and consultation links" width="1270" height="562" loading="lazy">
               <span class="image-link" aria-hidden="true">↗</span>
             </a>
             <div class="project-content">
@@ -181,20 +191,20 @@
               </ul>
               <div class="tag-list"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>E-commerce</span></div>
               <div class="project-gallery" aria-label="Renacido Pharmacy website and dashboard screenshots">
-                <a href="assets/images/renacido/renacido-customer-sign-in.webp" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/images/renacido/renacido-customer-sign-in.webp" alt="Customer sign-in page for Renacido Pharmacy" width="1269" height="568" loading="lazy">
+                <a href="assets/images/renacido/renacido-customer-sign-in.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-customer-sign-in.png" alt="Customer sign-in page for Renacido Pharmacy" width="1269" height="568" loading="lazy">
                   <span>Customer sign-in</span>
                 </a>
-                <a href="assets/images/renacido/renacido-storefront-footer.webp" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/images/renacido/renacido-storefront-footer.webp" alt="Renacido Pharmacy website footer with storefront navigation and contact details" width="1261" height="561" loading="lazy">
+                <a href="assets/images/renacido/renacido-storefront-footer.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-storefront-footer.png" alt="Renacido Pharmacy website footer with storefront navigation and contact details" width="1261" height="561" loading="lazy">
                   <span>Website footer</span>
                 </a>
-                <a href="assets/images/renacido/renacido-admin-dashboard.webp" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/images/renacido/renacido-admin-dashboard.webp" alt="Renacido Pharmacy administration dashboard menu showing store management areas" width="1080" height="2004" loading="lazy">
+                <a href="assets/images/renacido/renacido-admin-dashboard.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-admin-dashboard.png" alt="Renacido Pharmacy administration dashboard menu showing store management areas" width="1080" height="2004" loading="lazy">
                   <span>Administration</span>
                 </a>
-                <a href="assets/images/renacido/renacido-admin-sign-in.webp" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/images/renacido/renacido-admin-sign-in.webp" alt="Administrator sign-in page for Renacido Pharmacy" width="1261" height="564" loading="lazy">
+                <a href="assets/images/renacido/renacido-admin-sign-in.png" target="_blank" rel="noopener noreferrer">
+                  <img src="assets/images/renacido/renacido-admin-sign-in.png" alt="Administrator sign-in page for Renacido Pharmacy" width="1261" height="564" loading="lazy">
                   <span>Admin sign-in</span>
                 </a>
               </div>
