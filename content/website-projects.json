@@ -2,7 +2,7 @@
  {
   "title": "Julius Odo-Eke Portfolio Website",
   "year": "2026",
-  "description": "An independently designed and built portfolio that brings my web development, data analysis and teaching work together. Hosted on GitHub Pages, it pairs responsive layouts and clean section URLs with project showcases and search-ready profile details.",
+  "description": "This site: a portfolio for my web development, data analysis and teaching work. It is hosted on GitHub Pages, and each section has its own address you can share.",
   "image": "assets/images/portfolio/portfolio-home-desktop.jpg",
   "image_alt": "Desktop homepage of the Julius Odo-Eke portfolio, showing the introduction, navigation and profile portrait.",
   "screenshots": [
@@ -16,9 +16,9 @@
    }
   ],
   "highlights": [
-   "Responsive portfolio with clean, directly shareable section URLs.",
-   "Sveltia CMS collections for published projects, alongside public document previews.",
-   "Performance-conscious loading: ZIP previews load on demand to keep initial page loads lighter."
+   "Each section has its own address you can share.",
+   "Projects are managed through a Sveltia CMS admin page, and documents have public previews.",
+   "Large previews load only when you open them."
   ],
   "tags": [
    "HTML",
@@ -32,9 +32,9 @@
  {
   "title": "C.Zara Enterprise Website",
   "year": "2026",
-  "description": "A website for C.Zara Enterprise, a natural foods business based in Kurudu, Abuja. It introduces the business and its products, tells its story, and gives customers a direct WhatsApp line for enquiries. It is hosted live on GitHub Pages.",
+  "description": "A four-page website for C.Zara Enterprise, a natural foods business based in Kurudu, Abuja. It introduces the business and its products, tells its story, and gives customers a direct WhatsApp line for enquiries. The site is live on GitHub Pages.",
   "highlights": [
-   "Home, About, Gallery and Contact pages in one consistent design",
+   "Home, About Us, Products and Contact pages in one consistent design",
    "Product showcase covering natural honey, cashew nuts, groundnuts and red palm oil",
    "WhatsApp contact built into the header, page calls to action and footer"
   ],
@@ -43,7 +43,7 @@
    "CSS",
    "GitHub Pages"
   ],
-  "live_url": "https://odoekejulius.github.io/czara/"
+  "live_url": "https://chiomafloxxy.github.io/"
  },
  {
   "title": "Nethub",

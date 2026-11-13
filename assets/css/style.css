@@ -882,3 +882,9 @@ h1, h2 { text-wrap: balance; }
   .contact-link { padding-block: 12px; }
   .theme-toggle, .menu-toggle { width: 44px; height: 44px; }
 }
+
+/* Plainer details: headline emphasis is a solid accent colour, no numbered badges, no pulsing dot */
+.text-gradient, :root[data-theme="light"] .text-gradient { background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: currentColor; color: var(--accent); }
+.skill-number, .process-step > span { display: none; }
+.availability-dot { animation: none; }
+
