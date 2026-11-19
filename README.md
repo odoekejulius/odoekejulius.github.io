@@ -111,11 +111,22 @@ Add new website and analytics entries from the admin dashboard instead of editin
     │           └── Validation_Checks.csv
     │   ├── student-dropout-risk/
     │       ├── dashboard-preview.html
-    │       └── analysis-report-preview.html
+    │       ├── analysis-report-preview.html
+    │       ├── analysis-report.docx
+    │       ├── StudentDropout_PowerBI_Data.xlsx
+    │       ├── dashboard-source.jsx
+    │       ├── aggregate CSV outputs
+    │       ├── StudentDropout_PowerBI_Package.zip
+    │       └── powerbi/ (setup guide, DAX measures, validation checks)
     │   ├── social-media-wellbeing/
     │       ├── dashboard-preview.html
     │       ├── analysis-report-preview.html
-    │       └── reviewed aggregate CSV outputs
+    │       ├── analysis-report.docx
+    │       ├── SocialMedia_PowerBI_Data.xlsx
+    │       ├── dashboard-source.jsx
+    │       ├── reviewed aggregate CSV outputs
+    │       ├── SocialMedia_PowerBI_Package.zip
+    │       └── powerbi/ (setup guide, DAX measures, validation checks)
     │   └── bestselling-books/
     │       ├── dashboard-preview.html
     │       ├── analysis-report-preview.html
@@ -148,7 +159,7 @@ Add new website and analytics entries from the admin dashboard instead of editin
 
 ## Recent design updates
 
-Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, in-development cards for C.Zara Enterprise and Nethub, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and embedded analytics dashboards. The CMS project package preview uses the vendored JSZip 3.10.1 library under its included MIT license. Bump asset cache versions when referenced files change, and keep each shared asset's cache version consistent across `index.html`, `terms.html` and `404.html`; the stylesheet is currently version `48` and the main script version `49`. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
+Ambient aurora and dot-grid background, a highlights band with count-up numbers, a Download CV button, Renacido highlights, cards for C.Zara Enterprise, Nethub and MedKings Pharmacy, larger small text, left-aligned reading blocks, compressed images, a 1200x630 social preview (`assets/images/og-cover.png`), `404.html`, and `.nojekyll`. The site includes a light/dark toggle whose preference is remembered in the browser, an email composer with validation and topic selection, and embedded analytics dashboards. The CMS project package preview uses the vendored JSZip 3.10.1 library under its included MIT license. Bump asset cache versions when referenced files change, and keep each shared asset's cache version consistent across `index.html`, `terms.html` and `404.html`; the stylesheet and the main script are both currently version `49`. Shared color values live in the stylesheet’s root custom properties so future visual changes can use the palette instead of repeating literals throughout component rules.
 
 ## Social preview image (follows your profile photo)
 
@@ -160,8 +171,8 @@ To change the wording on the card (name, roles, location line), edit the constan
 
 ## Data analytics projects and Power BI packages
 
-There are four hand-built analytics cards in `index.html`: World Cup 2026, Student Dropout Risk, Social Media and Student Wellbeing, and Bestselling Books. The World Cup and Bestselling Books projects use public data, so their workbooks, aggregate CSVs and Power BI packages are published. The Student Dropout and Social Media projects publish only dashboard and report previews (and, for Social Media, reviewed aggregate CSVs); their student-level files and Power BI packages stay out of the public repository.
+There are four hand-built analytics cards in `index.html`: World Cup 2026, Student Dropout Risk, Social Media and Student Wellbeing, and Bestselling Books. All four projects publish their dashboard and report previews, workbook, aggregate CSVs and Power BI package. The Student Dropout and Social Media packages include the cleaned student-level data file (`student_clean.csv`), which the Power Query scripts and DAX measures need; it is inside the package ZIP only, not as a separate file.
 
-Each published Power BI package (a ZIP of `powerbi/` and `powerbi_data/`) contains Power Query load scripts, DAX measures, a report theme, a setup guide and a validation sheet whose expected values were recomputed from the raw data and match (18 for World Cup, 23 for Bestselling Books). The scripts were checked statically and have not been opened in Power BI Desktop, and no Power BI report (`.pbix`) is included. The dashboards on this site are browser previews of the intended design.
+Each published Power BI package (a ZIP of `powerbi/` and `powerbi_data/`) contains Power Query load scripts, DAX measures, a report theme, a setup guide and a validation sheet whose expected values were recomputed from the raw data and match (18 for World Cup, 23 for Bestselling Books). The Student Dropout and Social Media packages carry their own validation sheets (24 and 21 expected values); a spot check of their headline figures against the student files matched. The scripts were checked statically and have not been opened in Power BI Desktop, and no Power BI report (`.pbix`) is included. The dashboards on this site are browser previews of the intended design.
 
 Sizes and speed: the Renacido screenshots are PNG, the profile photo is recompressed, and the CSS adds larger touch targets only for touch devices (`pointer: coarse`).

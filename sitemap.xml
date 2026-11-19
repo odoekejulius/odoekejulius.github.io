@@ -2,10 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://odoekejulius.github.io/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://odoekejulius.github.io/terms.html</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/about/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/websites/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/analytics/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/experience/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/skills/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/education/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/documents/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/process/</loc>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://odoekejulius.github.io/contact/</loc>
+    <lastmod>2026-11-19</lastmod>
   </url>
 </urlset>

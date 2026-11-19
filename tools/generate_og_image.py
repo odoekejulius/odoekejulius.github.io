@@ -4,7 +4,7 @@
 The card is the picture shown when the site link is shared (WhatsApp, LinkedIn, X, Chrome, search).
 It reads the photo path from content/site-settings.json (the "portrait_image" field the admin
 panel edits) and falls back to assets/images/julius-odoeke.jpeg. After drawing the card it adds a
-?v=<fingerprint> to the og:image / twitter:image links in index.html, so link-preview caches fetch
+?v=<fingerprint> to the og:image / twitter:image links in index.html and the section pages, so link-preview caches fetch
 the new picture instead of showing the old one.
 
 Run locally:   pip install pillow   then   python tools/generate_og_image.py
@@ -23,7 +23,8 @@ SITE_URL = "https://odoekejulius.github.io"
 SETTINGS_FILE = ROOT / "content" / "site-settings.json"
 DEFAULT_PHOTO = "assets/images/julius-odoeke.jpeg"
 OUTPUT = ROOT / "assets" / "images" / "og-cover.png"
-PAGE = ROOT / "index.html"
+SECTIONS = ("about", "websites", "analytics", "experience", "skills", "education", "documents", "process", "contact")
+PAGES = [ROOT / "index.html"] + [ROOT / name / "index.html" for name in SECTIONS]
 
 NAME_LINES = ("Julius Chibuzo", "Odo-Eke")
 ROLE_LINES = ("Full-stack web developer", "Data analyst  \u00b7  Educator")
@@ -105,14 +106,15 @@ def build_card(photo_file):
 
 def stamp_page(version, photo_relative):
     """Point the preview-image meta tags (and the structured-data photo) at the new files."""
-    if not PAGE.is_file():
-        return
-    with open(PAGE, encoding="utf-8", newline="") as handle:
-        text = handle.read()
-    text = re.sub(r"(assets/images/og-cover\.png)(\?v=[0-9a-f]+)?", rf"\1?v={version}", text)
-    text = re.sub(r'("image":\s*")' + re.escape(SITE_URL) + r'/[^"]+(")', rf"\g<1>{SITE_URL}/{photo_relative}\g<2>", text)
-    with open(PAGE, "w", encoding="utf-8", newline="") as handle:
-        handle.write(text)
+    for page in PAGES:
+        if not page.is_file():
+            continue
+        with open(page, encoding="utf-8", newline="") as handle:
+            text = handle.read()
+        text = re.sub(r"(assets/images/og-cover\.png)(\?v=[0-9a-f]+)?", rf"\1?v={version}", text)
+        text = re.sub(r'("image":\s*")' + re.escape(SITE_URL) + r'/[^"]+(")', rf"\g<1>{SITE_URL}/{photo_relative}\g<2>", text)
+        with open(page, "w", encoding="utf-8", newline="") as handle:
+            handle.write(text)
 
 
 def main():
