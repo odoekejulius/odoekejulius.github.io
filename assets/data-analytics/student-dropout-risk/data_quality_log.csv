@@ -1,0 +1,14 @@
+check_type,check,rows_affected,finding,action
+Completeness,Missing values in any column,0,None found,No action
+Uniqueness,Duplicate rows / duplicate person_id,0,None found,No action
+Logic,units_passed + units_failed = units_enrolled,0,Holds for 100% of rows (0 violations),No action
+Logic,part_time_job flag consistent with weekly_work_hours,0,0 violations,No action
+Plausibility,Students aged 15-16 at a degree-level institution,7753,"7.75% of rows; age shows ~1pp spread in dropout, so conclusions unaffected",Kept & flagged; confirm age field with data owner
+Plausibility,gpa_semester_2 populated for semester-1 students,19995,"Semantics unclear: field may mean ""prior-year semester 2"" or be mis-recorded",Kept; confirm definition; treated as a prior-term GPA
+Plausibility,international_student independent of nationality,5477,"~18% flagged international within every nationality (e.g. 5,477 USA nationals) - cannot be visa status",Kept; do NOT interpret as visa status; clarify definition
+Range,"Capped values (attendance=100, assignments=100, GPA1=4.0, admission=200, prior grade=200)",26916,"26,916 capped entries across 5 fields (10,556 / 10,316 / 4,255 / 945 / 844; a student can appear in more than one) - valid but compressed at the top",Kept; noted for modelling
+Range,admission_grade below 50 on a 0-200 scale,169,Min 5.5 - unusual but within scale,Kept & flagged
+Valid zeros,lms_logins_per_week = 0 / library_visits = 0,3060,"3,060 zero-LMS; 7,815 zero-library students - genuine disengagement, not missing (56% / 77% dropout)",Kept as signal
+Outliers,missed_deadlines up to 20; units_failed up to 17,397,"397 students with 15+ missed deadlines or 12+ failed units - plausible extremes, monotone with dropout",Kept
+Interpretation,Dataset behaves like simulated data (very clean monotone gradients; nationality/gender/course ~no effect),,Treat as a demonstration dataset; validate on real institutional data before acting,Caveat in report
+Interpretation,Timing of outcome vs features not documented (possible leakage from end-of-term GPA),,Addressed by a leading-indicators-only model (AUC 0.83),Caveat in report

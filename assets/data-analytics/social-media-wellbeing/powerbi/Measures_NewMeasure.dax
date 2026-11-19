@@ -1,0 +1,94 @@
+// Paste ONE measure at a time: Modeling > New measure, then paste the line (name = expression).
+// Format column in the guide tells you which format to apply.
+
+// Volume | format: #,0 | Students in the current filter
+Students =
+    COUNTROWS(StudentClean)
+
+// Usage | format: 0.0 | Average daily social media hours
+Avg Daily Usage Hours =
+    AVERAGE(StudentClean[Daily_Usage_Hours])
+
+// Outcomes | format: 0.0 | Average wellbeing index (higher is better)
+Avg Mental Health Index =
+    AVERAGE(StudentClean[Mental_Health_Index])
+
+// Outcomes | format: 0.0 | Average perceived stress (blanks ignored)
+Avg Stress =
+    AVERAGE(StudentClean[Perceived_Stress_Score])
+
+// Outcomes | format: 0.00 | Average GPA (blanks ignored)
+Avg GPA =
+    AVERAGE(StudentClean[Academic_Performance_GPA])
+
+// Outcomes | format: 0.0 | Average nightly sleep
+Avg Sleep Hours =
+    AVERAGE(StudentClean[Sleep_Duration_Hours])
+
+// Outcomes | format: 0.0 | Average sleep quality (1-5)
+Avg Sleep Quality =
+    AVERAGE(StudentClean[Sleep_Quality_Score])
+
+// Wellbeing | format: #,0 | Students with wellbeing index below 60
+Low Wellbeing Students =
+    SUM(StudentClean[low_wellbeing_flag])
+
+// Wellbeing | format: 0.0% | Share with wellbeing index below 60
+Low Wellbeing % =
+    DIVIDE([Low Wellbeing Students], [Students])
+
+// Wellbeing | format: 0.0% | Share sleeping less than guidance for their age (minors under 8h, adults under 7h)
+Short Sleep % =
+    DIVIDE(SUM(StudentClean[short_sleep_flag]), [Students])
+
+// Wellbeing | format: 0.0% | Share with stress 27+ among students with a stress score
+High Stress % =
+    DIVIDE(SUM(StudentClean[high_stress_flag]), COUNT(StudentClean[high_stress_flag]))
+
+// Wellbeing | format: 0.0% | Share with GPA below 3.0 among students with a GPA
+Low GPA % =
+    DIVIDE(SUM(StudentClean[low_gpa_flag]), COUNT(StudentClean[low_gpa_flag]))
+
+// Impact label | format: 0.0% | Share rated Negative
+Negative Impact % =
+    DIVIDE(SUM(StudentClean[impact_negative]), [Students])
+
+// Impact label | format: 0.0% | Share rated Beneficial
+Beneficial % =
+    DIVIDE(CALCULATE(COUNTROWS(StudentClean), StudentClean[Overall_Impact] = "Beneficial"), [Students])
+
+// Impact label | format: 0.0% | Share rated Neutral
+Neutral % =
+    DIVIDE(CALCULATE(COUNTROWS(StudentClean), StudentClean[Overall_Impact] = "Neutral"), [Students])
+
+// Usage | format: 0.0% | Share who use social media late at night
+Late Night % =
+    DIVIDE(SUM(StudentClean[late_night_flag]), [Students])
+
+// Usage | format: 0.0% | Share aged under 18
+Minors % =
+    DIVIDE(SUM(StudentClean[minor_flag]), [Students])
+
+// Focus group | format: #,0 | Students using 7 or more hours a day
+Heavy Users 7h+ =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[Daily_Usage_Hours] >= 7)
+
+// Focus group | format: 0.0% | Share of all students using 7+ hours
+Heavy Users 7h+ % =
+    DIVIDE([Heavy Users 7h+], CALCULATE(COUNTROWS(StudentClean), ALL(StudentClean)))
+
+// Focus group | format: 0.0% | Low-wellbeing rate among 7h+ users
+Low Wellbeing % Among 7h+ =
+    CALCULATE([Low Wellbeing %], StudentClean[Daily_Usage_Hours] >= 7)
+
+// Focus group | format: 0.0% | Share of all low-wellbeing students who use 7+ hours
+Share of Low Wellbeing in 7h+ =
+    DIVIDE(CALCULATE([Low Wellbeing Students], StudentClean[Daily_Usage_Hours] >= 7), CALCULATE([Low Wellbeing Students], ALL(StudentClean)))
+
+// Effects | format: 0.00 | Regression slope from the UsageEffects table
+Wellbeing Points per Extra Hour =
+    CALCULATE(MAX(UsageEffects[slope_per_extra_hour]), UsageEffects[outcome] = "Mental health index (points)")
+
+// Effects | format: 0.00 | Share of wellbeing variation explained by daily hours
+R-squared Usage to Wellbeing =
+    CALCULATE(MAX(UsageEffects[r_squared]), UsageEffects[outcome] = "Mental health index (points)")

@@ -1,0 +1,94 @@
+// Paste ONE measure at a time: Modeling > New measure, then paste the line (name = expression).
+// Format column in the guide tells you which format to apply.
+
+// Volume | format: #,0 | Students in the current filter
+Students =
+    COUNTROWS(StudentClean)
+
+// Volume | format: #,0 | Students who dropped out
+Dropouts =
+    SUM(StudentClean[dropout])
+
+// Volume | format: #,0 | Students retained
+Retained =
+    [Students] - [Dropouts]
+
+// Rate | format: 0.0% | Dropouts divided by students
+Dropout Rate =
+    DIVIDE([Dropouts], [Students])
+
+// Rate | format: 0.0% | Dropout rate ignoring all filters (reference line)
+Overall Dropout Rate =
+    CALCULATE([Dropout Rate], ALL(StudentClean))
+
+// Rate | format: 0.00 | Dropout rate relative to the overall rate
+Lift vs Overall =
+    DIVIDE([Dropout Rate], [Overall Dropout Rate])
+
+// Risk model | format: 0.0% | Average predicted dropout probability (out-of-fold)
+Avg Risk Score =
+    AVERAGE(StudentClean[risk_score])
+
+// Risk model | format: #,0 | Students whose risk score is above 50%
+High and Critical Students =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[risk_tier_order] >= 3)
+
+// Risk model | format: 0.0% | Share of students in the High and Critical tiers
+High and Critical Share of Students =
+    DIVIDE([High and Critical Students], [Students])
+
+// Risk model | format: 0.0% | Share of dropouts that sit in the High and Critical tiers
+High and Critical Share of Dropouts =
+    DIVIDE(CALCULATE([Dropouts], StudentClean[risk_tier_order] >= 3), [Dropouts])
+
+// Fairness | format: #,0 | Students flagged at a 50% threshold
+Flagged Students (50% threshold) =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[risk_score] >= 0.5)
+
+// Fairness | format: 0.0% | Share flagged
+Flagged Rate =
+    DIVIDE([Flagged Students (50% threshold)], [Students])
+
+// Fairness | format: 0.0% | Share of actual dropouts that were flagged
+True Positive Rate =
+    DIVIDE(CALCULATE(COUNTROWS(StudentClean), StudentClean[risk_score] >= 0.5, StudentClean[dropout] = 1), [Dropouts])
+
+// Fairness | format: 0.0% | Share of retained students that were flagged
+False Positive Rate =
+    DIVIDE(CALCULATE(COUNTROWS(StudentClean), StudentClean[risk_score] >= 0.5, StudentClean[dropout] = 0), [Retained])
+
+// Early warning | format: 0.00 | Average number of the ten transparent risk flags
+Avg Risk Flags =
+    AVERAGE(StudentClean[risk_flag_count])
+
+// Early warning | format: #,0 | Recommended referral threshold
+Students with 3+ Flags =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[risk_flag_count] >= 3)
+
+// Focus groups | format: #,0 | Low income and tuition not up to date
+Low Income Unpaid Students =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[family_income_level] = "Low", StudentClean[tuition_up_to_date] = 0)
+
+// Focus groups | format: 0.0% | Dropout rate for that group
+Low Income Unpaid Dropout Rate =
+    CALCULATE([Dropout Rate], StudentClean[family_income_level] = "Low", StudentClean[tuition_up_to_date] = 0)
+
+// Focus groups | format: #,0 | Students working 20+ hours a week
+Heavy Work Students (20h+) =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[weekly_work_hours] >= 20)
+
+// Focus groups | format: 0.0% | Dropout rate for that group
+Heavy Work Dropout Rate =
+    CALCULATE([Dropout Rate], StudentClean[weekly_work_hours] >= 20)
+
+// Focus groups | format: 0.0% | Dropout rate when tuition is not up to date
+Tuition Unpaid Dropout Rate =
+    CALCULATE([Dropout Rate], StudentClean[tuition_up_to_date] = 0)
+
+// Focus groups | format: #,0 | Exactly one failed unit
+One Failed Unit Students =
+    CALCULATE(COUNTROWS(StudentClean), StudentClean[units_failed] = 1)
+
+// Scenario | format: #,0 | Illustrative: 10% of expected High+Critical dropouts retained (assumption, not a forecast)
+Scenario: Retained at 10% Uplift =
+    ROUND(CALCULATE([Dropouts], StudentClean[risk_tier_order] >= 3) * 0.1, 0)

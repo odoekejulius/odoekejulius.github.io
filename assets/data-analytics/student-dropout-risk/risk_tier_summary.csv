@@ -1,0 +1,5 @@
+risk_tier,students,dropouts,mean_predicted,actual_rate,share_of_students,share_of_all_dropouts
+Low (<20%),51404,3133,0.0606,0.0609,0.514,0.0979
+Moderate (20-50%),20027,6557,0.3338,0.3274,0.2003,0.2049
+High (50-80%),14712,9628,0.6498,0.6544,0.1471,0.3008
+Critical (80%+),13857,12686,0.9126,0.9155,0.1386,0.3964

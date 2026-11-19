@@ -1,0 +1,11 @@
+usage_tier,students,mean_mh,mean_sleep,late_night
+1 Light (<3h),457,91.8687,7.6512,No
+1 Light (<3h),305,91.9508,7.6921,Yes
+2 Moderate (3-<5h),1013,86.2448,7.2367,No
+2 Moderate (3-<5h),667,85.1184,7.0253,Yes
+3 Elevated (5-<7h),215,77.7674,6.5758,No
+3 Elevated (5-<7h),882,77.4161,6.4779,Yes
+4 High (7-<10h),110,68.1364,5.7927,No
+4 High (7-<10h),551,67.4265,5.726,Yes
+5 Very high (10h+),61,52.8689,4.4754,No
+5 Very high (10h+),239,51.8285,4.6197,Yes

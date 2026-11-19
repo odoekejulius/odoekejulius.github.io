@@ -1,0 +1,30 @@
+dimension,min,max,spread_pp
+GPA semester 1,0.02,0.875,85.49
+GPA semester 2,0.024,0.835,81.058
+Units failed,0.044,0.8,75.551
+Library visits / month,0.196,0.774,57.792
+Missed deadlines,0.097,0.56,46.284
+Attendance %,0.161,0.592,43.043
+Assignments submitted %,0.174,0.593,41.912
+LMS logins / week,0.201,0.561,36.037
+Work hours / week,0.247,0.515,26.739
+Admission grade,0.223,0.462,23.869
+Family income,0.2,0.429,22.93
+Stress level,0.199,0.413,21.444
+Tuition up to date,0.287,0.442,15.568
+Satisfaction,0.26,0.413,15.309
+Part-time job,0.247,0.398,15.106
+First generation,0.281,0.374,9.355
+Sleep hours,0.279,0.369,8.992
+Extracurricular,0.291,0.363,7.189
+Disability,0.308,0.365,5.73
+Semester,0.296,0.342,4.668
+Study mode,0.292,0.337,4.46
+Nationality,0.301,0.33,2.851
+Mental health support,0.312,0.337,2.453
+Scholarship,0.311,0.332,2.111
+Gender,0.319,0.334,1.499
+Commute (mins),0.316,0.327,1.157
+Age band,0.314,0.325,1.043
+Course type,0.317,0.321,0.453
+International student,0.32,0.321,0.116

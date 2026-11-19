@@ -1,0 +1,6 @@
+model,auc_5fold,description
+Full model (protected attributes excluded),0.9037,"All academic, behavioural, financial, wellbeing features"
+Full model minus family income,0.9014,Income removed — almost no loss
+Leading indicators only,0.8306,No GPA / units / grades — usable before results land
+"Leading-only, no income / first-gen / scholarship",0.8199,Behavioural + wellbeing + work only
+Engagement signals only,0.8808,"Attendance, submissions, deadlines, LMS, library"

@@ -1,0 +1,11 @@
+flag,students_flagged,share_flagged,dropout_rate_flagged,dropout_rate_not_flagged,gap_pp
+flag_low_gpa,25241,0.2524,0.6836,0.1973,48.627
+flag_multi_fail,31642,0.3164,0.587,0.1965,39.0539
+flag_low_attendance,20011,0.2001,0.5268,0.2683,25.8436
+flag_missed_deadlines,36809,0.3681,0.4767,0.2288,24.7921
+flag_low_submission,21014,0.2101,0.5117,0.2691,24.2599
+flag_low_lms,20671,0.2067,0.4644,0.2824,18.1939
+flag_low_income,34809,0.3481,0.4292,0.2618,16.7445
+flag_heavy_work,20174,0.2017,0.4532,0.2864,16.6822
+flag_tuition_unpaid,21514,0.2151,0.4422,0.2865,15.5676
+flag_high_stress,33060,0.3306,0.3878,0.2866,10.124

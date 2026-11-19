@@ -1,0 +1,25 @@
+check_id,measure,filter_context,expected_value,tolerance,how_to_check
+D01,Students,No filter,100000.0,0.0,
+D02,Dropouts,No filter,32004.0,0.0,
+D03,Dropout Rate,No filter,0.32,0.0001,
+D04,Dropout Rate,family_income_level = Low,0.4292,0.0001,
+D05,Dropout Rate,tuition_up_to_date = 0,0.4422,0.0001,
+D06,Dropout Rate,units_failed_band = 7+,0.8,0.0001,
+D07,Dropout Rate,attendance_band = 0-50,0.5917,0.0001,
+D08,Lift vs Overall,family_income_level = Low,1.3411,0.0005,
+D09,High and Critical Students,No filter,28569.0,0.0,
+D10,High and Critical Share of Dropouts,No filter,0.6972,0.0001,
+D11,High and Critical Share of Students,No filter,0.2857,0.0001,
+D12,Dropout Rate,risk_tier = Critical (80%+),0.9155,0.0001,
+D13,Avg Risk Score,No filter,0.32,0.0001,Close to the overall dropout rate: the scores are calibrated
+D14,Students with 3+ Flags,No filter,48145.0,0.0,
+D15,Dropout Rate,risk_flag_count = 5,0.7247,0.0001,
+D16,Low Income Unpaid Students,No filter,10110.0,0.0,
+D17,Low Income Unpaid Dropout Rate,No filter,0.5305,0.0001,
+D18,Heavy Work Students (20h+),No filter,20174.0,0.0,
+D19,Heavy Work Dropout Rate,No filter,0.4532,0.0001,
+D20,True Positive Rate,gender = Female,0.6939,0.0002,Matches FairnessAudit
+D21,False Positive Rate,family_income_level = Low,0.1454,0.0002,Matches FairnessAudit
+D22,Flagged Rate,disability_status = 1,0.3272,0.0002,Matches FairnessAudit
+D23,One Failed Unit Students,No filter,16601.0,0.0,
+D24,Scenario: Retained at 10% Uplift,No filter,2231.0,0.0,

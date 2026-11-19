@@ -1,0 +1,17 @@
+metric,value
+students,100000.0
+dropouts,32004.0
+dropout_rate,0.32
+retained,67996.0
+model_auc_5fold,0.9037
+high_critical_students,28569.0
+high_critical_share_of_students,0.2857
+high_critical_dropouts,22314.0
+high_critical_share_of_dropouts,0.6972
+low_income_tuition_unpaid_students,10110.0
+low_income_tuition_unpaid_dropout_rate,0.5305
+work_20plus_hours_students,20174.0
+work_20plus_hours_dropout_rate,0.4532
+zero_failed_units_dropout_rate,0.0445
+one_failed_unit_students,16601.0
+one_failed_unit_dropout_rate,0.1372

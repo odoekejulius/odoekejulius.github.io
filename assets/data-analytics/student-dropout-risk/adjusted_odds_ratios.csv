@@ -1,0 +1,35 @@
+term,OR,lo,hi,p
+const,1318.5874,969.8846,1792.6595,0.0
+age,0.9942,0.9888,0.9996,0.035
+first_generation,1.4057,1.3541,1.4592,0.0
+scholarship_holder,0.6381,0.6135,0.6636,0.0
+tuition_up_to_date,0.3925,0.3754,0.4103,0.0
+part_time_job,0.8935,0.8264,0.966,0.0047
+weekly_work_hours,1.0285,1.0247,1.0324,0.0
+semester,0.9544,0.946,0.9628,0.0
+admission_grade,0.997,0.9964,0.9977,0.0
+previous_qualification_grade,0.9993,0.9986,1.0001,0.0701
+units_enrolled,1.0528,,,
+units_passed,0.9538,,,
+units_failed,1.1038,,,
+gpa_semester_1,0.3092,0.2922,0.3272,0.0
+gpa_semester_2,0.4618,0.4406,0.484,0.0
+attendance_rate,0.9757,0.9746,0.9769,0.0
+assignments_submitted_rate,0.9862,0.9852,0.9871,0.0
+library_visits_per_month,0.941,0.9358,0.9462,0.0
+lms_logins_per_week,0.9219,0.9169,0.9269,0.0
+extracurricular_activities,0.7543,0.7258,0.7839,0.0
+missed_deadlines,1.1276,1.1194,1.1358,0.0
+stress_level,1.1273,1.1164,1.1383,0.0
+mental_health_support,1.0067,0.9669,1.0482,0.7454
+satisfaction_score,0.9344,0.9256,0.9433,0.0
+commute_time_mins,1.0012,1.0004,1.0019,0.0032
+sleep_hours,0.9554,0.9406,0.9705,0.0
+family_income_level_Low,2.1401,2.0267,2.2598,0.0
+family_income_level_Middle,1.4287,1.3572,1.5041,0.0
+course_type_Business,0.9808,0.9267,1.0381,0.5041
+course_type_Health Sciences,0.9879,0.9263,1.0537,0.7124
+course_type_Law & Social Sciences,0.9712,0.9065,1.0404,0.4052
+course_type_STEM,0.9925,0.9397,1.0482,0.7869
+study_mode_Online,1.2211,1.137,1.3114,0.0
+study_mode_Part-time,1.2353,1.1621,1.3132,0.0

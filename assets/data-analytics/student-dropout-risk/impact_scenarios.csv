@@ -1,0 +1,4 @@
+retention_uplift_among_expected_dropouts,students_in_scope,expected_dropouts_in_scope,students_retained
+0.05,28569,22314,1116
+0.1,28569,22314,2231
+0.15,28569,22314,3347
