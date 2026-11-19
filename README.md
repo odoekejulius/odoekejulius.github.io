@@ -140,6 +140,14 @@ Add new website and analytics entries from the admin dashboard instead of editin
     ├── images/
     │   ├── julius-odoeke.jpeg
     │   ├── og-cover.png
+    │   ├── czara/
+    │   │   ├── czara-home-desktop.jpg
+    │   │   ├── czara-home-mobile.jpg
+    │   │   └── czara-products-desktop.jpg
+    │   ├── portfolio/
+    │   │   ├── portfolio-home-desktop.jpg
+    │   │   ├── portfolio-home-mobile.jpg
+    │   │   └── portfolio-websites-desktop.jpg
     │   └── renacido/
     │       ├── renacido-admin-dashboard.png
     │       ├── renacido-admin-sign-in.png

@@ -32,10 +32,22 @@
  {
   "title": "C.Zara Enterprise Website",
   "year": "2026",
-  "description": "A four-page website for C.Zara Enterprise, a natural foods business based in Kurudu, Abuja. It introduces the business and its products, tells its story, and gives customers a direct WhatsApp line for enquiries. The site is live on GitHub Pages.",
+  "description": "A single-page website for C.Zara Enterprise, a natural foods business based in Kurudu, Abuja. It introduces the business and its products, tells its story, and gives customers a direct WhatsApp line for enquiries. The site is live on GitHub Pages.",
+  "image": "assets/images/czara/czara-home-desktop.jpg",
+  "image_alt": "Desktop homepage of the C.Zara Enterprise website, showing the headline, navigation and photos of honey, cashew nut, groundnut and red palm oil bottles.",
+  "screenshots": [
+   {
+    "image": "assets/images/czara/czara-products-desktop.jpg",
+    "caption": "Products section"
+   },
+   {
+    "image": "assets/images/czara/czara-home-mobile.jpg",
+    "caption": "Responsive mobile homepage"
+   }
+  ],
   "highlights": [
-   "Home, About Us, Products and Contact pages in one consistent design",
-   "Product showcase covering natural honey, cashew nuts, groundnuts and red palm oil",
+   "Home, About, Products and Contact sections in one consistent design",
+   "Product showcase covering natural honey, cashew nuts, groundnuts, red palm oil, garri and ukwa",
    "WhatsApp contact built into the header, page calls to action and footer"
   ],
   "tags": [
